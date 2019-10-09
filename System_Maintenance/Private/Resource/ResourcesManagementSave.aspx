@@ -1,6 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master"AutoEventWireup="true" CodeBehind="ResourcesManagementSave.aspx.cs" Inherits="System_Maintenance.Private.Resource.ResourcesManagementSave" %>
-
-<asp:Content ID="Content1" ContentPlaceHolderID="ScriptPlaceHolder2" runat="server">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ResourcesManagementSave.aspx.cs" Inherits="System_Maintenance.Private.Resource.ResourcesManagementSave" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script src="../../src/js/jquery.MultiFile.js"></script>
     <script type="text/javascript">
 
@@ -9,7 +10,7 @@
             $('form').preventDoubleSubmission();
         });
         var PreviewOriginal = "";
-        var Edit =0;
+        var Edit = 0;
         var listLanguages = [];
         var image;
         var sizeImage = "";
@@ -68,11 +69,11 @@
                 }
             });
 
-             $("select[id$=ddlListLanguage]").multiselect({
+            $("select[id$=ddlListLanguage]").multiselect({
                 includeSelectAllOption: true,
-                nonSelectedText:  "None Selected",
+                nonSelectedText: "None Selected",
                 selectAllText: "All Selected"
-            }); 
+            });
         }
 
 
@@ -118,10 +119,10 @@
                 });
 
                 $("select[id$=ddlListLanguage]").multiselect({
-                includeSelectAllOption: true,
-                nonSelectedText:  'None Selected',
-                selectAllText: 'All Selected'
-                }); 
+                    includeSelectAllOption: true,
+                    nonSelectedText: 'None Selected',
+                    selectAllText: 'All Selected'
+                });
 
             })();
 
@@ -130,14 +131,13 @@
                 return false;
             }
             if (listLanguages.length === 0) {
-                fn_message('i',"You must select at least one language";
+                fn_message('i', "You must select at least one language";
                 event.preventDefault();
                 return false;
             }
             var jsonList = JSON.stringify(listLanguages);
             $("[id$=hfListLanguage]").val(fn_jsonreplace(jsonList));
-            if (!fn_validateform('editBasic'))
-            {
+            if (!fn_validateform('editBasic')) {
                 event.preventDefault();
                 return false;
             }
@@ -152,7 +152,7 @@
                 return false;
             }
             return true;
-    }
+        }
 
 
         function fn_setimage() {
@@ -353,7 +353,7 @@
             } else {
                 var input = document.querySelector("input[type=file]");
                 if (input.value == "" && $("#<%=hfPathImage.ClientID%>").val() == "") { fn_message('i', 'Select a file'); return; }
-                
+
                 if (input.value != "") {
                     if ((input.value.indexOf(".docx") != -1) || (input.value.indexOf(".doc") != -1) || (input.value.indexOf(".ppt") != -1) || (input.value.indexOf(".pptx") != -1) || (input.value.indexOf(".pptx") != -1) || (input.value.indexOf(".xls") != -1) || (input.value.indexOf(".xlsx") != -1)) {
                         fn_message('i', 'No preview available for this type document'); return;
@@ -374,9 +374,9 @@
                         viewWord += $("#<%=hfPathImage.ClientID%>").val();
                         $("#piframe").attr("src", viewWord);
                     }
-                }                
+                }
             }
-           
+
             $.magnificPopup.open({
                 items: {
                     src: '#resource',
@@ -388,9 +388,8 @@
         }
 
     </script>
-    <%--<script src="/src/js/js_file.js" type="text/javascript"></script>--%>
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder2" runat="server">
+
+
     <div class="row">
         <div class="col-lg-12">
             <asp:HiddenField ID="hfDistributorId" runat="server" />
@@ -399,31 +398,18 @@
             <asp:HiddenField ID="hfPublicName" runat="server" />
             <asp:HiddenField ID="hfFileExtension" runat="server" />
             <asp:HiddenField ID="hfListLanguage" runat="server" />
-           
-            
-            <%--  <div class="myForm1 themeBlue subborder">
-        <div class="divTitulo">
-            <h2>
-                
-        </div>
-        <div class="divComentario">
-            <p>
-            </p>
-        </div>
-    </div>--%>
+
+
             <section class="panel">
                 <div id="message_row">
                 </div>
                 <header class="panel-heading">
                     <div class="panel-actions">
-                        <%--<a href="#" class="fa fa-caret-down"></a>--%>
-                        <%--<a href="#" class="fa fa-times"></a>--%>
-                        <%--<a href="#" class="fa fa-edit" onclick="fn_iconedit(event,'fCompany','sub-Company','Company');"></a>--%>
                     </div>
                     <h2 class="panel-title">
                         <asp:Literal ID="ltTitle" runat="server"></asp:Literal></h2>
                     <div class="title" style="text-align: right; margin-top: -20px;">
-                        <a id= "helpdesk" class="helpDesk" data-keyname="PROCESS_COMMUNICATION_CENTER_RESOURCES_MANAGEMENT_SAVE"><i class="fa fa-question-circle fa-2x"></i></a>
+                        <a id="helpdesk" class="helpDesk" data-keyname="PROCESS_COMMUNICATION_CENTER_RESOURCES_MANAGEMENT_SAVE"><i class="fa fa-question-circle fa-2x"></i></a>
                     </div>
                 </header>
 
@@ -440,7 +426,7 @@
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
                                 <asp:DropDownList ID="ddlLanguage" runat="server" CssClass="form-control mb-md hide"></asp:DropDownList>
 
-                                <asp:ListBox ID="ddlListLanguage" multiple="multiple" SelectionMode="Multiple" CssClass="form-control" runat="server"></asp:ListBox>   
+                                <asp:ListBox ID="ddlListLanguage" multiple="multiple" SelectionMode="Multiple" CssClass="form-control" runat="server"></asp:ListBox>
 
                             </div>
                         </div>
@@ -468,7 +454,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group" style="display:none;">
+                        <div class="form-group" style="display: none;">
                             <asp:Label ID="lblSystemContact" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
                                 <%-- FALTA IMPLEMENTAR EL METEDO PARA TRAER DESDE LA BD--%>
@@ -485,7 +471,7 @@
                                 <asp:TextBox ID="txtName" runat="server" CssClass="form-control  validate[required,maxSize[50]]" MaxLength="50"></asp:TextBox>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <asp:Label ID="lblTranslateKey" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
@@ -499,30 +485,17 @@
                                 <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control  validate[required,maxSize[50]]" TextMode="MultiLine" MaxLength="50"></asp:TextBox>
                             </div>
                         </div>
-                        <%--<div class="form-group" style="display:none;">
-                            <asp:Label ID="lblUsePartyPlan" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
 
-                            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-text">
-                                <asp:CheckBox ID="chkParty" runat="server" />
-                            </div>
-                        </div>--%>
-                       <%-- <div class="form-group" style="display:none;">
-                            <asp:Label ID="lblUserSocialMarketing" runat="server" Text="" CssClass="col-xs-5 col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
-
-                            <div class="col-xs-2 col-sm-7 col-md-6 col-lg-7 cnt-text">
-                                <asp:CheckBox ID="chkSoxial" runat="server" />
-                            </div>
-                        </div>--%>
-                         <div class="form-group">
+                        <div class="form-group">
                             <asp:Label ID="lblAplication" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
                                 <asp:DropDownList runat="server" ID="ddlAplication" CssClass="form-control mb-md">
                                 </asp:DropDownList>
                             </div>
                         </div>
-                       
 
-                        <div class="form-group" id="dvUrl" style="display:none">
+
+                        <div class="form-group" id="dvUrl" style="display: none">
                             <asp:Label ID="lblUrl" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <%--<div class="col-md-4">
 								    user.&nbsp;<asp:TextBox runat="server" ID="txtUrl" CssClass="form-control"></asp:TextBox>                                    
@@ -540,7 +513,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+
                         <div class="form-group">
                             <asp:Label ID="lblUploadFile" runat="server" Text="" CssClass="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label"></asp:Label>
                             <div class="col-md-6">
@@ -549,11 +522,11 @@
 
                             </div>
                         </div>
-                        <div class="form-group" id="DivLink" style="display:none">
+                        <div class="form-group" id="DivLink" style="display: none">
                             <asp:Label ID="Label22" runat="server" Text="" CssClass="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label" data-trigger="hover" data-placement="top" data-content="&nbsp;" data-original-title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">"Link"<i class="icon-question-sign"></i></asp:Label>
                             <div class="col-md-6">
                                 <asp:TextBox ID="txtLink" placeholder="ex. http://www.youtube.com/embed/w8IfaW-38yE" runat="server" CssClass="form-control"></asp:TextBox>
-                                <input type="button" value="Preview" onclick="preview('link')" class="btn btn-default" style="margin-top: 5px;"/>
+                                <input type="button" value="Preview" onclick="preview('link')" class="btn btn-default" style="margin-top: 5px;" />
                             </div>
                         </div>
                         <div class="form-group" id="DivFile">
@@ -561,7 +534,7 @@
                             <div class="col-md-6">
                                 <%-- AKLC_#[4914]_[lpacheco]_BEGIN --%>
                                 <asp:FileUpload ID="fuResource" runat="server" CssClass="Width_2_file fuResource" />
-                                <input type="button" value="Preview" onclick="preview('file')" class="btn btn-default previewFile" style="margin-top: 5px; display:none"/>
+                                <input type="button" value="Preview" onclick="preview('file')" class="btn btn-default previewFile" style="margin-top: 5px; display: none" />
                                 <%--accept-doc|docx|xls|xlsx|ppt|pdf|pptx|gif|jpeg|jpg|tif|avi|mp4|wmv|png--%>
                                 <%-- END --%>
                             </div>
@@ -605,10 +578,10 @@
             </header>
             <div class="panel-body">
                 <%--<div class="modal-wrapper">--%>
-                    <div class='embed-responsive embed-responsive-16by9'>
-                        <iframe id="piframe" class="embed-responsive-item" width="610" height="345" src="" frameborder="0" allowfullscreen></iframe>
-                    </div>
-                    <img id="imgpreview" class="img-responsive">
+                <div class='embed-responsive embed-responsive-16by9'>
+                    <iframe id="piframe" class="embed-responsive-item" width="610" height="345" src="" frameborder="0" allowfullscreen></iframe>
+                </div>
+                <img id="imgpreview" class="img-responsive">
                 <%--</div>--%>
             </div>
             <footer class="panel-footer">
@@ -620,5 +593,6 @@
             </footer>
         </section>
     </div>
+
 
 </asp:Content>

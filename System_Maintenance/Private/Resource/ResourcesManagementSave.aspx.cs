@@ -17,7 +17,7 @@ using xSystem_Maintenance.src.app_code;
 
 namespace System_Maintenance.Private.Resource
 {
-    public partial class ResourcesManagementSave : BasePageModule
+    public partial class ResourcesManagementSave : Page
     {
 
         public int vsId
@@ -103,7 +103,7 @@ namespace System_Maintenance.Private.Resource
             }
             catch (System.Exception)
             {
-                Message(EnumAlertType.Error, "An error occurred while loading data");
+                //Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
 
@@ -161,7 +161,7 @@ namespace System_Maintenance.Private.Resource
             }
             catch (Exception exception)
             {
-                Message(EnumAlertType.Error, "An error occurred while loading data");
+                //Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
 
@@ -222,8 +222,8 @@ namespace System_Maintenance.Private.Resource
                         SetControls(obj);
                     else
                         GoBack();
-                else
-                    this.Message(EnumAlertType.Error, "An error occurred while loading data");
+                //else
+                    //Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
 
@@ -309,7 +309,7 @@ namespace System_Maintenance.Private.Resource
             }
             catch (Exception exception)
             {
-                this.Message(EnumAlertType.Error,"An error occurred while loading data");
+                //this.//Message(EnumAlertType.Error,"An error occurred while loading data");
             }
 
 
@@ -358,19 +358,19 @@ namespace System_Maintenance.Private.Resource
                 
                 if (string.IsNullOrEmpty(txtName.Text.Trim()))
                 {
-                    this.Message(EnumAlertType.Error, "The Name input can not be empty ");
+                    //this.//Message(EnumAlertType.Error, "The Name input can not be empty ");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(txtTranslateKey.Text.Trim()))
                 {
-                    this.Message(EnumAlertType.Error, "The Name input can not be empty ");
+                    //this.//Message(EnumAlertType.Error, "The Name input can not be empty ");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(txtDescription.Text.Trim()))
                 {
-                    this.Message(EnumAlertType.Error, "The Description input can not be empty ");
+                    //this.//Message(EnumAlertType.Error, "The Description input can not be empty ");
                     return;
                 }
                 
@@ -439,12 +439,12 @@ namespace System_Maintenance.Private.Resource
                 }
                 else
                 {
-                    this.Message(EnumAlertType.Error, "Category or language already exists in another resource");
+                    //this.//Message(EnumAlertType.Error, "Category or language already exists in another resource");
                 }
             }            
             catch (Exception exception)
             {
-                this.Message(EnumAlertType.Error,"An error occurred while loading data");
+                //this.//Message(EnumAlertType.Error,"An error occurred while loading data");
             }
         }
 
@@ -473,7 +473,7 @@ namespace System_Maintenance.Private.Resource
                             case "Document":
                                 if (!ParseEnum2<EnumDocumentFileFormat>(Extension))
                                 {
-                                    this.Message(EnumAlertType.Info, "Invalid file type");
+                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
                                     //return objAppResource;
                                 }
@@ -481,7 +481,7 @@ namespace System_Maintenance.Private.Resource
                             case "Image":
                                 if (!ParseEnum2<EnumImageFileFormat>(Extension))
                                 {
-                                    this.Message(EnumAlertType.Info, "Invalid file type");
+                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
                                     //return;
                                 }
@@ -489,7 +489,7 @@ namespace System_Maintenance.Private.Resource
                             case "Audio":
                                 if (!ParseEnum2<EnumAudioFileFormat>(Extension))
                                 {
-                                    this.Message(EnumAlertType.Info, "Invalid file type");
+                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
                                     //return;
                                 }
@@ -497,7 +497,7 @@ namespace System_Maintenance.Private.Resource
                             case "Video":
                                 if (!ParseEnum2<EnumVideoFileFormat>(Extension))
                                 {
-                                    this.Message(EnumAlertType.Info, "Invalid file type");
+                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
                                     //return;
                                 }
@@ -505,7 +505,7 @@ namespace System_Maintenance.Private.Resource
                             case "Presentation":
                                 if (!ParseEnum2<EnumPresentationFileFormat>(Extension))
                                 {
-                                    this.Message(EnumAlertType.Info, "Invalid file type");
+                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
                                     //return;
                                 }
@@ -531,14 +531,14 @@ namespace System_Maintenance.Private.Resource
                     else
                     {
                         hpf = null;
-                        this.Message(EnumAlertType.Info, "File size is over 5MB");
+                        //this.//Message(EnumAlertType.Info, "File size is over 5MB");
                     }
                 }
                 else
                 {
 
                     hpf = null;
-                    this.Message(EnumAlertType.Info, "File size is 0MB");
+                    //this.//Message(EnumAlertType.Info, "File size is 0MB");
                 }
             }
             catch (Exception exception)
@@ -604,11 +604,11 @@ namespace System_Maintenance.Private.Resource
                     if (vsId == 0)
                         SetControls();
 
-                    this.Message(EnumAlertType.Success, "Saved successfully");
+                    //this.//Message(EnumAlertType.Success, "Saved successfully");
                 }
                 else
                 {
-                    this.Message(EnumAlertType.Error, "Invalid Language");
+                    //this.//Message(EnumAlertType.Error, "Invalid Language");
                 }
             }
         }

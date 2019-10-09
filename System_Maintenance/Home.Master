@@ -254,6 +254,7 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="/Private/Registro/RegistroUsuario.aspx"><i class="fa fa-circle-o"></i>Registro Usuarios</a></li>
+                                <li><a href="/Private/Resource/ResourcesManagementSave.aspx"><i class="fa fa-circle-o"></i>Registro Resource</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
