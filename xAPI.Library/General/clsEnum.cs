@@ -219,4 +219,115 @@ namespace xAPI.Library.General
         [StringValue("b")]
         Custom = 5
     }
+    public enum EnumVideoFileFormat
+    {
+        avi,
+        mp4,
+        wmv,
+        fla,
+        flv,
+        mpeg,
+        mpg
+    }
+    public enum EnumPresentationFileFormat
+    {
+        ppt,
+        pptx
+    }
+    public enum EnumImageFileFormat
+    {
+        gif,
+        jpeg,
+        jpg,
+        tif,
+        png,
+        psd,
+        ai,
+        eps,
+        bmp
+
+    }
+    public enum EnumAudioFileFormat
+    {
+        mp3,
+        wma,
+        wav,
+        midi
+    }
+
+    public enum EnumDocumentFileFormat
+    {
+        doc,
+        docx,
+        xls,
+        xlsx,
+        ppt,
+        pdf,
+        pptx,
+        txt,
+        html
+    }
+    public enum EnumDocumenImagetFileFormat
+    {
+        doc,
+        docx,
+        xls,
+        xlsx,
+        ppt,
+        pdf,
+        pptx,
+        txt,
+        html,
+        jpeg,
+        jpg,
+        png,
+        gif,
+        bmp,
+    }
+    public enum EnumExtensionURL
+    {
+        [StringValue("ext")]
+        ext = 0,
+    }
+    public enum EnumFolderSettings
+    {
+        [StringValue("export\\")]
+        FolderExport = 1,
+        [StringValue("resources\\")]
+        FolderResources = 2,
+        [StringValue("images\\")]
+        FolderImages = 3,
+        FolderUpdates = 4,
+        [StringValue("review\\")]
+        FolderReview = 5,
+        [StringValue("docs\\")]
+        FolderDocs = 6,
+        [StringValue("shippingFiles\\")]
+        FolderShipping = 7,
+        [StringValue("docs/")]
+        FolderPDF = 8,
+        [StringValue("images/")]
+        ImageFolder = 9,
+        [StringValue("Products\\")]
+        Products = 11,
+        [StringValue("invoiceFiles\\")]
+        invoiceFiles = 12,
+        [StringValue("cashierFiles\\")]
+        cashierFiles = 13
+    }
+    public enum EnumStatus
+    {
+        [StringValue("n")]
+        Disabled = 0,//Inactive
+        [StringValue("y")]
+        Enabled = 1,//Active
+        Deleted = 2,
+        ShowAll = 3,
+        [StringValue("s")]
+        Suspended = 4,//Suspended
+        [StringValue("u")]
+        notSuspended = 5,
+        [StringValue("p")]
+        purged = 6
+    }
 }

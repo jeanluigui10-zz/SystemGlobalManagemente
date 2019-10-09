@@ -1,14 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using xAPI.Library.Base;
-using xAPI.Library;
-using System.Data.SqlClient;
-using xAPI.Entity;
 using System.Data;
-using xAPI.Library.Connection;
+using System.Data.SqlClient;
 using xAPI.Entity.Security;
+using xAPI.Library.Base;
+using xAPI.Library.Connection;
 using xAPI.Library.General;
 
 namespace xAPI.Dao.Security
