@@ -40,5 +40,36 @@ namespace xAPI.BL.Tool
 
             return lstEquipo;
         }
+
+        public List<Equipo> CargarEquipos(ref BaseEntity objBase)
+        {
+            objBase = new BaseEntity();
+            List<Equipo> lstEquipo = null;
+            try
+            {
+                lstEquipo = EquipoDAO.Instance.CargarEquipos(ref objBase);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lstEquipo;
+        }
+
+        public Boolean RegistrarEquipo(ref BaseEntity objBase, Equipo obj)
+        {
+            Boolean success = false;
+            try
+            {
+                success = EquipoDAO.Instance.RegistrarEquipo(ref objBase, obj);
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred on application level 2"));
+            }
+            return success;
+        }
     }
 }

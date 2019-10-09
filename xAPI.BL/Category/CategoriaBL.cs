@@ -40,5 +40,37 @@ namespace xAPI.BL.Category
 
             return lstCategoria;
         }
+
+        public List<Categoria> CargarCategorias(ref BaseEntity objBase)
+        {
+            objBase = new BaseEntity();
+            List<Categoria> lstCategoria = null;
+            try
+            {
+                lstCategoria = CategoriaDAO.Instance.CargarCategorias(ref objBase);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lstCategoria;
+        }
+
+        public Boolean RegistrarCategoria(ref BaseEntity objBase, Categoria obj)
+        {
+            Boolean success = false;
+            try
+            {
+                success = CategoriaDAO.Instance.RegistrarCategoria(ref objBase, obj);
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+            return success;
+        }
+
     }
 }

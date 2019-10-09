@@ -22,6 +22,24 @@ namespace System_Maintenance {
         protected global::System.Web.UI.WebControls.ContentPlaceHolder head;
         
         /// <summary>
+        /// Control frmHomeMaster.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlForm frmHomeMaster;
+        
+        /// <summary>
+        /// Control txtnumberIncidents.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtnumberIncidents;
+        
+        /// <summary>
         /// Control userName.
         /// </summary>
         /// <remarks>
@@ -29,6 +47,15 @@ namespace System_Maintenance {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl userName;
+        
+        /// <summary>
+        /// Control btnCerrarSesion.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnCerrarSesion;
         
         /// <summary>
         /// Control nameUserId.
@@ -40,13 +67,13 @@ namespace System_Maintenance {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl nameUserId;
         
         /// <summary>
-        /// Control frmHomeMaster.
+        /// Control txtnumberIncidentsR.
         /// </summary>
         /// <remarks>
         /// Campo generado automáticamente.
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm frmHomeMaster;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl txtnumberIncidentsR;
         
         /// <summary>
         /// Control ContentPlaceHolder1.

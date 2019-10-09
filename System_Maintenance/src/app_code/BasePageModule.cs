@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
+using System.IO;
+using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.UI;
 using xAPI.Library.General;
-using System.IO;
-using xAPI.Entity;
-using System.Text.RegularExpressions;
-using System.Globalization;
-using System.Threading;
-using xAPI.Library.Base;
-using System.Data;
-using xAPI.BL;
-using System.Collections;
-using System.Text;
-using System.Configuration;
-using System.Resources;
 
 namespace System_Maintenance.src.app_code
 {
@@ -79,8 +69,8 @@ namespace System_Maintenance.src.app_code
                 //ValidateLogin();
                 //ValidateAccess();
                 ///Esto era parte de la validación por la url.
-                if (RequiresAccess)
-                    ValidateAccess();
+                //if (RequiresAccess)
+                    //ValidateAccess();
             }
             base.OnInit(e);
         }

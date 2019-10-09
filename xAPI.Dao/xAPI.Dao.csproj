@@ -42,7 +42,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Environment\AmbienteDAO.cs" />
+    <Compile Include="Environment\Detalle_AmbienteUsuarioDAO.cs" />
+    <Compile Include="Floor\PisoDAO.cs" />
+    <Compile Include="Incidence\IncidenceDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\ReportDAO.cs" />
     <Compile Include="Security\TipoUsuarioDAO.cs" />
     <Compile Include="Security\UsuarioDAO.cs" />
     <Compile Include="Category\CategoriaDAO.cs" />

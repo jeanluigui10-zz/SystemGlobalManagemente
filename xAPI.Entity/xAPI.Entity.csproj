@@ -42,12 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category\Categoria.cs" />
-    <Compile Include="Environment\Ambiente.cs" />
-    <Compile Include="Environment\Detalle_AmbienteEquipo.cs" />
+    <Compile Include="Environment\Ambientes.cs" />
+    <Compile Include="Environment\Detalle_AmbienteUsuario.cs" />
+    <Compile Include="Floor\Piso.cs" />
+    <Compile Include="Incidence\Incidencia.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\Reporte.cs" />
     <Compile Include="Security\Detalle_UsuarioAmbiente.cs" />
     <Compile Include="Security\TipoUsuario.cs" />
-    <Compile Include="Security\Usuario.cs" />
+    <Compile Include="Security\Usuarios.cs" />
     <Compile Include="Status\State.cs" />
     <Compile Include="Tool\Equipo.cs" />
   </ItemGroup>
