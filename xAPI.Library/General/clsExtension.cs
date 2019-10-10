@@ -90,28 +90,7 @@ namespace xAPI.Library.General
         {
             return text.ToString("N", CultureInfo.InvariantCulture);
         }
-        public static String ToStringDecimalCustom(this Decimal text, int MarketId)
-        {
-            string t = "";
-            try
-            {
-                t = text.ToString("N", CultureInfo.InvariantCulture);
-                //if (MarketId != null)
-                //{
-                    if (MarketId == (Int16) EnumMarkets.Japan)
-                    {
-                        t = text.ToString("N0", CultureInfo.InvariantCulture);
-                    }
-
-                //}
-
-            }
-            catch (Exception ex)
-            {
-                t = text.ToString("N", CultureInfo.InvariantCulture);
-            }
-            return t;
-        }
+  
         public static String ToStringDecimal2(this Decimal text)
         {
             return text.ToString("G", CultureInfo.InvariantCulture);

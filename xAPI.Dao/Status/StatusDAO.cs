@@ -23,36 +23,35 @@ namespace xAPI.Dao.Status
         }
         #endregion
 
-        public List<State> LlenarEquipos(ref BaseEntity objBase, int categoryid)
+        public List<State> LlenarStatus(ref BaseEntity objBase)
         {
             SqlCommand ObjCmd = null;
-            List<State> listEquipo = null;
+            List<State> lstStates = null;
             SqlDataReader dr = null;
             try
             {
-                ObjCmd = new SqlCommand("Sp_EquipoxCategoria", clsConnection.GetConnection());
+                ObjCmd = new SqlCommand("Sp_Listar_EstadoEquipo", clsConnection.GetConnection());
                 ObjCmd.CommandType = CommandType.StoredProcedure;
-                ObjCmd.Parameters.AddWithValue("@categoryId", categoryid);
-                listEquipo = new List<State>();
+                lstStates = new List<State>();
                 dr = ObjCmd.ExecuteReader();
                 while (dr.Read())
                 {
                     State ObjEquipo = new State();
-                    ObjEquipo.Id_Condicion = dr.GetColumnValue<Int32>("Id_Equipo");
-                    ObjEquipo.Nombre_Condicion = dr.GetColumnValue<String>("Nombre_Equipo");
-                    listEquipo.Add(ObjEquipo);
+                    ObjEquipo.Id_Condicion = dr.GetColumnValue<Int32>("Id_Condicion");
+                    ObjEquipo.Nombre_Condicion = dr.GetColumnValue<String>("Nombre_Condicion");
+                    lstStates.Add(ObjEquipo);
                 }
             }
             catch (Exception ex)
             {
-                listEquipo = null;
-                objBase.Errors.Add(new BaseEntity.ListError(ex, "Equipo not found."));
+                lstStates = null;
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "Estado equipo not found."));
             }
             finally
             {
                 clsConnection.DisposeCommand(ObjCmd);
             }
-            return listEquipo;
+            return lstStates;
         }
     }
 }

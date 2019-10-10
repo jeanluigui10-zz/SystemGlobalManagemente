@@ -24,15 +24,15 @@ namespace xAPI.BL.Security
         }
         #endregion
 
-        public Usuario ValidateLogin(ref BaseEntity objBase, String dni, String password)
+        public Usuarios ValidateLogin(ref BaseEntity objBase, Usuarios obj)
         {
             objBase = new BaseEntity();
-            Usuario objDistributor = null;
+            Usuarios objDistributor = null;
             try
             {
-                if (!String.IsNullOrEmpty(dni) && !String.IsNullOrEmpty(password))
+                if (obj != null)
                 {
-                    objDistributor = UsuarioDAO.Instance.ValidatebyUsernameAndPassword(ref objBase, dni, password);
+                    objDistributor = UsuarioDAO.Instance.ValidatebyUsernameAndPassword(ref objBase, obj);
                     
                 }
             }
@@ -44,5 +44,78 @@ namespace xAPI.BL.Security
             return objDistributor;
         }
 
+        public Boolean RegistrarUsuario(ref BaseEntity objBase, Usuarios obj)
+        {
+            Boolean success = false;
+            try
+            {
+                success = UsuarioDAO.Instance.RegistrarUsuario(ref objBase, obj);
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+            return success;
+        }
+
+        public Boolean ActualizarUsuario(ref BaseEntity objBase, Usuarios obj)
+        {
+            Boolean success = false;
+            try
+            {
+                success = UsuarioDAO.Instance.ActualizarUsuario(ref objBase, obj);
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+            return success;
+        }
+        public Boolean EliminarUsuario(ref BaseEntity objBase, Usuarios obj)
+        {
+            Boolean success = false;
+            try
+            {
+                success = UsuarioDAO.Instance.EliminarUsuario(ref objBase, obj);
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+            return success;
+        }
+
+        public List<Usuarios> ListarUsuarios(ref BaseEntity objBase)
+        {
+            objBase = new BaseEntity();
+            List<Usuarios> lst= null;
+            try
+            {
+                lst = UsuarioDAO.Instance.ListarUsuarios(ref objBase);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lst;
+        }
+        public List<Usuarios> ListarAsistenteUsuarios(ref BaseEntity objBase)
+        {
+            objBase = new BaseEntity();
+            List<Usuarios> lst = null;
+            try
+            {
+                lst = UsuarioDAO.Instance.ListarAsistenteUsuarios(ref objBase);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lst;
+        }
     }
 }

@@ -33,9 +33,9 @@ namespace xSystem_Maintenance.src.app_code
             set { HttpContext.Current.Session["dtCommission"] = value; }
         }
 
-        public static Usuario SsUser
+        public static Usuarios SsUser
         {
-            get { return clsExtension.GetSession<Usuario>("User_xCorporate") ?? RedirectUser<Usuario>(); }
+            get { return clsExtension.GetSession<Usuarios>("User_xCorporate") ?? RedirectUser<Usuarios>(); }
             set { HttpContext.Current.Session["User_xCorporate"] = value; }
         }
 
@@ -97,8 +97,8 @@ namespace xSystem_Maintenance.src.app_code
         //}
         public static void Logout()
         {
-            //HttpContext.Current.Session.Abandon();
-            //HttpContext.Current.Session.Clear();
+            HttpContext.Current.Session.Abandon();
+            HttpContext.Current.Session.Clear();
         }
         public static String SsCulture
         {

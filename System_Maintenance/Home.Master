@@ -5,19 +5,23 @@
 <html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>AdminLTE 2 | Blank Page</title>
+    <title>Monitoreo | UPN</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-        <!-- Bootstrap 3.3.6 -->
+    <!-- Bootstrap 3.3.6 -->
     <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
     <!-- Ionicons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- bootstrap datepicker -->
+    <link rel="stylesheet" href="/plugins/datepicker/datepicker3.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="/plugins/datatables/dataTables.bootstrap.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="/dist/css/AdminLTE.min.css">
-        <!-- AdminLTE Skins. Choose a skin from the css/skins
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
        folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
     <!-- iCheck -->
@@ -26,8 +30,14 @@
     <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
     <script src="/bootstrap/js/bootstrap.min.js"></script>
+    <!-- DataTables -->
+    <script src="/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <!-- bootstrap datepicker -->
+    <script src="/plugins/datepicker/bootstrap-datepicker.js"></script>
     <!-- iCheck -->
     <script src="/plugins/iCheck/icheck.min.js"></script>
+
     <script src="/src/js/Base.js"></script>
 
     <script src="/plugins/slimScroll/jquery.slimscroll.min.js"></script>
@@ -37,378 +47,275 @@
     <script src="/dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="/dist/js/demo.js"></script>
+    <script src="/src/handlebars/handlebars-v2.0.0.min.js"></script>
+    <%@ Import Namespace="xSystem_Maintenance.src.app_code" %>
+    <%@ Import Namespace="xAPI.Library.General" %>
+    <script type="text/javascript">
+
+        function updateDataTableSelectAllCtrl(table) {
+            var $table = table.table().node();
+            var $chkbox_all = $('tbody input[type="checkbox"]', $table);
+            var $chkbox_checked = $('tbody input[type="checkbox"]:checked', $table);
+            var chkbox_select_all = $('thead input[name="all"]', $table).get(0);
+
+            // If none of the checkboxes are checked
+            if ($chkbox_checked.length === 0) {
+                chkbox_select_all.checked = false;
+                if ('indeterminate' in chkbox_select_all) {
+                    chkbox_select_all.indeterminate = false;
+                }
+
+                // If all of the checkboxes are checked
+            } else if ($chkbox_checked.length === $chkbox_all.length) {
+                chkbox_select_all.checked = true;
+                if ('indeterminate' in chkbox_select_all) {
+                    chkbox_select_all.indeterminate = false;
+                }
+
+                // If some of the checkboxes are checked
+            } else {
+                chkbox_select_all.checked = true;
+                if ('indeterminate' in chkbox_select_all) {
+                    chkbox_select_all.indeterminate = true;
+                }
+            }
+        }
+
+        function fn_validateform(div) {
+            if ($("#" + div).validationEngine({ returnIsValid: true }) == true) {
+                return true;
+            }
+            return false;
+        }
+
+
+    </script>
 
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
 <body class="hold-transition skin-blue sidebar-mini">
 
+    <form id="frmHomeMaster" runat="server">
+        <!-- Site wrapper -->
+        <div class="wrapper">
 
-    <!-- Site wrapper -->
-    <div class="wrapper">
-
-        <header class="main-header">
-            <!-- Logo -->
-            <a href="../../index2.html" class="logo">
-                <!-- mini logo for sidebar mini 50x50 pixels -->
-                <span class="logo-mini"><b></b></span>
-                <!-- logo for regular state and mobile devices -->
-                <span class="logo-lg"><b>Monitoreo</b></span>
-            </a>
-            <!-- Header Navbar: style can be found in header.less -->
-            <nav class="navbar navbar-static-top">
-                <!-- Sidebar toggle button-->
-                <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="/Private/Incidents/Home.aspx" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b></b></span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>Monitoreo</b></span>
                 </a>
-
-                <div class="navbar-custom-menu">
-                    <ul class="nav navbar-nav">
-                        <!-- Messages: style can be found in dropdown.less-->
-                        <%--    <li class="dropdown messages-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-envelope-o"></i>
-                                <span class="label label-success">4</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 4 messages</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- start message -->
-                                            <a href="#">
-                                                <div class="pull-left">
-                                                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                                                </div>
-                                                <h4>Support Team
-                       
-                                                    <small><i class="fa fa-clock-o"></i>5 mins</small>
-                                                </h4>
-                                                <p>Why not buy a new awesome theme?</p>
-                                            </a>
-                                        </li>
-                                        <!-- end message -->
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">See All Messages</a></li>
-                            </ul>
-                        </li>
-                        <!-- Notifications: style can be found in dropdown.less -->
-                        <li class="dropdown notifications-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-bell-o"></i>
-                                <span class="label label-warning">10</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 10 notifications</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <a href="#">
-                                                <i class="fa fa-users text-aqua"></i>5 new members joined today
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
                     </a>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li class="footer"><a href="#">View all</a></li>
-                            </ul>
-                        </li>
-                        <!-- Tasks: style can be found in dropdown.less -->
-                        <li class="dropdown tasks-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <i class="fa fa-flag-o"></i>
-                                <span class="label label-danger">9</span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li class="header">You have 9 tasks</li>
-                                <li>
-                                    <!-- inner menu: contains the actual data -->
-                                    <ul class="menu">
-                                        <li>
-                                            <!-- Task item -->
-                                            <a href="#">
-                                                <h3>Design some buttons
-                       
-                                                    <small class="pull-right">20%</small>
-                                                </h3>
-                                                <div class="progress xs">
-                                                    <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                                                        <span class="sr-only">20% Complete</span>
-                                                    </div>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <!-- end task item -->
-                                    </ul>
-                                </li>
-                                <li class="footer">
-                                    <a href="#">View all tasks</a>
-                                </li>
-                            </ul>
-                        </li>--%>
-                        <!-- User Account: style can be found in dropdown.less -->
-                        <li class="dropdown user user-menu">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                                <%--<span class="hidden-xs">r</span>--%>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <!-- User image -->
-                                <li class="user-header">
-                                    <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
 
-                                    <p id="userName" runat="server">
-                                        Luigui Hilario
-                 
-                                        <small>Member since Nov. 2012</small>
-                                    </p>
-                                </li>
-                                <!-- Menu Body -->
-                                <li class="user-body">
-                                    <div class="row">
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Followers</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Sales</a>
-                                        </div>
-                                        <div class="col-xs-4 text-center">
-                                            <a href="#">Friends</a>
-                                        </div>
-                                    </div>
-                                    <!-- /.row -->
-                                </li>
-                                <!-- Menu Footer-->
-                                <li class="user-footer">
-                                    <div class="pull-left">
-                                        <a href="#" class="btn btn-default btn-flat">Profile</a>
-                                    </div>
-                                    <div class="pull-right">
-                                        <a href="#" class="btn btn-default btn-flat">Sign out</a>
-                                    </div>
-                                </li>
-                            </ul>
-                        </li>
-                        <!-- Control Sidebar Toggle Button -->
-
-                    </ul>
-                </div>
-            </nav>
-        </header>
-
-        <!-- =============================================== -->
-
-        <!-- Left side column. contains the sidebar -->
-        <aside class="main-sidebar">
-            <!-- sidebar: style can be found in sidebar.less -->
-            <section class="sidebar">
-                <!-- Sidebar user panel -->
-                <div class="user-panel">
-                    <div class="pull-left image">
-                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
-                    </div>
-                    <div class="pull-left info">
-                        <p id="nameUserId" runat="server">Usuario</p>
-                        <%--<a href="#"><i class="fa fa-circle text-success"></i>Online</a>--%>
-                    </div>
-                </div>
-                <!-- search form -->
-                <form action="#" method="get" class="sidebar-form">
-                    <div class="input-group">
-                        <input type="text" name="q" class="form-control" placeholder="Search...">
-                        <span class="input-group-btn">
-                            <button type="submit" name="search" id="search-btn" class="btn btn-flat">
-                                <i class="fa fa-search"></i>
-                            </button>
-                        </span>
-                    </div>
-                </form>
-                <!-- /.search form -->
-                <!-- sidebar menu: : style can be found in sidebar.less -->
-                <ul class="sidebar-menu">
-                    <li class="header">MAIN NAVIGATION</li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-dashboard"></i><span>Reporte</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="Incident.aspx"><i class="fa fa-circle-o"></i>Registro Incidencias</a></li>
-                            <li><a href="../../index2.html"><i class="fa fa-circle-o"></i>Ver</a></li>
-                        </ul>
-                    </li>
-                    <%--   <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-files-o"></i>
-                            <span>Layout Options</span>
-                            <span class="pull-right-container">
-                                <span class="label label-primary pull-right">4</span>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="../layout/top-nav.html"><i class="fa fa-circle-o"></i>Top Navigation</a></li>
-                            <li><a href="../layout/boxed.html"><i class="fa fa-circle-o"></i>Boxed</a></li>
-                            <li><a href="../layout/fixed.html"><i class="fa fa-circle-o"></i>Fixed</a></li>
-                            <li><a href="../layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i>Collapsed Sidebar</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="../widgets.html">
-                            <i class="fa fa-th"></i><span>Widgets</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-green">Hot</small>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-pie-chart"></i>
-                            <span>Charts</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i>ChartJS</a></li>
-                            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i>Morris</a></li>
-                            <li><a href="../charts/flot.html"><i class="fa fa-circle-o"></i>Flot</a></li>
-                            <li><a href="../charts/inline.html"><i class="fa fa-circle-o"></i>Inline charts</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-laptop"></i>
-                            <span>UI Elements</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="../UI/general.html"><i class="fa fa-circle-o"></i>General</a></li>
-                            <li><a href="../UI/icons.html"><i class="fa fa-circle-o"></i>Icons</a></li>
-                            <li><a href="../UI/buttons.html"><i class="fa fa-circle-o"></i>Buttons</a></li>
-                            <li><a href="../UI/sliders.html"><i class="fa fa-circle-o"></i>Sliders</a></li>
-                            <li><a href="../UI/timeline.html"><i class="fa fa-circle-o"></i>Timeline</a></li>
-                            <li><a href="../UI/modals.html"><i class="fa fa-circle-o"></i>Modals</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-edit"></i><span>Forms</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="../forms/general.html"><i class="fa fa-circle-o"></i>General Elements</a></li>
-                            <li><a href="../forms/advanced.html"><i class="fa fa-circle-o"></i>Advanced Elements</a></li>
-                            <li><a href="../forms/editors.html"><i class="fa fa-circle-o"></i>Editors</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-table"></i><span>Tables</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="../tables/simple.html"><i class="fa fa-circle-o"></i>Simple tables</a></li>
-                            <li><a href="../tables/data.html"><i class="fa fa-circle-o"></i>Data tables</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="../calendar.html">
-                            <i class="fa fa-calendar"></i><span>Calendar</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-red">3</small>
-                                <small class="label pull-right bg-blue">17</small>
-                            </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="../mailbox/mailbox.html">
-                            <i class="fa fa-envelope"></i><span>Mailbox</span>
-                            <span class="pull-right-container">
-                                <small class="label pull-right bg-yellow">12</small>
-                                <small class="label pull-right bg-green">16</small>
-                                <small class="label pull-right bg-red">5</small>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="treeview active">
-                        <a href="#">
-                            <i class="fa fa-folder"></i><span>Examples</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="invoice.html"><i class="fa fa-circle-o"></i>Invoice</a></li>
-                            <li><a href="profile.html"><i class="fa fa-circle-o"></i>Profile</a></li>
-                            <li><a href="login.html"><i class="fa fa-circle-o"></i>Login</a></li>
-                            <li><a href="register.html"><i class="fa fa-circle-o"></i>Register</a></li>
-                            <li><a href="lockscreen.html"><i class="fa fa-circle-o"></i>Lockscreen</a></li>
-                            <li><a href="404.html"><i class="fa fa-circle-o"></i>404 Error</a></li>
-                            <li><a href="500.html"><i class="fa fa-circle-o"></i>500 Error</a></li>
-                            <li class="active"><a href="blank.html"><i class="fa fa-circle-o"></i>Blank Page</a></li>
-                            <li><a href="pace.html"><i class="fa fa-circle-o"></i>Pace Page</a></li>
-                        </ul>
-                    </li>
-                    <li class="treeview">
-                        <a href="#">
-                            <i class="fa fa-share"></i><span>Multilevel</span>
-                            <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                        </a>
-                        <ul class="treeview-menu">
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Level One</a></li>
-                            <li>
-                                <a href="#"><i class="fa fa-circle-o"></i>Level One
-               
-                                    <span class="pull-right-container">
-                                        <i class="fa fa-angle-left pull-right"></i>
-                                    </span>
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <li class="dropdown messages-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <i class="fa fa-envelope-o"></i>
+                                    <span class="label label-success" runat="server" id="txtnumberIncidents">0</span>
                                 </a>
-                                <ul class="treeview-menu">
-                                    <li><a href="#"><i class="fa fa-circle-o"></i>Level Two</a></li>
-                                    <li>
-                                        <a href="#"><i class="fa fa-circle-o"></i>Level Two
-                   
-                                            <span class="pull-right-container">
-                                                <i class="fa fa-angle-left pull-right"></i>
-                                            </span>
-                                        </a>
-                                        <ul class="treeview-menu">
-                                            <li><a href="#"><i class="fa fa-circle-o"></i>Level Three</a></li>
-                                            <li><a href="#"><i class="fa fa-circle-o"></i>Level Three</a></li>
-                                        </ul>
+                            </li>
+                            <!-- User Account: style can be found in dropdown.less -->
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <img src="../../dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                                    <%--<span class="hidden-xs">r</span>--%>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                        <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                                        <p id="userName" runat="server">
+                                            Luigui Hilario
+                 
+                                        <small></small>
+                                        </p>
+                                    </li>
+                                    <!-- Menu Body -->
+                                    <%--    <li class="user-body">
+                                        <div class="row">
+                                            <div class="col-xs-4 text-center">
+                                                <a href="#">Followers</a>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <a href="#">Sales</a>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <a href="#">Friends</a>
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+                                    </li>--%>
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <asp:LinkButton CssClass="btn btn-default btn-flat" runat="server" ID="btnCerrarSesion" OnClick="btnCerrarSesion_Click" Text="Sign out"></asp:LinkButton>
+                                        </div>
                                     </li>
                                 </ul>
                             </li>
-                            <li><a href="#"><i class="fa fa-circle-o"></i>Level One</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="../../documentation/index.html"><i class="fa fa-book"></i><span>Documentation</span></a></li>
-                    <li class="header">LABELS</li>
-                    <li><a href="#"><i class="fa fa-circle-o text-red"></i><span>Important</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-yellow"></i><span>Warning</span></a></li>
-                    <li><a href="#"><i class="fa fa-circle-o text-aqua"></i><span>Information</span></a></li>--%>
-                </ul>
-            </section>
-            <!-- /.sidebar -->
-        </aside>
+                            <!-- Control Sidebar Toggle Button -->
 
-        <!-- =============================================== -->
-        <form id="frmHomeMaster" runat="server">
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+            <!-- =============================================== -->
+
+            <!-- Left side column. contains the sidebar -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                        <div class="pull-left image">
+                            <img src="../../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                        </div>
+                        <div class="pull-left info">
+                            <p id="nameUserId" runat="server">Usuario</p>
+                            <%--<a href="#"><i class="fa fa-circle text-success"></i>Online</a>--%>
+                        </div>
+                    </div>
+
+                    <!-- sidebar menu: : style can be found in sidebar.less -->
+                    <ul class="sidebar-menu">
+                        <%
+                            if (BaseSession.SsUser.Id_TipoUsuario == (Int32)xAPI.Library.General.EnumTipoUsuario.Administrador || BaseSession.SsUser.Id_TipoUsuario == (Int32)xAPI.Library.General.EnumTipoUsuario.Asistente)
+                            {
+
+
+                        %>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i><span>Reporte</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Report/ReportIncident.aspx"><i class="fa fa-circle-o"></i>Incidencias</a></li>
+                            </ul>
+                        </li>
+                        <%
+                            }
+                        %>
+
+                        <%
+                            if (BaseSession.SsUser.Id_TipoUsuario == (Int32)xAPI.Library.General.EnumTipoUsuario.Asistente)
+                            {
+
+                        %>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Incidencias</span>
+                                <span class="pull-right-container">
+                                    <span class="label label-primary pull-right" runat="server" id="txtnumberIncidentsR">0</span>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Incidents/Incident.aspx"><i class="fa fa-circle-o"></i>Registro Incidencias</a></li>
+                            </ul>
+                        </li>
+                        <%
+                            }
+                        %>
+
+                        <%
+                            if (BaseSession.SsUser.Id_TipoUsuario == (Int32)xAPI.Library.General.EnumTipoUsuario.Administrador)
+                            {
+
+
+                        %>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Usuarios</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Registro/RegistroUsuario.aspx"><i class="fa fa-circle-o"></i>Registro Usuarios</a></li>
+                                <li><a href="/Private/Resource/ResourcesManagementSave.aspx"><i class="fa fa-circle-o"></i>Registro Resource</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Pisos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Registro/RegistroPiso.aspx"><i class="fa fa-circle-o"></i>Registro Piso</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Ambientes</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Registro/RegistroAmbiente.aspx"><i class="fa fa-circle-o"></i>Registro Ambiente</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Categorias</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Registro/RegistroCategoria.aspx"><i class="fa fa-circle-o"></i>Registro Categorias</a></li>
+                            </ul>
+                        </li>
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Equipos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Registro/RegistroEquipo.aspx"><i class="fa fa-circle-o"></i>Registro Equipos</a></li>
+                            </ul>
+                        </li>
+
+                        <%
+                            }
+                        %>
+                    </ul>
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+            <!-- =============================================== -->
+
             <!-- Content Wrapper. Contains page content -->
             <div class="content-wrapper">
                 <!-- Content Header (Page header) -->
@@ -424,54 +331,31 @@
                         </asp:ContentPlaceHolder>
                     </div>
 
-                    <%--     <!-- Default box -->
-      <div class="box">
-        <div class="box-header with-border">
-          <h3 class="box-title">Title</h3>
 
-          <div class="box-tools pull-right">
-            <button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fa fa-minus"></i></button>
-            <button type="button" class="btn btn-box-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fa fa-times"></i></button>
-          </div>
-        </div>
-        <div class="box-body">
-          Start creating your amazing application!
-        </div>
-        <!-- /.box-body -->
-        <div class="box-footer">
-          Footer
-        </div>
-        <!-- /.box-footer-->
-      </div>
-      <!-- /.box -->--%>
                 </section>
                 <!-- /.content -->
             </div>
 
-        </form>
-        <!-- /.content-wrapper -->
 
-        <footer class="main-footer">
-            <div class="pull-right hidden-xs">
-                <b>Version</b> 2.3.6
+            <!-- /.content-wrapper -->
+
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 1.0.0
    
-            </div>
-            <strong>Copyright &copy; 2014-2016 <a href="http://almsaeedstudio.com">Almsaeed Studio</a>.</strong> All rights
-    reserved.
+                </div>
+                <strong>Copyright &copy; 2019-2020 <a href="http://almsaeedstudio.com">Software Developer</a>.</strong> Todos los derechos reservados.
  
-        </footer>
+            </footer>
 
-        <!-- Control Sidebar -->
+            <!-- Control Sidebar -->
 
-        <!-- /.control-sidebar -->
-        <!-- Add the sidebar's background. This div must be placed
+            <!-- /.control-sidebar -->
+            <!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-        <div class="control-sidebar-bg"></div>
-    </div>
-    <!-- ./wrapper -->
-
-
+            <div class="control-sidebar-bg"></div>
+        </div>
+        <!-- ./wrapper -->
+    </form>
 </body>
 </html>

@@ -1,18 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
-using System_Maintenance.src.app_code;
-using xAPI.Entity;
-using xAPI.BL;
-using xAPI.Entity.Security;
-using xAPI.BL.Security;
-using xAPI.Library.Base;
 using System.Web.Services;
-using xAPI.Entity.Environment;
-using xAPI.BL.Environment;
+using System.Web.UI;
+using System_Maintenance.src.app_code;
+using xAPI.BL.Security;
+using xAPI.Entity.Security;
+using xAPI.Library.Base;
+using xAPI.Library.General;
 using xSystem_Maintenance.src.app_code;
 
 namespace System_Maintenance.Private.Security
@@ -33,14 +27,8 @@ namespace System_Maintenance.Private.Security
             try
             {
                 BaseEntity objBase = new BaseEntity();
-                List<Ambiente> objTipoUsuario = AmbienteBL.Instance.LlenarAmbiente(ref objBase);
                 List<TipoUsuario> objTipoUsuarios = TipoUsuarioBL.Instance.LlenarTipoUsuarios(ref objBase);
-
-                ddlAmbiente.DataSource = objTipoUsuario;
-                ddlAmbiente.DataTextField = "Nombre_Ambiente";
-                ddlAmbiente.DataValueField = "Id_Ambiente";
-                ddlAmbiente.DataBind();
-
+                
                 ddlRol.DataSource = objTipoUsuarios;
                 ddlRol.DataTextField = "Nombre_TipUsuario";
                 ddlRol.DataValueField = "Id_TipoUsuario";
@@ -61,43 +49,80 @@ namespace System_Maintenance.Private.Security
             {
                 String dni = objUser["Dni"];
                 String password = objUser["Password"];
-                Usuario objUsuario = UsuarioBL.Instance.ValidateLogin(ref objBase, dni, password);
-                if (objUsuario != null)
+                Int32 tipousuario = Convert.ToInt32(objUser["Id_TipoUsuario"]);
+                Usuarios obj = new Usuarios()
                 {
-                    objReturn = new
+                    Dni_Usuario = dni,
+                    Contrasena = password,
+                    Id_TipoUsuario = tipousuario
+                };
+                Usuarios objUsuario = UsuarioBL.Instance.ValidateLogin(ref objBase, obj);
+                if (objBase.Errors.Count == 0)
+                {
+                    if (objUsuario != null)
                     {
-                        Result = "Ok"
-                    };
-
+                        if (objUsuario.Estado == (Int32)EnumEsatado.Inactivo)
+                        {
+                            objReturn = new
+                            {
+                                Result = "NoOk",
+                                Msg = "Usuario Inactivo"
+                            };
+                        }
+                        else
+                        {
+                            if (objUsuario.Estado == (Int32)EnumEsatado.Activo)
+                            {
+                                BaseSession.SsUser = objUsuario;
+                                objReturn = new
+                                {
+                                    Result = "Ok",
+                                    Msg = "../Incidents/Home.aspx"
+                                };
+                            }                          
+                        }
+                    }
+                    else
+                    {
+                        objReturn = new
+                        {
+                            Result = "NoOk",
+                            Msg = "Credenciales Incorrectas."
+                        };
+                    }
                 }
             }
             catch (Exception ex)
             {
-                throw ex;
+                objReturn = new
+                {
+                    Result = "NoOk",
+                    Msg = "Ocurrio un error al intentar Iniciar Sesion."
+                };
             }
             return objReturn;
         }
 
         
-        protected void btnLogin_Click(object sender, EventArgs e)
-        {
-            BaseEntity objBase = new BaseEntity();
-            try
-            {
-                String dni = txtdni.Text;
-                String password = txtpassword.Text;
-                Usuario objUsuario = UsuarioBL.Instance.ValidateLogin(ref objBase, dni, password);
-                if (objUsuario != null)
-                {
-                    BaseSession.SsUser = objUsuario;
-                    Response.Redirect("~/Private/Incidents/Home.aspx", false);
+        //protected void btnLogin_Click(object sender, EventArgs e)
+        //{
+        //    BaseEntity objBase = new BaseEntity();
+        //    try
+        //    {
+        //        String dni = txtdni.Text;
+        //        String password = txtpassword.Text;
+        //        Usuarios objUsuario = UsuarioBL.Instance.ValidateLogin(ref objBase, );
+        //        if (objUsuario != null)
+        //        {
+        //            BaseSession.SsUser = objUsuario;
+        //            Response.Redirect("~/Private/Incidents/Home.aspx", false);
 
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
+        //}
     }
 }

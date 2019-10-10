@@ -24,10 +24,10 @@ namespace xAPI.BL.Environment
         }
         #endregion
 
-        public List<Ambiente> LlenarAmbiente(ref BaseEntity objBase)
+        public List<Ambientes> LlenarAmbiente(ref BaseEntity objBase)
         {
             objBase = new BaseEntity();
-            List<Ambiente> lstAmbiente = null;
+            List<Ambientes> lstAmbiente = null;
             try
             {
                 lstAmbiente = AmbienteDAO.Instance.LlenarAmbiente(ref objBase);
@@ -39,6 +39,53 @@ namespace xAPI.BL.Environment
             }
 
             return lstAmbiente;
+        }
+        public List<Ambientes> LlenarAmbientes(ref BaseEntity objBase)
+        {
+            objBase = new BaseEntity();
+            List<Ambientes> lstAmbiente = null;
+            try
+            {
+                lstAmbiente = AmbienteDAO.Instance.LlenarAmbientes(ref objBase);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lstAmbiente;
+        }
+        
+        public Boolean RegistrarAmbiente(ref BaseEntity objBase, Ambientes obj)
+        {
+            Boolean success = false;
+            try
+            {
+                success = AmbienteDAO.Instance.RegistrarAmbiente(ref objBase, obj);
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+            return success;
+        }
+
+        public List<Ambientes> LlenarAmbientexPiso(ref BaseEntity objBase, int idpiso)
+        {
+            objBase = new BaseEntity();
+            List<Ambientes> lstAmbientes = null;
+            try
+            {
+                lstAmbientes = AmbienteDAO.Instance.LlenarAmbientexPiso(ref objBase, idpiso);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lstAmbientes;
         }
     }
 }
