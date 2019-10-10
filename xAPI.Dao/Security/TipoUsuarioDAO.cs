@@ -31,7 +31,7 @@ namespace xAPI.Dao.Security
             SqlDataReader dr = null;
             try
             {
-                ObjCmd = new SqlCommand("Sp_Listar_TipoUsuario", clsConnection.GetConnection());
+                ObjCmd = new SqlCommand("List_Usertype_Sp", clsConnection.GetConnection());
                 ObjCmd.CommandType = CommandType.StoredProcedure;
                 listTipoUsuario = new List<TipoUsuario>();
                 dr = ObjCmd.ExecuteReader();
