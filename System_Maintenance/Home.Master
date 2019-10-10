@@ -210,7 +210,10 @@
                             </a>
 
                             <ul class="treeview-menu">
-                                <li><a href="/Private/Report/ReportIncident.aspx"><i class="fa fa-circle-o"></i>Incidencias</a></li>
+                                <li><a href="/Private/Report/ReportIncident.aspx"><i class="fa fa-circle-o"></i>Ventas</a></li>
+                            </ul>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Report/ReportIncident.aspx"><i class="fa fa-circle-o"></i>Pedidos</a></li>
                             </ul>
                         </li>
                         <%
@@ -268,43 +271,20 @@
                             <ul class="treeview-menu">
                                 <li><a href="/Private/Resource/ResourcesManagementSave.aspx"><i class="fa fa-circle-o"></i>Registro Diseño</a></li>
                             </ul>
+                        </li>   
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Clientes</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Customer/Customer.aspx"><i class="fa fa-circle-o"></i>Registro Clientes</a></li>
+                            </ul>
                         </li>
-                <%--        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-pie-chart"></i>
-                                <span>Ambientes</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="/Private/Registro/RegistroAmbiente.aspx"><i class="fa fa-circle-o"></i>Registro Ambiente</a></li>
-                            </ul>
-                        </li>--%>
-                      <%--  <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-pie-chart"></i>
-                                <span>Categorias</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="/Private/Registro/RegistroCategoria.aspx"><i class="fa fa-circle-o"></i>Registro Categorias</a></li>
-                            </ul>
-                        </li>--%>
-                      <%--  <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-pie-chart"></i>
-                                <span>Equipos</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="/Private/Registro/RegistroEquipo.aspx"><i class="fa fa-circle-o"></i>Registro Equipos</a></li>
-                            </ul>
-                        </li>--%>
 
                         <%
                             }
