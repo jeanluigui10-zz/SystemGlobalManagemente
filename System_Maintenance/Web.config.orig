@@ -18,8 +18,12 @@
   </system.web>
   <connectionStrings>
     <!--<add connectionString="Server=.;Database=BD_SystemMaintenance;User ID=sa;Password=12345678" name="systemweb_db"/>-->
+<<<<<<< HEAD
       <add connectionString="Server=DESKTOP-09DCO5M\SQLEXPRESS;Database=BD_SystemMaintenance;User ID=sa;Password=12345678" name="systemweb_db" />
 
+=======
+    <add connectionString="Server=bdstorage-management.chyunlsbzlpj.us-east-2.rds.amazonaws.com;Database=BD_SystemMaintenance;User ID=admin;Password=12345678" name="systemweb_db" />
+>>>>>>> ffb313b24b83ce0b39b8ce6910a596fa88cd2b56
   </connectionStrings>
   <appSettings>
     <add key="dpPath" value="C:\Sites\Zennoa\Files\distributor\" />
@@ -59,8 +63,6 @@
     <modules>
       <remove name="TelemetryCorrelationHttpModule" />
       <add name="TelemetryCorrelationHttpModule" type="Microsoft.AspNet.TelemetryCorrelation.TelemetryCorrelationHttpModule, Microsoft.AspNet.TelemetryCorrelation" preCondition="integratedMode,managedHandler" />
-      <remove name="TelemetryCorrelationHttpModule" />
-      <add name="TelemetryCorrelationHttpModule" type="Microsoft.AspNet.TelemetryCorrelation.TelemetryCorrelationHttpModule, Microsoft.AspNet.TelemetryCorrelation" preCondition="integratedMode,managedHandler" />
     </modules>
 
     <httpErrors errorMode="Custom">
@@ -70,8 +72,6 @@
   </system.webServer>
   <system.codedom>
     <compilers>
-      <compiler language="c#;cs;csharp" extension=".cs" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:default /nowarn:1659;1699;1701" />
-      <compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:default /nowarn:41008 /define:_MYTYPE=\&quot;Web\&quot; /optionInfer+" />
       <compiler language="c#;cs;csharp" extension=".cs" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.CSharpCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:default /nowarn:1659;1699;1701" />
       <compiler language="vb;vbs;visualbasic;vbscript" extension=".vb" type="Microsoft.CodeDom.Providers.DotNetCompilerPlatform.VBCodeProvider, Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" warningLevel="4" compilerOptions="/langversion:default /nowarn:41008 /define:_MYTYPE=\&quot;Web\&quot; /optionInfer+" />
     </compilers>
