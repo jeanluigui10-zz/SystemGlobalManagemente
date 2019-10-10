@@ -38,8 +38,8 @@ namespace xAPI.Dao.Security
                 while (dr.Read())
                 {
                     TipoUsuario objTipoUsuario = new TipoUsuario();
-                    objTipoUsuario.Id_TipoUsuario = dr.GetColumnValue<Int32>("Id_TipoUsuario");
-                    objTipoUsuario.Nombre_TipUsuario = dr.GetColumnValue<String>("Nombre_TipUsuario");
+                    objTipoUsuario.Id_TipoUsuario = dr.GetColumnValue<Int32>("UserTypeId");
+                    objTipoUsuario.Nombre_TipUsuario = dr.GetColumnValue<String>("UserTypeName");
                     listTipoUsuario.Add(objTipoUsuario);
                 }
             }

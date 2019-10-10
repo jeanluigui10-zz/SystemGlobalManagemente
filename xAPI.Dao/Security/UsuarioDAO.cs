@@ -31,7 +31,7 @@ namespace xAPI.Dao.Security
             SqlDataReader dr = null;
             try
             {
-                ObjCmd = new SqlCommand("Sp_ValidarLogueo", clsConnection.GetConnection());
+                ObjCmd = new SqlCommand("Sp_ValidateLogin", clsConnection.GetConnection());
                 ObjCmd.CommandType = CommandType.StoredProcedure;
                 ObjCmd.Parameters.AddWithValue("@Dni", obj.Dni_Usuario);
                 ObjCmd.Parameters.AddWithValue("@Password", obj.Contrasena);
@@ -40,14 +40,14 @@ namespace xAPI.Dao.Security
                 if (dr.Read())
                 {
                     objUsers = new Usuarios();
-                    objUsers.Id_Usuario = dr.GetColumnValue<Int32>("Id_Usuario");
-                    objUsers.AMaterno_Usuario = dr.GetColumnValue<String>("AMaterno_Usuario");
-                    objUsers.APaterno_Usuario = dr.GetColumnValue<String>("APaterno_Usuario");
-                    objUsers.Nombre_Usuario = dr.GetColumnValue<String>("Nombre_Usuario");
-                    objUsers.Dni_Usuario = dr.GetColumnValue<String>("Dni_Usuario");
-                    objUsers.Contrasena = dr.GetColumnValue<String>("Contrasena");
-                    objUsers.Estado = dr.GetColumnValue<byte>("Estado");
-                    objUsers.Id_TipoUsuario = dr.GetColumnValue<Int32>("Id_TipoUsuario");
+                    objUsers.Id_Usuario = dr.GetColumnValue<Int32>("UserId");
+                    objUsers.AMaterno_Usuario = dr.GetColumnValue<String>("LastNameMaternal");
+                    objUsers.APaterno_Usuario = dr.GetColumnValue<String>("LastNamePaternal");
+                    objUsers.Nombre_Usuario = dr.GetColumnValue<String>("FirstName");
+                    objUsers.Dni_Usuario = dr.GetColumnValue<String>("Dni");
+                    objUsers.Contrasena = dr.GetColumnValue<String>("Password");
+                    objUsers.Estado = dr.GetColumnValue<byte>("Status");
+                    objUsers.Id_TipoUsuario = dr.GetColumnValue<Int32>("UserTypeId");
                     //User.FechaCreacion = dr.GetColumnValue<DateTime>("FechaCreacion");
                     //User.FechaActualizacion = dr.GetColumnValue<DateTime>("FechaActualizacion");
                     //User.CreadoPor = dr.GetColumnValue<Int32>("CreadoPor");
