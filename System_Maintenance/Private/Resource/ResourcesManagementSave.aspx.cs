@@ -174,8 +174,7 @@ namespace System_Maintenance.Private.Resource
             if (!string.IsNullOrEmpty(Request.QueryString["q"]))
             {
                 this.ltTitle.Text = "Edit a Resource";
-                //string id = Encryption.Decrypt(Request.QueryString["q"]);COMENTE
-                string id = Request.QueryString["q"];
+                string id = Encryption.Decrypt(Request.QueryString["q"]); 
                 if (!string.IsNullOrEmpty(id))
                     vsId = Convert.ToInt32(id);
                 else
@@ -187,11 +186,9 @@ namespace System_Maintenance.Private.Resource
             }
             if (!string.IsNullOrEmpty(Request.QueryString["l"]))
             {
-                //if (!string.IsNullOrEmpty(Encryption.Decrypt(Request.QueryString["l"]))) COMENTE
-               if (!string.IsNullOrEmpty(Request.QueryString["l"]))
+                if (!string.IsNullOrEmpty(Encryption.Decrypt(Request.QueryString["l"]))) 
                 {
-                    //hfCi.Value = Encryption.Decrypt(Request.QueryString["l"]);COMENTE
-                    hfCi.Value = Request.QueryString["l"];
+                    hfCi.Value = Encryption.Decrypt(Request.QueryString["l"]);
                     string[] Values = hfCi.Value.Split('|');
                     vsLId = Convert.ToInt32(Values[0]);
                     ddlLanguage.SelectedValue = vsLId.ToString();
@@ -554,7 +551,7 @@ namespace System_Maintenance.Private.Resource
         }
         private void GoBack()
         {
-            Response.Redirect("ResourcesManagement.aspx", false);
+            //Response.Redirect("ResourcesManagement.aspx", false);
         }
 
         private void LoadDdlApplications(DropDownList ddl, DataTable dt)

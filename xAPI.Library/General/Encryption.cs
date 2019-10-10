@@ -5,12 +5,12 @@ using System.Text;
 using System.Security.Cryptography;
 using System.IO;
 
-namespace xAPI.Library.Security
+namespace xAPI.Library.General
 {
     /// <summary>
     /// Clase Encriptacion y Desencriptacion.
     /// </summary>
-    public static class clsEncryption
+    public static class Encryption
     {
         private static dynamic parameters = null;
 
@@ -473,11 +473,11 @@ namespace xAPI.Library.Security
 
         public static void SetParameters(dynamic parameters)
         {
-            clsEncryption.parameters = parameters;
+            Encryption.parameters = parameters;
         }
         public static dynamic GetParameters()
         {
-            return clsEncryption.parameters;
+            return Encryption.parameters;
         }
     }
 }

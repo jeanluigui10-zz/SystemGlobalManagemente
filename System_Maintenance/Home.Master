@@ -254,22 +254,22 @@
                             </a>
                             <ul class="treeview-menu">
                                 <li><a href="/Private/Registro/RegistroUsuario.aspx"><i class="fa fa-circle-o"></i>Registro Usuarios</a></li>
-                                <li><a href="/Private/Resource/ResourcesManagementSave.aspx"><i class="fa fa-circle-o"></i>Registro Resource</a></li>
+                          
                             </ul>
                         </li>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i>
-                                <span>Pisos</span>
+                                <span>Resource</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Private/Registro/RegistroPiso.aspx"><i class="fa fa-circle-o"></i>Registro Piso</a></li>
+                                <li><a href="/Private/Resource/ResourcesManagementSave.aspx"><i class="fa fa-circle-o"></i>Registro Diseño</a></li>
                             </ul>
                         </li>
-                        <li class="treeview">
+                <%--        <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i>
                                 <span>Ambientes</span>
@@ -280,8 +280,8 @@
                             <ul class="treeview-menu">
                                 <li><a href="/Private/Registro/RegistroAmbiente.aspx"><i class="fa fa-circle-o"></i>Registro Ambiente</a></li>
                             </ul>
-                        </li>
-                        <li class="treeview">
+                        </li>--%>
+                      <%--  <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i>
                                 <span>Categorias</span>
@@ -292,8 +292,8 @@
                             <ul class="treeview-menu">
                                 <li><a href="/Private/Registro/RegistroCategoria.aspx"><i class="fa fa-circle-o"></i>Registro Categorias</a></li>
                             </ul>
-                        </li>
-                        <li class="treeview">
+                        </li>--%>
+                      <%--  <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i>
                                 <span>Equipos</span>
@@ -304,7 +304,7 @@
                             <ul class="treeview-menu">
                                 <li><a href="/Private/Registro/RegistroEquipo.aspx"><i class="fa fa-circle-o"></i>Registro Equipos</a></li>
                             </ul>
-                        </li>
+                        </li>--%>
 
                         <%
                             }
