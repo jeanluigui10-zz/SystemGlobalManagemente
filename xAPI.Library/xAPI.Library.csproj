@@ -84,13 +84,13 @@
     <Compile Include="Base\BaseEntity.cs" />
     <Compile Include="Connection\clsConnection.cs" />
     <Compile Include="General\clsCsv.cs" />
-    <Compile Include="General\clsEncryption.cs" />
     <Compile Include="General\clsEnum.cs" />
     <Compile Include="General\clsExcel.cs" />
     <Compile Include="General\clsExport.cs" />
     <Compile Include="General\clsExtension.cs" />
     <Compile Include="General\clsSendEmail.cs" />
     <Compile Include="General\clsUtilities.cs" />
+    <Compile Include="General\Encryption.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

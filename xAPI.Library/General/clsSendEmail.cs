@@ -10,7 +10,6 @@ using System.Web.Script.Serialization;
 using System.Data.SqlClient;
 using xAPI.Library.Connection;
 using System.Data;
-using xAPI.Library.Security;
 using System.IO;
 using System.Net.Mime;
 
@@ -125,7 +124,7 @@ namespace xAPI.Library.General
                     // = obj.SMTP;
                     //  = obj.Port;
                     // = obj.Username;
-                    //   clsEncryption.Decrypt(obj.Password);
+                    //   Encryption.Decrypt(obj.Password);
                     //string mailFrom = "noreply@aseamail.com";
                     string mailFrom = server.EmailSender.ToString();
                     //string mailFrom = "lpacheco@xirectss.com";
@@ -145,9 +144,9 @@ namespace xAPI.Library.General
 
                     //string mailFromAccount = "lpacheco@xirectss.com";
                     //"activosfijos@grupoxentry.com"
-                    //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+                    //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-                    string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                    string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
 
                     //string mailFromPassword = "1234.Pass";
                     //"13011970"
@@ -218,7 +217,7 @@ namespace xAPI.Library.General
                     // = obj.SMTP;
                     //  = obj.Port;
                     // = obj.Username;
-                    //   clsEncryption.Decrypt(obj.Password);
+                    //   Encryption.Decrypt(obj.Password);
                     //string mailFrom = "noreply@aseamail.com";
                     string mailFrom = server.EmailSender.ToString();
                     //string mailFrom = "lpacheco@xirectss.com";
@@ -238,9 +237,9 @@ namespace xAPI.Library.General
 
                     //string mailFromAccount = "lpacheco@xirectss.com";
                     //"activosfijos@grupoxentry.com"
-                    //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+                    //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-                    string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                    string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
 
                     //string mailFromPassword = "1234.Pass";
                     //"13011970"
@@ -329,7 +328,7 @@ namespace xAPI.Library.General
                     // = obj.SMTP;
                     //  = obj.Port;
                     // = obj.Username;
-                    //   clsEncryption.Decrypt(obj.Password);
+                    //   Encryption.Decrypt(obj.Password);
                     //string mailFrom = "noreply@aseamail.com";
                     string mailFrom = server.EmailSender.ToString();
                     //string mailFrom = "lpacheco@xirectss.com";
@@ -349,9 +348,9 @@ namespace xAPI.Library.General
 
                     //string mailFromAccount = "lpacheco@xirectss.com";
                     //"activosfijos@grupoxentry.com"
-                    //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+                    //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-                    string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                    string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
 
                     //string mailFromPassword = "1234.Pass";
                     //"13011970"
@@ -421,7 +420,7 @@ namespace xAPI.Library.General
                     // = obj.SMTP;
                     //  = obj.Port;
                     // = obj.Username;
-                    //   clsEncryption.Decrypt(obj.Password);
+                    //   Encryption.Decrypt(obj.Password);
                     //string mailFrom = "noreply@aseamail.com";
                     string mailFrom = server.EmailSender.ToString();
                     //string mailFrom = "lpacheco@xirectss.com";
@@ -441,9 +440,9 @@ namespace xAPI.Library.General
 
                     //string mailFromAccount = "lpacheco@xirectss.com";
                     //"activosfijos@grupoxentry.com"
-                    //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+                    //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-                    string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                    string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
 
                     //string mailFromPassword = "1234.Pass";
                     //"13011970"
@@ -662,7 +661,7 @@ namespace xAPI.Library.General
                 
                 //SendAccount
                 string mailFromAccount = EmailDestination[0];//"mastermail@tru-friends.com";                
-                string mailFromPassword = clsEncryption.Decrypt(EmailDestination[1]);// "Vqu1r0z1+0.";
+                string mailFromPassword = Encryption.Decrypt(EmailDestination[1]);// "Vqu1r0z1+0.";
                 
                 //SendMaskAccount
                 string mailFrom = EmailDestination[0];
@@ -721,9 +720,9 @@ namespace xAPI.Library.General
 
                     //string mailFromAccount = "lpacheco@xirectss.com";
                     //"activosfijos@grupoxentry.com"
-                    //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+                    //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-                    string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                    string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
                     string mailSubject = subject;
                     string mailBody = message;
 
@@ -812,7 +811,7 @@ namespace xAPI.Library.General
                     // = obj.SMTP;
                     //  = obj.Port;
                     // = obj.Username;
-                    //   clsEncryption.Decrypt(obj.Password);
+                    //   Encryption.Decrypt(obj.Password);
                     //string mailFrom = "noreply@aseamail.com";
                     string mailFrom = server.EmailSender.ToString();
                     //string mailFrom = "lpacheco@xirectss.com";
@@ -832,9 +831,9 @@ namespace xAPI.Library.General
 
                     //string mailFromAccount = "lpacheco@xirectss.com";
                     //"activosfijos@grupoxentry.com"
-                    //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+                    //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-                    string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                    string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
 
                     //string mailFromPassword = "1234.Pass";
                     //"13011970"
@@ -959,9 +958,9 @@ namespace xAPI.Library.General
 
                 //string mailFromAccount = "lpacheco@xirectss.com";
                 //"activosfijos@grupoxentry.com"
-                //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+                //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-                string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
                 string mailSubject = subject;
                 string mailBody = message;
                 //Dim MediaType As String = "text/html"
@@ -1039,7 +1038,7 @@ namespace xAPI.Library.General
                     string mailFromAccount = server.Username.ToString();
                     //"activosfijos@grupoxentry.com"
                     //string mailFromPassword = "@Xirect2012";
-                    string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                    string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
                     //"13011970"
 
                     string mailSubject = subject;
@@ -1103,7 +1102,7 @@ namespace xAPI.Library.General
                     string mailFromAccount = server.Username.ToString();
                     //"activosfijos@grupoxentry.com"
                     //string mailFromPassword = "@Xirect2012";
-                    string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                    string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
                     //"13011970"
 
                     string mailSubject = subject;
@@ -1219,9 +1218,9 @@ namespace xAPI.Library.General
 
                 //string mailFromAccount = "lpacheco@xirectss.com";
                 //"activosfijos@grupoxentry.com"
-                //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+                //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-                string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
                 //"13011970"
 
                 string mailSubject = subject;
@@ -1600,9 +1599,9 @@ namespace xAPI.Library.General
 
         //            //string mailFromAccount = "lpacheco@xirectss.com";
         //            //"activosfijos@grupoxentry.com"
-        //            //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+        //            //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-        //            string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+        //            string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
 
         //            //string mailFromPassword = "1234.Pass";
         //            //"13011970"
@@ -1745,9 +1744,9 @@ namespace xAPI.Library.General
 
         //            //string mailFromAccount = "lpacheco@xirectss.com";
         //            //"activosfijos@grupoxentry.com"
-        //            //string mailFromPassword = "3vtgbn7u";//   clsEncryption.Decrypt(obj.Password);
+        //            //string mailFromPassword = "3vtgbn7u";//   Encryption.Decrypt(obj.Password);
 
-        //            string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+        //            string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
 
         //            //string mailFromPassword = "1234.Pass";
         //            //"13011970"
@@ -1814,7 +1813,7 @@ namespace xAPI.Library.General
                     string mailServer = server.SMTP.ToString();
                     int mailPort = Convert.ToInt32(server.Port);
                     string mailFromAccount = server.Username.ToString();
-                    string mailFromPassword = clsEncryption.Decrypt(server.Password.ToString());
+                    string mailFromPassword = Encryption.Decrypt(server.Password.ToString());
                     string mailSubject = Subject;
                     string mailBody = Message;
                     mailBody = Message;

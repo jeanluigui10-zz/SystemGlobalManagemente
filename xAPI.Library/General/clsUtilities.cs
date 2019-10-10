@@ -12,8 +12,6 @@ using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml;
-using xAPI.Library.Security;
-
 
 namespace xAPI.Library.General
 {
@@ -944,7 +942,7 @@ namespace xAPI.Library.General
             List<String> lstTime = new List<String>();
 
             String concat = apikey + Base64Encode(method) + date.ToUniversalTime().ToString("yyyyMMddmm");
-            signature = clsEncryption.Encrypt_Sha1(concat, false);
+            signature = Encryption.Encrypt_Sha1(concat, false);
 
             return signature;
         }
