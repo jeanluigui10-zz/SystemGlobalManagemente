@@ -196,7 +196,7 @@ namespace xAPI.Dao.Security
             SqlDataReader dr = null;
             try
             {
-                ObjCmd = new SqlCommand("Sp_ListarAsistente_Usuario", clsConnection.GetConnection());
+                ObjCmd = new SqlCommand("List_Assistant_Sp", clsConnection.GetConnection());
                 ObjCmd.CommandType = CommandType.StoredProcedure;
                 list = new List<Usuarios>();                                                                
                 dr = ObjCmd.ExecuteReader();
@@ -205,15 +205,15 @@ namespace xAPI.Dao.Security
                 {
                     Usuarios obj = new Usuarios();
                     count++;
-                    obj.Id_Usuario = dr.GetColumnValue<Int32>("Id_Usuario");
-                    obj.Nombre_Usuario = dr.GetColumnValue<String>("Nombre_Usuario");
-                    obj.APaterno_Usuario = dr.GetColumnValue<String>("APaterno_Usuario");
-                    obj.AMaterno_Usuario = dr.GetColumnValue<String>("AMaterno_Usuario");
-                    obj.Dni_Usuario = dr.GetColumnValue<String>("Dni_Usuario");
-                    obj.Contrasena = dr.GetColumnValue<String>("Contrasena");
-                    obj.Nombre_TipUsuario = dr.GetColumnValue<String>("Nombre_TipUsuario");
-                    obj.Id_TipoUsuario = dr.GetColumnValue<Int32>("Id_TipoUsuario");
-                    obj.Estado = dr.GetColumnValue<Byte>("Estado");
+                    obj.Id_Usuario = dr.GetColumnValue<Int32>("UserId");
+                    obj.Nombre_Usuario = dr.GetColumnValue<String>("FirstName");
+                    obj.APaterno_Usuario = dr.GetColumnValue<String>("LastNamePaternal");
+                    obj.AMaterno_Usuario = dr.GetColumnValue<String>("LastNameMaternal");
+                    obj.Dni_Usuario = dr.GetColumnValue<String>("Dni");
+                    obj.Contrasena = dr.GetColumnValue<String>("Password");
+                    obj.Nombre_TipUsuario = dr.GetColumnValue<String>("UserTypeName");
+                    obj.Id_TipoUsuario = dr.GetColumnValue<Int32>("UserTypeId");
+                    obj.Estado = dr.GetColumnValue<Byte>("Status");
                     obj.Index = count.ToString();
                     list.Add(obj);
                 }
