@@ -52,7 +52,6 @@ namespace System_Maintenance.Private.Resource
         private void LoadFieldTranslations()
         {
             lblRequiredFields.Text = "(*)Required fields.";
-            lblLanguage.Text = "Language:";
 
             lblResourceCategory.Text = "Resource Category:";
             lblResourceType.Text = "Resource Type:";
@@ -63,7 +62,6 @@ namespace System_Maintenance.Private.Resource
             lblTranslateKey.Text = "* Translation Key Name:";
             lblDescription.Text = "* Description:";
 
-            lblAplication.Text = "Application:";
 
             lblUploadFile.Text = "Upload a File:";
 
@@ -97,13 +95,11 @@ namespace System_Maintenance.Private.Resource
                 DataTable dtResCat = ResourceBL.Instance.ResourceCategories_GetAll(ref entity, 1);     
 
                 LoadDDLResourceCategory(ddlResourceCategory, dtResCat);
-                //LoadDdlListLanguage(ddlListLanguage, xLogic.Instance.Language_ListAll(ref entity)); COMENTE
-                LoadDdlApplications(ddlAplication, ResourceBL.Instance.Get_ResourcesApplication_Actives(ref entity));
-
+              
             }
-            catch (System.Exception)
+            catch (Exception ex)
             {
-                //Message(EnumAlertType.Error, "An error occurred while loading data");
+                Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
 
@@ -121,8 +117,9 @@ namespace System_Maintenance.Private.Resource
                     ddl.DataBind();
                 }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
+                Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
 
@@ -144,9 +141,9 @@ namespace System_Maintenance.Private.Resource
                     }
                 }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-
+                Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
 
@@ -159,9 +156,9 @@ namespace System_Maintenance.Private.Resource
                 ddl.DataValueField = "ID";
                 ddl.DataBind();
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                //Message(EnumAlertType.Error, "An error occurred while loading data");
+                Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
 
@@ -184,22 +181,7 @@ namespace System_Maintenance.Private.Resource
             {
                 this.ltTitle.Text = "Add a Resource";
             }
-            if (!string.IsNullOrEmpty(Request.QueryString["l"]))
-            {
-                if (!string.IsNullOrEmpty(Encryption.Decrypt(Request.QueryString["l"]))) 
-                {
-                    hfCi.Value = Encryption.Decrypt(Request.QueryString["l"]);
-                    string[] Values = hfCi.Value.Split('|');
-                    vsLId = Convert.ToInt32(Values[0]);
-                    ddlLanguage.SelectedValue = vsLId.ToString();
-                }
-                else
-                {
-                    GoBack();
-                }
-            }
-            else
-                GoBack();
+         
         }
         #endregion
 
@@ -219,8 +201,8 @@ namespace System_Maintenance.Private.Resource
                         SetControls(obj);
                     else
                         GoBack();
-                //else
-                    //Message(EnumAlertType.Error, "An error occurred while loading data");
+                else
+                    Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
 
@@ -237,46 +219,17 @@ namespace System_Maintenance.Private.Resource
             chkEnable.Checked = true;
             rbFile.Checked = true;
             rbLink.Checked = false;
-            
-            foreach (ListItem item in ddlListLanguage.Items)
-            {
-                item.Selected = false;
-            }
+       
         }
 
         private void SetControls(AppResource objAppResource)
         {
             try
             {
-                this.hfDistributorId.Value = objAppResource.DistributorId.ToString();
+                this.hfDistributorId.Value = objAppResource.UserId.ToString();
                 this.ddlResourceType.SelectedValue = objAppResource.DOCTYPE;
                 this.txtDescription.Text = objAppResource.FileDescription;
                 this.ddlResourceType.Enabled = false;
-
-                //int i = 0;                                            
-                //List<object> lst = new List<object>();
-                //if (objAppResource.ListLanguage != null)
-                //{
-                //    if (objAppResource.ListLanguage[i].ID == 0)
-                //    {
-                //        foreach (ListItem item in ddlListLanguage.Items)
-                //        {
-                //            item.Selected = true;
-                //        }
-                //    }
-                //    else
-                //    {
-                //        foreach (clsLanguage item in objAppResource.ListLanguage)
-                //        {
-                //            ddlListLanguage.Items.FindByValue(Convert.ToString(objAppResource.ListLanguage[i].ID)).Selected = true;
-                //            i++;
-                //        }
-                //    }
-                    
-                //    dynamic languagesSelected = objAppResource.ListLanguage.Select(xitem => xitem.ID).ToArray();
-                //    string srLangSelected = JsonConvert.SerializeObject(languagesSelected);
-                //    hfListLanguage.Value = srLangSelected;
-                //}
 
                 this.txtName.Text = objAppResource.Name;
                 this.txtTranslateKey.Text = objAppResource.TranslationKey;
@@ -304,9 +257,9 @@ namespace System_Maintenance.Private.Resource
                 
                 Page.ClientScript.RegisterStartupScript(this.GetType(), "DivfileDivLink", "fn_hide_show();", true);                
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                //this.//Message(EnumAlertType.Error,"An error occurred while loading data");
+               Message(EnumAlertType.Error,"An error occurred while loading data");
             }
 
 
@@ -344,30 +297,28 @@ namespace System_Maintenance.Private.Resource
                 objAppResource.DOCTYPE = ddlResourceType.SelectedItem.Text.Trim();
                 objAppResource.CategotyId = Convert.ToInt32(ddlResourceCategory.SelectedValue);
                 objAppResource.Name = HtmlSanitizer.SanitizeHtml(txtName.Text.Trim());
-                objAppResource.TranslationKey = HtmlSanitizer.SanitizeHtml(txtTranslateKey.Text.Trim());
                 objAppResource.FileDescription = HtmlSanitizer.SanitizeHtml(txtDescription.Text);
                 objAppResource.Createdby = BaseSession.SsUser.Id_Usuario;
                 objAppResource.Updatedby = BaseSession.SsUser.Id_Usuario;
-                objAppResource.DistributorId = BaseSession.SsUser.Id_Usuario;
-                objAppResource.AplicationId = Convert.ToInt32(ddlAplication.SelectedValue);
+                objAppResource.UserId = BaseSession.SsUser.Id_Usuario;
                 objAppResource.Status = chkEnable.Checked ? (short)EnumStatus.Enabled : (short)EnumStatus.Disabled;
                 objAppResource.Url = txtUrl.Text;
                 
                 if (string.IsNullOrEmpty(txtName.Text.Trim()))
                 {
-                    //this.//Message(EnumAlertType.Error, "The Name input can not be empty ");
+                   Message(EnumAlertType.Error, "The Name input can not be empty ");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(txtTranslateKey.Text.Trim()))
                 {
-                    //this.//Message(EnumAlertType.Error, "The Name input can not be empty ");
+                   Message(EnumAlertType.Error, "The Name input can not be empty ");
                     return;
                 }
 
                 if (string.IsNullOrEmpty(txtDescription.Text.Trim()))
                 {
-                    //this.//Message(EnumAlertType.Error, "The Description input can not be empty ");
+                   Message(EnumAlertType.Error, "The Description input can not be empty ");
                     return;
                 }
                 
@@ -406,42 +357,20 @@ namespace System_Maintenance.Private.Resource
                 }
 
                 BaseEntity entity = new BaseEntity();
-                #region GetMarkets
-
-                List<string> listMarketsString = sr.Deserialize<List<string>>(hfListLanguage.Value);
-                List<int> listLanguages = new List<int>();
-                if (listMarketsString.Count > 0)
-                {
-                    if (listMarketsString[0].ToString().Equals("multiselect-all"))
-                    {
-                        listMarketsString.RemoveAt(0);
-                    }
-                    listLanguages = listMarketsString.Select(int.Parse).ToList();
-                }
-
-                tBaseLanguagueIdList ListLanguage = new tBaseLanguagueIdList();
-                foreach (int item in listLanguages)
-                {
-                    ListLanguage.Add(new tBaseLanguageID
-                    {
-                        LanguageId = item,
-                    });
-                }
-                #endregion
-
-                int quantityLegalDocument = ResourceBL.Instance.Get_QuantityLegalDocuments(ref entity, objAppResource, ListLanguage);
+          
+                int quantityLegalDocument = ResourceBL.Instance.Get_QuantityLegalDocuments(ref entity, objAppResource/*, ListLanguage*/);
                 if (quantityLegalDocument == 0)
                 {
-                    SaveResource(ListLanguage, objAppResource, hpf);
+                    SaveResource(objAppResource, hpf);
                 }
                 else
                 {
-                    //this.//Message(EnumAlertType.Error, "Category or language already exists in another resource");
+                   Message(EnumAlertType.Error, "Category or language already exists in another resource");
                 }
             }            
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                //this.//Message(EnumAlertType.Error,"An error occurred while loading data");
+               Message(EnumAlertType.Error,"An error occurred while loading data");
             }
         }
 
@@ -470,15 +399,14 @@ namespace System_Maintenance.Private.Resource
                             case "Document":
                                 if (!ParseEnum2<EnumDocumentFileFormat>(Extension))
                                 {
-                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
+                                   Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
-                                    //return objAppResource;
                                 }
                                 break;
                             case "Image":
                                 if (!ParseEnum2<EnumImageFileFormat>(Extension))
                                 {
-                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
+                                   Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
                                     //return;
                                 }
@@ -486,7 +414,7 @@ namespace System_Maintenance.Private.Resource
                             case "Audio":
                                 if (!ParseEnum2<EnumAudioFileFormat>(Extension))
                                 {
-                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
+                                   Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
                                     //return;
                                 }
@@ -494,7 +422,7 @@ namespace System_Maintenance.Private.Resource
                             case "Video":
                                 if (!ParseEnum2<EnumVideoFileFormat>(Extension))
                                 {
-                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
+                                   Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
                                     //return;
                                 }
@@ -502,7 +430,7 @@ namespace System_Maintenance.Private.Resource
                             case "Presentation":
                                 if (!ParseEnum2<EnumPresentationFileFormat>(Extension))
                                 {
-                                    //this.//Message(EnumAlertType.Info, "Invalid file type");
+                                   Message(EnumAlertType.Info, "Invalid file type");
                                     returnsw = true;
                                     //return;
                                 }
@@ -515,8 +443,7 @@ namespace System_Maintenance.Private.Resource
                         Random r = new Random(DateTime.Now.Millisecond);
                         FileName = r.Next(1000, 9999) + "_" + Regex.Replace(FileName, @"[^0-9a-zA-Z\._]", string.Empty);
                         objAppResource.FileName = FileName;
-                        //objAppResource.FilePublicName = SubDomainHandler.GeneratePublicName(BaseSession.SsUser.ID);
-                        objAppResource.FilePublicName = "FilePublic" + BaseSession.SsUser.Id_Usuario;
+                        objAppResource.FilePublicName = clsUtilities.GeneratePublicName(BaseSession.SsUser.Id_Usuario);
                         objAppResource.FileExtension = Path.GetExtension(FileName).ToLower();
 
                         if (objAppResource.FileExtension.ToLower() == ".bmp" || objAppResource.FileExtension.ToLower() == ".jpeg" || objAppResource.FileExtension.ToLower() == ".jpg" || objAppResource.FileExtension.ToLower() == ".png" || objAppResource.FileExtension.ToLower() == ".gif")
@@ -528,18 +455,19 @@ namespace System_Maintenance.Private.Resource
                     else
                     {
                         hpf = null;
-                        //this.//Message(EnumAlertType.Info, "File size is over 5MB");
+                       Message(EnumAlertType.Info, "File size is over 5MB");
                     }
                 }
                 else
                 {
 
                     hpf = null;
-                    //this.//Message(EnumAlertType.Info, "File size is 0MB");
+                    Message(EnumAlertType.Info, "File size is 0MB");
                 }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
+                Message(EnumAlertType.Error, "An error occurred while loading data");
             }
             return objAppResource;
 
@@ -551,7 +479,7 @@ namespace System_Maintenance.Private.Resource
         }
         private void GoBack()
         {
-            //Response.Redirect("ResourcesManagement.aspx", false);
+            Response.Redirect("ResourcesManagement.aspx", false);
         }
 
         private void LoadDdlApplications(DropDownList ddl, DataTable dt)
@@ -566,15 +494,16 @@ namespace System_Maintenance.Private.Resource
                     ddl.DataBind();
                 }
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
+                Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
 
-        private void SaveResource(tBaseLanguagueIdList ListLanguage, AppResource objAppResource, HttpPostedFile hpf)
+        private void SaveResource(AppResource objAppResource, HttpPostedFile hpf)
         {
             BaseEntity entity = new BaseEntity();
-            bool success = ResourceBL.Instance.AppResource_Save(ref entity, ListLanguage, objAppResource);
+            bool success = ResourceBL.Instance.AppResource_Save(ref entity, /*ListLanguage,*/ objAppResource);
             if (entity.Errors.Count <= 0)
             {
                 if (success)
@@ -601,13 +530,18 @@ namespace System_Maintenance.Private.Resource
                     if (vsId == 0)
                         SetControls();
 
-                    //this.//Message(EnumAlertType.Success, "Saved successfully");
+                   Message(EnumAlertType.Success, "Saved successfully");
                 }
                 else
                 {
-                    //this.//Message(EnumAlertType.Error, "Invalid Language");
+                   Message(EnumAlertType.Error, "Invalid Language");
                 }
             }
+        }
+
+        public void Message(EnumAlertType type, string message)
+        {
+            ClientScript.RegisterStartupScript(typeof(Page), "message", @"<script type='text/javascript'>fn_message('" + type.GetStringValue() + "', '" + message + "');</script>", false);
         }
 
 

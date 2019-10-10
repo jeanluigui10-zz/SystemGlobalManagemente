@@ -58,15 +58,6 @@ namespace System_Maintenance.Private.Resource {
         protected global::System.Web.UI.WebControls.HiddenField hfFileExtension;
         
         /// <summary>
-        /// Control hfListLanguage.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfListLanguage;
-        
-        /// <summary>
         /// Control ltTitle.
         /// </summary>
         /// <remarks>
@@ -83,33 +74,6 @@ namespace System_Maintenance.Private.Resource {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblRequiredFields;
-        
-        /// <summary>
-        /// Control lblLanguage.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblLanguage;
-        
-        /// <summary>
-        /// Control ddlLanguage.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlLanguage;
-        
-        /// <summary>
-        /// Control ddlListLanguage.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ListBox ddlListLanguage;
         
         /// <summary>
         /// Control lblResourceCategory.
@@ -227,24 +191,6 @@ namespace System_Maintenance.Private.Resource {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtDescription;
-        
-        /// <summary>
-        /// Control lblAplication.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblAplication;
-        
-        /// <summary>
-        /// Control ddlAplication.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAplication;
         
         /// <summary>
         /// Control lblUrl.

@@ -1,8 +1,18 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ResourcesManagementSave.aspx.cs" Inherits="System_Maintenance.Private.Resource.ResourcesManagementSave" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <script src="../../src/js/jquery.MultiFile.js"></script>
+
+    <style type="text/css"> 
+         .modal-block{
+                 background: transparent;
+                 padding: 0;
+                 text-align: left;
+                 max-width: 600px;
+                 margin: 40px auto;
+                 position: relative;
+         }
+    </style>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -11,7 +21,7 @@
         });
         var PreviewOriginal = "";
         var Edit = 0;
-        var listLanguages = [];
+        //var listLanguages = [];
         var image;
         var sizeImage = "";
         jQuery.fn.preventDoubleSubmission = function () {
@@ -45,7 +55,7 @@
         function fn_LoadListDDL() {
 
 
-            $("#<%=ddlListLanguage.ClientID%>").multiselect({
+            <%--$("#<%=ddlListLanguage.ClientID%>").multiselect({
                 includeSelectAllOption: true,
                 onChange: function (option, checked) {
                     listLanguages = [];
@@ -73,7 +83,7 @@
                 includeSelectAllOption: true,
                 nonSelectedText: "None Selected",
                 selectAllText: "All Selected"
-            });
+            });--%>
         }
 
 
@@ -99,55 +109,55 @@
 
         function fn_validate2(event) {
             (function () {
-                listLanguages = [];
-                $($("#ContentPlaceHolder_ContentPlaceHolder2_ddlListLanguage").val()).each(function () {
-                    if (listLanguages.length > 0) {
+                //listLanguages = [];
+                //$($("#ContentPlaceHolder_ContentPlaceHolder2_ddlListLanguage").val()).each(function () {
+                //    if (listLanguages.length > 0) {
 
-                        var added = false;
-                        for (var i = 0; i < listLanguages.length; i++) {
+                //        var added = false;
+                //        for (var i = 0; i < listLanguages.length; i++) {
 
-                            if (listLanguages[i] == this["trim"]()) {
-                                added = true;
-                            }
-                        }
-                        if (!added) {
-                            listLanguages.push(this["trim"]());
-                        }
-                    } else {
-                        listLanguages.push(this["trim"]());
-                    }
-                });
+                //            if (listLanguages[i] == this["trim"]()) {
+                //                added = true;
+                //            }
+                //        }
+                //        if (!added) {
+                //            listLanguages.push(this["trim"]());
+                //        }
+                //    } else {
+                //        listLanguages.push(this["trim"]());
+                //    }
+                //});
 
-                $("select[id$=ddlListLanguage]").multiselect({
-                    includeSelectAllOption: true,
-                    nonSelectedText: 'None Selected',
-                    selectAllText: 'All Selected'
-                });
+                //$("select[id$=ddlListLanguage]").multiselect({
+                //    includeSelectAllOption: true,
+                //    nonSelectedText: 'None Selected',
+                //    selectAllText: 'All Selected'
+                //});
 
             })();
 
             if (sizeImage > 10485760) {
-                fn_message('i', "The image upload is too big";
+                fn_message('i', "The image upload is too big");
                 return false;
             }
-            if (listLanguages.length === 0) {
-                fn_message('i', "You must select at least one language";
-                event.preventDefault();
-                return false;
-            }
-            var jsonList = JSON.stringify(listLanguages);
-            $("[id$=hfListLanguage]").val(fn_jsonreplace(jsonList));
+            //if (listLanguages.length === 0) {
+            //    fn_message('i', "You must select at least one language");
+            //    event.preventDefault();
+            //    return false;
+            //}
+            //var jsonList = JSON.stringify(listLanguages);
+            //$("[id$=hfListLanguage]").val(fn_jsonreplace(jsonList));
             if (!fn_validateform('editBasic')) {
                 event.preventDefault();
                 return false;
             }
             if (/[<>]+/.test($("#<%=txtDescription.ClientID %>").val())) {
-                fn_message('i', "Invalid Description input. The tags '>' and '<' are not allowed.";
+                fn_message('i', "Invalid Description input. The tags '>' and '<' are not allowed.");
                 return false;
             }
 
             if (/[<>]+/.test($("#<%=txtName.ClientID %>").val())) {
-                fn_message('i', "Invalid Name input. The tags '>' and '<' are not allowed.";
+                fn_message('i', "Invalid Name input. The tags '>' and '<' are not allowed.");
                 event.preventDefault();
                 return false;
             }
@@ -192,21 +202,7 @@
         }
 
         function fn_bind() {
-
-            <%--if ($('#<%=chkSoxial.ClientID%>').is(':checked')) {
-                $("#dvUrl").show();
-            }
-            else {
-                $("#dvUrl").hide();
-            }
-
-            $('#<%=chkSoxial.ClientID%>').change(function () {
-                if (this.checked)
-                    $("#dvUrl").show();
-                else
-                    $("#dvUrl").hide();
-            });--%>
-
+            
             $("#<%=fuResource.ClientID%>").bind('change', function () {
                 if ($("#<%=fuResource.ClientID%>").val() != "") {
 
@@ -236,26 +232,6 @@
                 }
             });
 
-
-            <%--if ($('#<%=chkUploadFile.ClientID%>').is(':checked')) {
-                $("#uFile").show();
-                $("#exUrl").hide();
-            }
-            else {
-                $("#uFile").hide();
-                $("#exUrl").show();
-            }
-
-            $('#<%=chkUploadFile.ClientID%>').change(function () {
-                if (this.checked) {
-                    $("#uFile").show();
-                    $("#exUrl").hide();
-                }
-                else {
-                    $("#uFile").hide();
-                    $("#exUrl").show();
-                }
-            });--%>
 
             $("#<%=rbLink.ClientID%>").click(function () {
                 fn_hide_show();
@@ -369,7 +345,6 @@
                 }
                 else {
                     if ($("#<%=hfPathImage.ClientID%>").val() != "") {
-                        //var viewWord = "http://xbackofficexss.xirecttest560.com";
                         var viewWord = "http://xbackoffice.xssdemos.com";
                         viewWord += $("#<%=hfPathImage.ClientID%>").val();
                         $("#piframe").attr("src", viewWord);
@@ -389,6 +364,9 @@
 
     </script>
 
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    
 
     <div class="row">
         <div class="col-lg-12">
@@ -397,7 +375,7 @@
             <asp:HiddenField ID="hfFileName" runat="server" />
             <asp:HiddenField ID="hfPublicName" runat="server" />
             <asp:HiddenField ID="hfFileExtension" runat="server" />
-            <asp:HiddenField ID="hfListLanguage" runat="server" />
+            <%--<asp:HiddenField ID="hfListLanguage" runat="server" />--%>
 
 
             <section class="panel">
@@ -420,7 +398,7 @@
                                 <asp:Label ID="lblRequiredFields" runat="server" Text=""></asp:Label>
                             </div>
                         </div>
-                        <div class="form-group">
+                   <%--     <div class="form-group">
                             <asp:Label ID="lblLanguage" Text="" runat="server" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
 
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
@@ -429,7 +407,7 @@
                                 <asp:ListBox ID="ddlListLanguage" multiple="multiple" SelectionMode="Multiple" CssClass="form-control" runat="server"></asp:ListBox>
 
                             </div>
-                        </div>
+                        </div>--%>
 
                         <div class="form-group">
                             <asp:Label ID="lblResourceCategory" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
@@ -486,13 +464,13 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                       <%-- <div class="form-group">
                             <asp:Label ID="lblAplication" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
                                 <asp:DropDownList runat="server" ID="ddlAplication" CssClass="form-control mb-md">
                                 </asp:DropDownList>
                             </div>
-                        </div>
+                        </div>--%>
 
 
                         <div class="form-group" id="dvUrl" style="display: none">

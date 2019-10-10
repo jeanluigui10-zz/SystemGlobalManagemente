@@ -176,6 +176,8 @@
                         fn_message("s", asw.d.Msg);
                         Fn_Limpiar();
                         Fn_RecargarLista();
+                    } else {
+                        fn_message("e", asw.d.Msg);
                     }
                 }
             }

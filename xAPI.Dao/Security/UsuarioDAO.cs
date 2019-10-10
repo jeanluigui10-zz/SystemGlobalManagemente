@@ -31,7 +31,7 @@ namespace xAPI.Dao.Security
             SqlDataReader dr = null;
             try
             {
-                ObjCmd = new SqlCommand("Sp_ValidateLogin", clsConnection.GetConnection());
+                ObjCmd = new SqlCommand("ValidateLogin_Sp", clsConnection.GetConnection());
                 ObjCmd.CommandType = CommandType.StoredProcedure;
                 ObjCmd.Parameters.AddWithValue("@Dni", obj.Dni_Usuario);
                 ObjCmd.Parameters.AddWithValue("@Password", obj.Contrasena);
@@ -73,7 +73,7 @@ namespace xAPI.Dao.Security
             Boolean success = false;
             try
             {
-                cmd = new SqlCommand("Sp_Registro_Usuario", clsConnection.GetConnection());
+                cmd = new SqlCommand("Save_User_Sp", clsConnection.GetConnection());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Nombre_Usuario", obj.Nombre_Usuario);
                 cmd.Parameters.AddWithValue("@APaterno_Usuario", obj.APaterno_Usuario);
@@ -106,7 +106,7 @@ namespace xAPI.Dao.Security
             Boolean success = false;
             try
             {
-                cmd = new SqlCommand("Sp_Actualizar_Usuario", clsConnection.GetConnection());
+                cmd = new SqlCommand("Update_User_Sp", clsConnection.GetConnection());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id_Usuario", obj.Id_Usuario);
                 cmd.Parameters.AddWithValue("@Nombre_Usuario", obj.Nombre_Usuario);
@@ -139,7 +139,7 @@ namespace xAPI.Dao.Security
             Boolean success = false;
             try
             {
-                cmd = new SqlCommand("Sp_Eliminar_Usuario", clsConnection.GetConnection());
+                cmd = new SqlCommand("[Detele_User_Sp]", clsConnection.GetConnection());
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@Id_Usuario", obj.Id_Usuario);
                 cmd.ExecuteNonQuery();
@@ -165,15 +165,15 @@ namespace xAPI.Dao.Security
             SqlDataReader dr = null;
             try
             {
-                ObjCmd = new SqlCommand("Sp_Listar_Usuario", clsConnection.GetConnection());
+                ObjCmd = new SqlCommand("List_User_Sp", clsConnection.GetConnection());
                 ObjCmd.CommandType = CommandType.StoredProcedure;
                 list = new List<Usuarios>();
                 dr = ObjCmd.ExecuteReader();
                 while (dr.Read())
                 {
                     Usuarios obj = new Usuarios();
-                    obj.Id_Usuario = dr.GetColumnValue<Int32>("Id_Usuario");
-                    obj.Nombre_Usuario = dr.GetColumnValue<String>("Nombre_Usuario");
+                    obj.Id_Usuario = dr.GetColumnValue<Int32>("[UserId]");
+                    obj.Nombre_Usuario = dr.GetColumnValue<String>("[Name]");
                     list.Add(obj);
                 }
             }

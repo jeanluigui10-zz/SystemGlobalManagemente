@@ -26,6 +26,11 @@
     <link rel="stylesheet" href="/dist/css/skins/_all-skins.min.css">
     <!-- iCheck -->
     <link rel="stylesheet" href="/plugins/iCheck/square/blue.css">
+    <%--Multiselect--%>
+    <link href="/plugins/bootstrap-multiselect/bootstrap-multiselect.css" rel="stylesheet" />
+
+    <link href="/plugins/magnific-popup/magnific-popup.css" rel="stylesheet" />
+    <link href="/plugins/bootstrap-toggle/bootstrap-toggle.min.css" rel="stylesheet" />
     <!-- jQuery 2.2.3 -->
     <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
@@ -48,6 +53,115 @@
     <!-- AdminLTE for demo purposes -->
     <script src="/dist/js/demo.js"></script>
     <script src="/src/handlebars/handlebars-v2.0.0.min.js"></script>
+    <script src="/plugins/bootstrap-multiselect/bootstrap-multiselect.js"></script>
+    <script src="/plugins/magnific-popup/magnific-popup.js"></script>
+    <script src="/plugins/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+    <script type="text/javascript">
+        var translateWidget = "Select a Language to Search";
+
+        /*  Validation Engine translations - ve (Validation Engine) */
+        var veFieldRequired = "This field is required";
+
+        var veSelectOption = "Please select an option";
+
+        var veSelectSelect = "Please select";
+
+        var veChkRequired = "This checkbox is required";
+
+        var veDateRangeRequired = "Both date range fields are required";
+
+        var veFieldEqualTest = "Field must equal test";
+
+        var veInvalid = "Invalid";
+
+        var veDateRange = "Date Range";
+
+        var veDateTimeRange = "Date Time Range";
+
+        var veMinimum = "Minimum";
+
+        var veMaximum = "Maximum";
+
+        var veOptions = "options";
+
+        var veCharsRequired = "characters required";
+
+        var veCharsAllowed = "characters allowed";
+
+        var veFillOneFields = "You must fill one of the following fields";
+
+        var veMimimumValue = "Minimum value is";
+
+        var veMaximumValue = "Maximum value is";
+
+        var veDatePrior = "Date prior to";
+
+        var veDatePast = "Date past";
+
+        var veOptionsAllowed = "options allowed";
+
+        var veFieldsDontMatch = "Fields do not match";
+
+        var veInvalidCCard = "Invalid credit card number";
+
+        var veInvalidPhone = "Invalid phone number";
+
+        var veInvalidMobile = "Invalid mobile number";
+
+        var veInvalidFax = "Invalid fax number";
+
+        var veInvalidEmail = "Invalid email address";
+
+        var veInvalidZip = "Invalid zip format";
+
+        var veInvalidDecimal = "Invalid floating decimal number";
+
+        var veNotValidInteger = "Not a valid integer";
+
+        var veMustBeFirst = "Must be first and last name";
+
+        var veDateFormat = "Invalid date, must be in";
+
+        var veDateFormat2 = "format";
+
+        var veInvalidIP = "Invalid IP address";
+
+        var veInvalidURL = "Invalid URL";
+
+        var veNumbersOnly = "Numbers only";
+
+        var veLettersOnly = "Letters only";
+
+        var veNoSpecialCharsAllowed = "No special characters allowed";
+
+        var veLettersOnly = "Letters only (accents allowed)";
+
+        var veUserTaken = "This user is already taken";
+
+        var veNameTaken = "This name is already taken";
+
+        var veValidatingWait = "Validating, please wait";
+
+        var veUsernameAvailable = "This username is available";
+
+        var veNameAvailable = "This name is available";
+
+        var veInvalidDate = "Invalid Date";
+
+        var veInvalidDateOrFormat = "Invalid Date or Date Format";
+
+        var veExpectedFormat = "Expected Format";
+
+        var veOR = "Or";
+
+    </script>
+
+
+
+    <script src="/plugins/ValidationEngine/jquery.validationEngine.js"></script>
+    <script src="/plugins/ValidationEngine/languages/jquery.validationEngine-en.js"></script>
+    <link href="/src/css/validationEngine.jquery.css" rel="stylesheet" />
+
     <%@ Import Namespace="xSystem_Maintenance.src.app_code" %>
     <%@ Import Namespace="xAPI.Library.General" %>
     <script type="text/javascript">

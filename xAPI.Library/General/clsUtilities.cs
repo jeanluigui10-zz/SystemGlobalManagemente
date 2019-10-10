@@ -1367,5 +1367,16 @@ namespace xAPI.Library.General
             //put a breakpoint here and check datatable
             return dataTable;
         }
+        public static String GeneratePublicName(Int32 Id)
+        {
+            String publicName = Id.ToString();
+
+            Random random = new Random(DateTime.Now.Millisecond);
+
+            for (int i = 0; i < 50; i++)
+                publicName += (Char)random.Next(65, 90);
+
+            return publicName;
+        }
     }
 }

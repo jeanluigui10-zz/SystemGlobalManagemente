@@ -265,7 +265,8 @@ namespace xAPI.Library.General
         pdf,
         pptx,
         txt,
-        html
+        html,
+        csv
     }
     public enum EnumDocumenImagetFileFormat
     {

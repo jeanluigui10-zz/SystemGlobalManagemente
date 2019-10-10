@@ -89,16 +89,16 @@ namespace xAPI.BL.Resource
             return dt;
 
         }
-        public Int32 Get_QuantityLegalDocuments(ref BaseEntity Base, AppResource resource, tBaseLanguagueIdList ListLanguage)
+        public Int32 Get_QuantityLegalDocuments(ref BaseEntity Base, AppResource resource/*, tBaseLanguagueIdList ListLanguage*/)
         {
-            return AppResourceDAO.Instance.Get_QuantityLegalDocuments(ref Base, resource, ListLanguage);
+            return AppResourceDAO.Instance.Get_QuantityLegalDocuments(ref Base, resource/*, ListLanguage*/);
         }
-        public Boolean AppResource_Save(ref BaseEntity Entity, tBaseLanguagueIdList listLanguages, AppResource Resource, Boolean RegisterTBL = false, String Username = "")
+        public Boolean AppResource_Save(ref BaseEntity Entity, /*tBaseLanguagueIdList listLanguages,*/ AppResource Resource, Boolean RegisterTBL = false, String Username = "")
         {
             Boolean success = false;
             Entity = new BaseEntity();
 
-            success = AppResourceDAO.Instance.Save(ref Entity, listLanguages, Resource, RegisterTBL, Username);
+            success = AppResourceDAO.Instance.Save(ref Entity, /*listLanguages,*/ Resource, RegisterTBL, Username);
 
             return success;
         }

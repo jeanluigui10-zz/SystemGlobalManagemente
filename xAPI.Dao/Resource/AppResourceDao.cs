@@ -38,7 +38,7 @@ namespace xAPI.Dao
                 DOCTYPE = ObjDr.GetColumnValue<String>("DOCTYPE"),
                 NameResource = ObjDr.GetColumnValue<String>("NameResource"),
                 AplicationId = ObjDr.GetColumnValue<Int32>("AplicationId"),
-                DistributorId = ObjDr.GetColumnValue<Int32>("DistributorId"),
+                UserId = ObjDr.GetColumnValue<Int32>("DistributorId"),
                 Photoid = ObjDr.GetColumnValue<Int32>("LEGACYNUMBER"),
                 Status = ObjDr.GetColumnValue<Int16>("STATUS"),
                 isUpload = ObjDr.GetColumnValue<Int16>("ISUPLOAD"),
@@ -157,20 +157,18 @@ namespace xAPI.Dao
             return dt;
         }
 
-        public Boolean Save(ref BaseEntity Entity, tBaseLanguagueIdList listLanguages, AppResource Resource, Boolean RegisterTBL = false, String UserName = "")
+        public Boolean Save(ref BaseEntity Entity, /*tBaseLanguagueIdList listLanguages,*/ AppResource Resource, Boolean RegisterTBL = false, String UserName = "")
         {
             Boolean success = false;
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("SP_APPRESOURCES_SAVE_FROM_TY_GET_LANGUAGESID", clsConnection.GetConnection())
+                cmd = new SqlCommand("Appresources_GetbyAplicationId_LanguageIds_Sp", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
 
                 SqlParameter outputParam = cmd.Parameters.Add("@PUBLICNAME", SqlDbType.VarChar, 100);
-                outputParam.Direction = ParameterDirection.Output;
-                outputParam = cmd.Parameters.Add("@IDOUT", SqlDbType.VarChar, 100);
                 outputParam.Direction = ParameterDirection.Output;
 
                 cmd.Parameters.AddWithValue("@FILEID", Resource.ID);
@@ -180,35 +178,21 @@ namespace xAPI.Dao
                 cmd.Parameters.AddWithValue("@DESCRIPTION", Resource.FileDescription);
                 cmd.Parameters.AddWithValue("@FILEEXTENSION", Resource.FileExtension);
                 cmd.Parameters.AddWithValue("@NAMERESOURCE", Resource.NameResource);
-                cmd.Parameters.AddWithValue("@APLICATIONID", Resource.AplicationId);
-                cmd.Parameters.AddWithValue("@DISTRIBUTORID", Resource.DistributorId);
+                cmd.Parameters.AddWithValue("@DISTRIBUTORID", Resource.UserId);
                 cmd.Parameters.AddWithValue("@CREATEDBY", Resource.Createdby);
-                cmd.Parameters.AddWithValue("@PHOTOID", Resource.Photoid);
                 cmd.Parameters.AddWithValue("@STATUS", Resource.Status);
-                cmd.Parameters.AddWithValue("@REGISTERTBL", RegisterTBL);
                 cmd.Parameters.AddWithValue("@USERNAME", UserName);
                 cmd.Parameters.AddWithValue("@URL", Resource.Url);
                 cmd.Parameters.AddWithValue("@ISUPLOAD", Resource.isUpload);
-
                 cmd.Parameters.AddWithValue("@RESOURCECATEGORYID", Resource.CategotyId);
-                cmd.Parameters.AddWithValue("@SYSTEMCONTACID", Resource.SystemContactId);
                 cmd.Parameters.AddWithValue("@NAME", Resource.Name);
-                cmd.Parameters.AddWithValue("@keyName", Resource.TranslationKey);
 
-                if (listLanguages.Count > 0)
-                {
-                    cmd.Parameters.Add(new SqlParameter { ParameterName = "@TYPE_LANGUAGEID", Value = listLanguages, SqlDbType = SqlDbType.Structured, TypeName = "dbo.TY_GET_LANGUAGESID" });
-                }
-
+              
                 success = cmd.ExecuteNonQuery() > 0;
                 if (!String.IsNullOrEmpty(cmd.Parameters["@PUBLICNAME"].Value.ToString()))
                     Resource.FilePublicName = Convert.ToString(cmd.Parameters["@PUBLICNAME"].Value);
 
-                if (!String.IsNullOrEmpty(cmd.Parameters["@IDOUT"].Value.ToString()))
-                    Resource.ID = Convert.ToInt32(cmd.Parameters["@IDOUT"].Value);
-
-
-
+               
             }
             catch (Exception ex)
             {
@@ -246,7 +230,7 @@ namespace xAPI.Dao
                 cmd.Parameters.AddWithValue("@FILEEXTENSION", Resource.FileExtension);
                 cmd.Parameters.AddWithValue("@NAMERESOURCE", Resource.FilePublicName + Resource.FileExtension);
                 cmd.Parameters.AddWithValue("@APLICATIONID", Resource.AplicationId);
-                cmd.Parameters.AddWithValue("@DISTRIBUTORID", Resource.DistributorId);
+                cmd.Parameters.AddWithValue("@DISTRIBUTORID", Resource.UserId);
                 cmd.Parameters.AddWithValue("@CREATEDBY", Resource.Createdby);
                 cmd.Parameters.AddWithValue("@STATUS", Resource.Status);
 
@@ -328,7 +312,7 @@ namespace xAPI.Dao
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("GET_RESOURCESAPPLICATION_ACTIVES", clsConnection.GetConnection())
+                cmd = new SqlCommand("ResourceApplication_Active_Sp", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -347,13 +331,13 @@ namespace xAPI.Dao
             return dt;
         }
 
-        public Int32 Get_QuantityLegalDocuments(ref BaseEntity Entity, AppResource resource, tBaseLanguagueIdList ListLanguage)
+        public Int32 Get_QuantityLegalDocuments(ref BaseEntity Entity, AppResource resource/*, tBaseLanguagueIdList ListLanguage*/)
         {
             Int32 quantity = -1;
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("sp_AppResource_QuantityLegalDocuments", clsConnection.GetConnection())
+                cmd = new SqlCommand("[AppResource_QuantityLegalDocuments_Sp]", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -361,10 +345,10 @@ namespace xAPI.Dao
                 cmd.Parameters.AddWithValue("@RESOURCECATEGORYID", resource.CategotyId);
                 cmd.Parameters.AddWithValue("@RESOURCEID", resource.ID);
 
-                if (ListLanguage.Count > 0)
-                {
-                    cmd.Parameters.Add(new SqlParameter { ParameterName = "@TYPE_LANGUAGEID", Value = ListLanguage, SqlDbType = SqlDbType.Structured, TypeName = "dbo.TY_GET_LANGUAGESID" });
-                }
+                //if (ListLanguage.Count > 0)
+                //{
+                //    cmd.Parameters.Add(new SqlParameter { ParameterName = "@TYPE_LANGUAGEID", Value = ListLanguage, SqlDbType = SqlDbType.Structured, TypeName = "dbo.TY_GET_LANGUAGESID" });
+                //}
 
                 SqlParameter outputParam = cmd.Parameters.Add("@QUANTITY", SqlDbType.Int);
                 outputParam.Direction = ParameterDirection.Output;

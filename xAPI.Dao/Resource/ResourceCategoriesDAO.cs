@@ -76,7 +76,7 @@ namespace xAPI.Dao
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("SP_RESOURCECATEGORIES_GETALL", clsConnection.GetConnection())
+                cmd = new SqlCommand("ResourceCategories_GetAll_Sp", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };

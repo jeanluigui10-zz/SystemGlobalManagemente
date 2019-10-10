@@ -313,6 +313,8 @@
     <Content Include="build\less\timeline.less" />
     <Content Include="build\less\users-list.less" />
     <Content Include="build\less\variables.less" />
+    <Content Include="plugins\bootstrap-toggle\bootstrap-toggle.min.css" />
+    <Content Include="plugins\bootstrap-toggle\bootstrap-toggle.min.js" />
     <Content Include="plugins\ckeditor\CHANGES.md" />
     <Content Include="plugins\ckeditor\LICENSE.md" />
     <Content Include="plugins\ckeditor\plugins\scayt\CHANGELOG.md" />
@@ -1078,6 +1080,8 @@
     <Content Include="plugins\jvectormap\jquery-jvectormap-usa-en.js" />
     <Content Include="plugins\jvectormap\jquery-jvectormap-world-mill-en.js" />
     <Content Include="plugins\knob\jquery.knob.js" />
+    <Content Include="plugins\magnific-popup\magnific-popup.css" />
+    <Content Include="plugins\magnific-popup\magnific-popup.js" />
     <Content Include="plugins\morris\morris.css" />
     <Content Include="plugins\morris\morris.js" />
     <Content Include="plugins\morris\morris.min.js" />
@@ -1146,6 +1150,8 @@
     <Content Include="plugins\timepicker\bootstrap-timepicker.js" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.css" />
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.js" />
+    <Content Include="plugins\ValidationEngine\languages\jquery.validationEngine-en.js" />
+    <Content Include="plugins\ValidationEngine\jquery.validationEngine.js" />
     <Content Include="Private\Incidents\Home.aspx" />
     <Content Include="Private\Incidents\Incident.aspx" />
     <Content Include="Private\Registro\Ambiente.aspx" />
@@ -1187,9 +1193,12 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="src\css\validationEngine.jquery.css" />
     <Content Include="src\handlebars\handlebars-v2.0.0.min.js" />
     <Content Include="src\handlebars\handlebars-v4.1.2.js" />
     <Content Include="src\js\Base.js" />
+    <Content Include="plugins\bootstrap-multiselect\bootstrap-multiselect.css" />
+    <Content Include="plugins\bootstrap-multiselect\bootstrap-multiselect.js" />
     <Content Include="src\js\jquery.MultiFile.js" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">

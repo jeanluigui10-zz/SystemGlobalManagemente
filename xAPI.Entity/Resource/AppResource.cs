@@ -14,7 +14,7 @@ namespace xAPI.Entity
         public String DOCTYPE { get; set; }
         public String NameResource { get; set; }
         public Int32? AplicationId { get; set; }
-        public Int32? DistributorId { get; set; }
+        public Int32? UserId { get; set; }
         public Int32? Photoid { get; set; }
         public String Url { get; set; }
         public Int16? isUpload { get; set; }
