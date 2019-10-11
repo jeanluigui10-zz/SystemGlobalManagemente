@@ -260,7 +260,7 @@ namespace xAPI.Dao
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("SP_APPRESOURCES_DELETE_LANGUAGESID", clsConnection.GetConnection());
+                cmd = new SqlCommand("Appresources_Delete_Sp", clsConnection.GetConnection());
                 cmd.Parameters.Add(new SqlParameter { ParameterName = "@TYPE_BASEID", Value = BaseList, SqlDbType = SqlDbType.Structured, TypeName = "dbo.TY_BASEID" });
                 cmd.CommandType = CommandType.StoredProcedure;
                 success = cmd.ExecuteNonQuery() > 0 ? true : false;

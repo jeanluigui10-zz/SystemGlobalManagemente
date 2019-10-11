@@ -134,7 +134,7 @@
                                 $("#<%=hfData.ClientID%>").val(lista);
                                 table.destroy();
                                 fn_fillTable2(lista);
-                                fn_message('s', 'SUCCESS_DELETED"),"Deleted successfully');
+                                fn_message('s', 'Deleted successfully');
                             }
                             else
                                 fn_message('e', 'Unable to delete the record(s)');
