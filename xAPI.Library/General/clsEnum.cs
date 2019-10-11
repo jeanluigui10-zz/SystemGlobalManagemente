@@ -193,6 +193,26 @@ namespace xAPI.Library.General
         Inactivo = 0
     }
     #endregion
+
+    public enum EnumAppCode
+    {
+        [StringValue("All")]
+        All = -1,
+        [StringValue("xBackOffice")]
+        xBackOffice = 2,
+        [StringValue("xCorporate")]
+        xCorporate = 3,
+        [StringValue("ResourcesManagement")]
+        ResourcesManagement = 4,
+        [StringValue("MyProductPhotos")]
+        MyProductPhotos = 7,
+        [StringValue("PartyPlan")]
+        PartyPlan = 11,
+        [StringValue("Soxial")]
+        SoxialMarketing = 12
+    }
+
+
     public enum EnumEmailAccess
     {
         [StringValue("mastermail@tru-friends.com|k+aRJKKGcsOsxh3P5u3gcQ==|Tru-Friends")]

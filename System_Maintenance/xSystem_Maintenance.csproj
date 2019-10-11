@@ -345,6 +345,7 @@
     <Content Include="Login.Master" />
     <Content Include="Home.Master" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\SystemWeb.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="plugins\bootstrap-slider\bootstrap-slider.js" />
     <Content Include="plugins\bootstrap-slider\slider.css" />
@@ -1162,6 +1163,7 @@
     <Content Include="Private\Registro\RegistroUsuario.aspx" />
     <Content Include="Private\Registro\Usuario.aspx" />
     <Content Include="Private\Report\ReportIncident.aspx" />
+    <Content Include="Private\Resource\ResourcesManagement.aspx" />
     <Content Include="Private\Resource\ResourcesManagementSave.aspx" />
     <Content Include="Private\Security\Login.aspx" />
     <Content Include="Private\Registro\RegistroEquipo.aspx" />
@@ -1193,12 +1195,16 @@
     <Content Include="Scripts\WebForms\WebForms.js" />
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
+    <Content Include="src\css\loader_datatable.css" />
     <Content Include="src\css\validationEngine.jquery.css" />
     <Content Include="src\handlebars\handlebars-v2.0.0.min.js" />
     <Content Include="src\handlebars\handlebars-v4.1.2.js" />
+    <Content Include="src\images\image_not_found.jpg" />
+    <Content Include="src\images\image_not_found_res.jpg" />
     <Content Include="src\js\Base.js" />
     <Content Include="plugins\bootstrap-multiselect\bootstrap-multiselect.css" />
     <Content Include="plugins\bootstrap-multiselect\bootstrap-multiselect.js" />
+    <Content Include="src\js\bootbox.js" />
     <Content Include="src\js\jquery.MultiFile.js" />
     <Content Include="ViewSwitcher.ascx" />
     <Content Include="Web.config">
@@ -1296,6 +1302,13 @@
     <Compile Include="Private\Report\ReportIncident.aspx.designer.cs">
       <DependentUpon>ReportIncident.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Private\Resource\ResourcesManagement.aspx.cs">
+      <DependentUpon>ResourcesManagement.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Private\Resource\ResourcesManagement.aspx.designer.cs">
+      <DependentUpon>ResourcesManagement.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Private\Resource\ResourcesManagementSave.aspx.cs">
       <DependentUpon>ResourcesManagementSave.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1324,6 +1337,7 @@
     <Compile Include="src\app_code\BaseSession.cs" />
     <Compile Include="src\app_code\Config.cs" />
     <Compile Include="src\app_code\HtmlSanitizer.cs" />
+    <Compile Include="src\app_code\SerializableClass.cs" />
     <Compile Include="ViewSwitcher.ascx.cs">
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

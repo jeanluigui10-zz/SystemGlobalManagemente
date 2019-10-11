@@ -98,19 +98,16 @@ namespace xAPI.Dao
 
         }
 
-        public DataTable GetAllByAplicationID(ref BaseEntity Base, Int32 AplicationID, Int32 LanguageID)
+        public DataTable GetAllByAplicationID(ref BaseEntity Base)
         {
             DataTable dt = new DataTable();
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("SP_APPRESOURCES_GETBYAPLICATIONID_LANGUAGEIDS", clsConnection.GetConnection())
+                cmd = new SqlCommand("Resources_GetResource_Sp", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-
-                cmd.Parameters.AddWithValue("@APLICATIONID", AplicationID);
-                cmd.Parameters.AddWithValue("@LANGUAGEID", LanguageID);
                 dt.Load(cmd.ExecuteReader());
             }
             catch (Exception ex)

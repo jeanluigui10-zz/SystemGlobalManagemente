@@ -31,6 +31,7 @@
 
     <link href="/plugins/magnific-popup/magnific-popup.css" rel="stylesheet" />
     <link href="/plugins/bootstrap-toggle/bootstrap-toggle.min.css" rel="stylesheet" />
+    <link href="/src/css/loader_datatable.css" rel="stylesheet" />
     <!-- jQuery 2.2.3 -->
     <script src="/plugins/jQuery/jquery-2.2.3.min.js"></script>
     <!-- Bootstrap 3.3.6 -->
@@ -56,6 +57,7 @@
     <script src="/plugins/bootstrap-multiselect/bootstrap-multiselect.js"></script>
     <script src="/plugins/magnific-popup/magnific-popup.js"></script>
     <script src="/plugins/bootstrap-toggle/bootstrap-toggle.min.js"></script>
+    <script src="/src/js/bootbox.js"></script>
     <script type="text/javascript">
         var translateWidget = "Select a Language to Search";
 
@@ -154,6 +156,7 @@
 
         var veOR = "Or";
 
+       
     </script>
 
 
@@ -383,7 +386,7 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Private/Resource/ResourcesManagementSave.aspx"><i class="fa fa-circle-o"></i>Registro Diseño</a></li>
+                                <li><a href="/Private/Resource/ResourcesManagement.aspx"><i class="fa fa-circle-o"></i>Registro Diseño</a></li>
                             </ul>
                         </li>   
 
@@ -451,5 +454,8 @@
         </div>
         <!-- ./wrapper -->
     </form>
+
+
+
 </body>
 </html>

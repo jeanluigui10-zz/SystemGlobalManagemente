@@ -102,5 +102,23 @@ namespace xAPI.BL.Resource
 
             return success;
         }
+        public DataTable AppResource_GetByAplicationID(ref BaseEntity entity)
+        {
+            entity = new BaseEntity();
+            DataTable dt = null;
+            dt = AppResourceDAO.Instance.GetAllByAplicationID(ref entity);
+                        
+            return dt;
+        }
+        public Boolean AppResource_Delete(ref BaseEntity entity, tBaseIdList idList)
+        {
+            Boolean success = false;
+            if (idList.Count > 0)
+                success = AppResourceDAO.Instance.Delete(ref entity, idList);
+            else
+                entity.Errors.Add(new BaseEntity.ListError(new Exception { }, "An error occurred sending data"));
+
+            return success;
+        }
     }
 }

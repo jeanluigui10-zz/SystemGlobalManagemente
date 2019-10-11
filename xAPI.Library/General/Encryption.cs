@@ -24,12 +24,12 @@ namespace xAPI.Library.General
         {
             try
             {
-                string passPhrase = parameters.EncryptionPassPhrase;//"@1B2c3D4e5F6g7H8x1cr3t22";
-                string saltValue = parameters.EncryptionSaltValue;//"@1B2c3D4e5F6g7H8";
+                string passPhrase ="@1B2c3D4e5F6g7H8x1cr3t22";
+                string saltValue ="@1B2c3D4e5F6g7H8";
                 string hashAlgorithm = "SHA1";
 
                 int passwordIterations = 2;
-                string initVector = parameters.EncryptionInitVector;// "@1B2c3D4e5F6g7H8";
+                string initVector = "@1B2c3D4e5F6g7H8";
                 int keySize = 256;
 
                 byte[] initVectorBytes = Encoding.ASCII.GetBytes(initVector);
@@ -58,7 +58,7 @@ namespace xAPI.Library.General
                 string cipherText = Convert.ToBase64String(cipherTextBytes);
                 return cipherText;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return "";
             }
@@ -177,12 +177,12 @@ namespace xAPI.Library.General
         {
             try
             {
-                string passPhrase = parameters.EncryptionPassPhrase;//"@1B2c3D4e5F6g7H8x1cr3t22";
-                string saltValue = parameters.EncryptionSaltValue;//"@1B2c3D4e5F6g7H8";
+                string passPhrase = "@1B2c3D4e5F6g7H8x1cr3t22";
+                string saltValue = "@1B2c3D4e5F6g7H8";
                 string hashAlgorithm = "SHA1";
 
                 int passwordIterations = 2;
-                string initVector = parameters.EncryptionInitVector;// "@1B2c3D4e5F6g7H8";
+                string initVector = "@1B2c3D4e5F6g7H8";
                 int keySize = 256;
                 // Convert strings defining encryption key characteristics into byte
                 // arrays. Let us assume that strings only contain ASCII codes.
