@@ -183,8 +183,10 @@ namespace xAPI.Dao
                 cmd.Parameters.AddWithValue("@ISUPLOAD", Resource.isUpload);
                 cmd.Parameters.AddWithValue("@RESOURCECATEGORYID", Resource.CategotyId);
                 cmd.Parameters.AddWithValue("@NAME", Resource.Name);
+                cmd.Parameters.AddWithValue("@UnitPrice", Resource.UnitPrice);
+                
 
-              
+
                 success = cmd.ExecuteNonQuery() > 0;
                 if (!String.IsNullOrEmpty(cmd.Parameters["@PUBLICNAME"].Value.ToString()))
                     Resource.FilePublicName = Convert.ToString(cmd.Parameters["@PUBLICNAME"].Value);

@@ -303,7 +303,7 @@ namespace System_Maintenance.Private.Resource
                 objAppResource.UserId = BaseSession.SsUser.Id_Usuario;
                 objAppResource.Status = chkEnable.Checked ? (short)EnumStatus.Enabled : (short)EnumStatus.Disabled;
                 objAppResource.Url = txtUrl.Text;
-                
+                objAppResource.UnitPrice = Convert.ToDecimal(txtUnitPrice.Text);
                 if (string.IsNullOrEmpty(txtName.Text.Trim()))
                 {
                    Message(EnumAlertType.Error, "The Name input can not be empty ");

@@ -527,6 +527,12 @@
                                 <asp:CheckBox runat="server" Checked="true" ID="chkEnable" />
                             </div>
                         </div>
+                        <div class="form-group">
+                            <asp:Label ID="Label1" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
+                            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
+                                <asp:TextBox ID="txtUnitPrice" runat="server" CssClass="form-control  validate[required]"></asp:TextBox>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

@@ -19,6 +19,7 @@ namespace xAPI.Entity
         public String Url { get; set; }
         public Int16? isUpload { get; set; }
         public Int32? CategotyId { get; set; }
+        public Decimal UnitPrice { get; set; }
         public Int32? SystemContactId { get; set; }
         //public List<clsLanguage> ListLanguage { get; set; } comente
 
