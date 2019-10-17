@@ -37,17 +37,12 @@ namespace xAPI.Dao
                 FilePublicName = ObjDr.GetColumnValue<String>("FilePublicname"),
                 DOCTYPE = ObjDr.GetColumnValue<String>("DOCTYPE"),
                 NameResource = ObjDr.GetColumnValue<String>("NameResource"),
-                AplicationId = ObjDr.GetColumnValue<Int32>("AplicationId"),
                 UserId = ObjDr.GetColumnValue<Int32>("DistributorId"),
-                Photoid = ObjDr.GetColumnValue<Int32>("LEGACYNUMBER"),
                 Status = ObjDr.GetColumnValue<Int16>("STATUS"),
                 isUpload = ObjDr.GetColumnValue<Int16>("ISUPLOAD"),
-                Url = ObjDr.GetColumnValue<String>("URL"),
-
                 CategotyId = ObjDr.GetColumnValue<Int32>("RESOURCECATEGORYID"),
-                SystemContactId = ObjDr.GetColumnValue<Int32>("SYSTEMCONTACID"),
                 Name = ObjDr.GetColumnValue<String>("NAME"),
-                TranslationKey = ObjDr.GetColumnValue<String>("KeyName") ?? String.Empty
+                UnitPrice = ObjDr.GetColumnValue<Decimal>("UnitPrice"),
             };
             return obj;
         }
@@ -60,7 +55,7 @@ namespace xAPI.Dao
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("SP_APPRESOURCES_GETBYID_LANGUAGEIDS", clsConnection.GetConnection())
+                cmd = new SqlCommand("AppResource_GetById_Sp", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -69,20 +64,6 @@ namespace xAPI.Dao
                 while (dr.Read())
                 {
                     objAppResource = GetEntity_v3(dr);
-                }
-
-                dr.NextResult();
-                if (dr.HasRows)
-                {
-                    while (dr.Read())
-                    {
-                        //clsLanguage lang = new clsLanguage
-                        //{
-                        //    ID = dr.GetColumnValue<Int32>("LANGUAGEID")
-                        //};
-                        //lstLanguages.Add(lang);           comente
-                    }
-                    //objAppResource.ListLanguage = lstLanguages; comente
                 }
             }
             catch (Exception ex)
