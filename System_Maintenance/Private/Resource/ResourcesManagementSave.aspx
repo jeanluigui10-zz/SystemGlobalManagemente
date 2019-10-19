@@ -450,12 +450,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <asp:Label ID="lblTranslateKey" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
-                            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:TextBox ID="txtTranslateKey" runat="server" CssClass="form-control  validate[required]" MaxLength="200"></asp:TextBox>
-                            </div>
-                        </div>
 
                         <div class="form-group">
                             <asp:Label ID="lblDescription" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
@@ -464,14 +458,12 @@
                             </div>
                         </div>
 
-                       <%-- <div class="form-group">
-                            <asp:Label ID="lblAplication" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
+                        <div class="form-group">
+                            <asp:Label ID="Label1" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label">Precio Unitario</asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:DropDownList runat="server" ID="ddlAplication" CssClass="form-control mb-md">
-                                </asp:DropDownList>
+                                <asp:TextBox ID="txtUnitPrice" runat="server" CssClass="form-control  validate[required]"></asp:TextBox>
                             </div>
-                        </div>--%>
-
+                        </div>
 
                         <div class="form-group" id="dvUrl" style="display: none">
                             <asp:Label ID="lblUrl" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
@@ -527,6 +519,7 @@
                                 <asp:CheckBox runat="server" Checked="true" ID="chkEnable" />
                             </div>
                         </div>
+               
                     </div>
                 </div>
 

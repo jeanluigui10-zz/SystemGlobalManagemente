@@ -146,8 +146,10 @@ namespace System_Maintenance.Private.Resource
                             FileName = item["FILENAME"].ToString(),
                             DocType = item["DOCTYPE"].ToString(),
                             Category =  item["RESOURCE_CATEGORY_NAME"].ToString(),
+                            Name =  item["Name"].ToString(),
                             FileDescription = item["DESCRIPTION"].ToString(),
                             NameResource = item["NAMERESOURCE"].ToString(),
+                            UnitPrice = Convert.ToDecimal(item["UnitPrice"]).ToString(),
                             CreatedDate = Convert.ToDateTime(item["CREATEDDATE"]).ToString("MM/dd/yyyy"),
                             Status = Convert.ToInt16(item["STATUS"]) == (short)EnumStatus.Enabled ? "Enabled" : "Disabled",
                             Index = item["ID"].ToString()

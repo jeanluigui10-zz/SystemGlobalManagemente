@@ -59,7 +59,6 @@ namespace System_Maintenance.Private.Resource
             lblSystemContact.Text = "System Contact:";
 
             lblName.Text = "* Name:";
-            lblTranslateKey.Text = "* Translation Key Name:";
             lblDescription.Text = "* Description:";
 
 
@@ -212,7 +211,6 @@ namespace System_Maintenance.Private.Resource
             ddlResourceCategory.SelectedIndex = 0;
             hfDistributorId.Value = string.Empty;
             txtName.Text = string.Empty;
-            txtTranslateKey.Text = string.Empty;
             txtDescription.Text = string.Empty;
             txtUrl.Text = string.Empty;
             txtLink.Text = string.Empty;
@@ -232,17 +230,13 @@ namespace System_Maintenance.Private.Resource
                 this.ddlResourceType.Enabled = false;
 
                 this.txtName.Text = objAppResource.Name;
-                this.txtTranslateKey.Text = objAppResource.TranslationKey;
 
                 this.ddlResourceCategory.SelectedValue = objAppResource.CategotyId.ToString();
-                this.ddlSystemContact.SelectedValue = objAppResource.SystemContactId.ToString();
-
-                chkEnable.Checked = objAppResource.Status == (int)EnumStatus.Enabled ? true : false;
-                
+                chkEnable.Checked = objAppResource.Status == (int)EnumStatus.Enabled ? true : false;                
                 rbFile.Checked = objAppResource.isUpload == 1 ? true : false;
 
                 rbLink.Checked = objAppResource.isUpload == 0 ? true : false;
-
+                txtUnitPrice.Text = objAppResource.UnitPrice.ToString();
                 if (rbFile.Checked == true)
                 {
                     this.hfPathImage.Value = objAppResource.NameResource;
@@ -303,25 +297,23 @@ namespace System_Maintenance.Private.Resource
                 objAppResource.UserId = BaseSession.SsUser.Id_Usuario;
                 objAppResource.Status = chkEnable.Checked ? (short)EnumStatus.Enabled : (short)EnumStatus.Disabled;
                 objAppResource.Url = txtUrl.Text;
-                
+                objAppResource.UnitPrice = Convert.ToDecimal(txtUnitPrice.Text);
                 if (string.IsNullOrEmpty(txtName.Text.Trim()))
                 {
-                   Message(EnumAlertType.Error, "The Name input can not be empty ");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtTranslateKey.Text.Trim()))
-                {
-                   Message(EnumAlertType.Error, "The Name input can not be empty ");
-                    return;
-                }
-
-                if (string.IsNullOrEmpty(txtDescription.Text.Trim()))
-                {
-                   Message(EnumAlertType.Error, "The Description input can not be empty ");
+                   Message(EnumAlertType.Error, "Debe ingresar un nombre ");
                     return;
                 }
                 
+                if (string.IsNullOrEmpty(txtDescription.Text.Trim()))
+                {
+                   Message(EnumAlertType.Error, "Debe ingresar una descripcion ");
+                    return;
+                }
+                if (string.IsNullOrEmpty(txtName.Text.Trim()))
+                {
+                    Message(EnumAlertType.Error, "Debe ingresar un precio. ");
+                    return;
+                }
                 if (rbFile.Checked == true)
                 {
                     objAppResource.isUpload = 1;

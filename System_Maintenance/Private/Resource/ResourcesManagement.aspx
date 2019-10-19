@@ -109,11 +109,11 @@
         }        
 
         function fn_RowEdit(index) {
-            window.location.href = "ResourcesManagementSave.aspx?q=" + index + "&l=" + $("#<%=hfLng.ClientID %>").val();
+            window.location.href = "ResourcesManagementSave.aspx?q=" + index; <%--+ "&l=" + $("#<%=hfLng.ClientID %>").val();--%>
         }
 
-    	function fn_new() {
-    		window.location.href = "ResourcesManagementSave.aspx?l=" + $("#<%=hfLng.ClientID %>").val();
+    	   function fn_new() {
+           window.location.href = "ResourcesManagementSave.aspx"; <%--?l=" + $("#<%=hfLng.ClientID %>").val();--%>
         }
 
         function fn_delete3() {
@@ -204,7 +204,7 @@
 
                             </div>
                         </div>
-                        <div class="myForm1 themeBlue">
+                        <div class="myForm1 themeBlue" style="margin-top:10px">
                             <div class="container-menunav">
                                
                                 <div class="grid-container paddleft-3">
@@ -214,13 +214,14 @@
                                                 <th style="display: none;"></th>
                                                 <th><input type="checkbox" id="all" name="all" /></th>
                                                 <th>ID</th>
-                                                <th>TYPE</th>
-                                                <th>CATEGORY</th>
-                                                <th>DESCRIPTION</th>
-                                                <th>FILE</th>
-                                                <th>STATUS</th>
-                                                <th>CREATED_DATE</th>
-                                                <th>ACTION</th>
+                                                <th>Tipo</th>
+                                                <th>Categoria</th>
+                                                <th>Name</th>
+                                                <th>Descripcion</th>
+                                                <th>File</th>
+                                                <th>Estado</th>
+                                                <th>Precio</th>
+                                                <th>Accion</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -234,7 +235,7 @@
             </section>
         </div>
     </div>
-    <asp:HiddenField ID="hfLng" runat="server" />
+    <%--<asp:HiddenField ID="hfLng" runat="server" />--%>
     <div class="modal fade" id="popup-languages" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-dialog" >
             <div class="modal-content">
@@ -262,10 +263,11 @@
                     <td style='text-align:center;'>{{Index}}</td>                      
                     <td>{{DocType}}</td>
                     <td>{{Category}}</td>
+                    <td>{{Name}}</td> 
                     <td>{{FileDescription}}</td> 
                     <td><img style='max-height: 50px; max-width: 50px;' src='{{NameResource}}' onerror='this.src="../../../src/images/image_not_found_res.jpg"'/></td>  
                     <td>{{Status}}</td>  
-                    <td>{{CreatedDate}}</td> 
+                    <td>{{UnitPrice}}</td>  
                     <td style='text-align:center;'><a onclick="fn_RowEdit('{{Id}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a><a onclick="fn_DownloadFile('{{{NameResource}}}')"  title='Download' class='gridActionBtn'><i class='fa fa-download'></i></a></td>                 
                   </tr>
         {{/each}}
