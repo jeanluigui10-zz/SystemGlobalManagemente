@@ -1153,6 +1153,8 @@
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="plugins\ValidationEngine\languages\jquery.validationEngine-en.js" />
     <Content Include="plugins\ValidationEngine\jquery.validationEngine.js" />
+    <Content Include="Private\Chat\RedirectChatModule.aspx" />
+    <Content Include="src\control\Chat\ucRedirectChatModule.ascx" />
     <Content Include="Private\Incidents\Home.aspx" />
     <Content Include="Private\Incidents\Incident.aspx" />
     <Content Include="Private\Registro\Ambiente.aspx" />
@@ -1231,6 +1233,20 @@
     </Compile>
     <Compile Include="Login.Master.designer.cs">
       <DependentUpon>Login.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Private\Chat\RedirectChatModule.aspx.cs">
+      <DependentUpon>RedirectChatModule.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Private\Chat\RedirectChatModule.aspx.designer.cs">
+      <DependentUpon>RedirectChatModule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="src\control\Chat\ucRedirectChatModule.ascx.cs">
+      <DependentUpon>ucRedirectChatModule.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="src\control\Chat\ucRedirectChatModule.ascx.designer.cs">
+      <DependentUpon>ucRedirectChatModule.ascx</DependentUpon>
     </Compile>
     <Compile Include="Private\Incidents\Home.aspx.cs">
       <DependentUpon>Home.aspx</DependentUpon>

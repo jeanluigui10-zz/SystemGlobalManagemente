@@ -15,6 +15,7 @@ namespace xSystem_Maintenance.src.app_code
         public static string EnterprisePhysicalPath { get { return WebConfigurationManager.AppSettings["epPath"]; } }
         public static string DistributorVirtualPath { get { return WebConfigurationManager.AppSettings["dvPath"]; } }
         public static string EnterpriseVirtualPath { get { return WebConfigurationManager.AppSettings["evPath"]; } }
-
+        public static String RedirectChatModule { get { return HttpUtility.UrlDecode(WebConfigurationManager.AppSettings["Domain_ChatModule"]); } }
+        public static String ChatModuleId { get { return HttpUtility.UrlDecode(WebConfigurationManager.AppSettings["ChatModuleId"]); } }
     }
 }
