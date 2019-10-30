@@ -151,7 +151,7 @@ namespace System_Maintenance.Private.Resource
                             NameResource = item["NAMERESOURCE"].ToString(),
                             UnitPrice = Convert.ToDecimal(item["UnitPrice"]).ToString(),
                             CreatedDate = Convert.ToDateTime(item["CREATEDDATE"]).ToString("MM/dd/yyyy"),
-                            Status = Convert.ToInt16(item["STATUS"]) == (short)EnumStatus.Enabled ? "Enabled" : "Disabled",
+                            Status = Convert.ToInt16(item["STATUS"]) == (short)EnumStatus.Enabled ? "Habilitado" : "Deshabilitado",
                             Index = item["ID"].ToString()
                         });
                     }

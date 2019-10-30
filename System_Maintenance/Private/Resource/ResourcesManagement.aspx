@@ -134,10 +134,10 @@
                                 $("#<%=hfData.ClientID%>").val(lista);
                                 table.destroy();
                                 fn_fillTable2(lista);
-                                fn_message('s', 'Deleted successfully');
+                                fn_message('s', 'Se elimino correctamente');
                             }
                             else
-                                fn_message('e', 'Unable to delete the record(s)');
+                                fn_message('e', 'No se puede eliminar el registro(s)');
                         };
                         var error = function (xhr, ajaxOptions, thrownError) {
                             fn_message('e', 'An error occurred while sending data');
@@ -147,7 +147,7 @@
                     }
                 });
             }
-            else fn_message('i', "Please select at least one row to delete");
+            else fn_message('i', "Por favor, seleccione una fila para eliminar");
         }
 
 
@@ -165,7 +165,7 @@
                 }
 
             } catch (e) {
-                fn_message('e', 'An error occurred while downloading the file');
+                fn_message('e', 'A ocurrido un error mientras se descargaba el archivo');
             }
         }
     </script>
@@ -182,7 +182,7 @@
                 <header class="panel-heading">
                     <div class="panel-actions">
                     </div>
-                    <h2 class="panel-title">Resources management</h2>
+                    <h2 class="panel-title">Gestión de los recursos</h2>
                     <div class="title" style="text-align: right; margin-top: -20px;">
                         <a id= "helpdesk" class="helpDesk" data-keyname="PROCESS_COMMUNICATION_CENTER_RESOURCES_MANAGEMENT"><i class="fa fa-question-circle fa-2x"></i></a>
                     </div>
@@ -194,8 +194,8 @@
                         <div class="row">
                             <div class="col-md-9 cnt-controles">
                                 <a class="mb-xs mt-xs mr-xs btn btn-primary" onclick="fn_new()"  id="a1"><i
-                                    class="fa fa-plus"></i><span>&nbsp;Add</span> </a>
-                                <a class="mb-xs mt-xs mr-xs btn btn-danger" onclick="fn_delete3()" id="A2"><i class="fa fa-times"></i><span>&nbsp;Delete</span> </a>
+                                    class="fa fa-plus"></i><span>&nbsp;Agregar</span> </a>
+                                <a class="mb-xs mt-xs mr-xs btn btn-danger" onclick="fn_delete3()" id="A2"><i class="fa fa-times"></i><span>&nbsp;Eliminar</span> </a>
 
                              <%--   <asp:LinkButton ID="lnkbtnlanguage" runat="server" class="mb-xs mt-xs mr-xs btn btn-info">
                                     <asp:Image ID="imgRegion" runat="server" />
@@ -218,7 +218,7 @@
                                                 <th>Categoria</th>
                                                 <th>Name</th>
                                                 <th>Descripcion</th>
-                                                <th>File</th>
+                                                <th>Archivo</th>
                                                 <th>Estado</th>
                                                 <th>Precio</th>
                                                 <th>Accion</th>

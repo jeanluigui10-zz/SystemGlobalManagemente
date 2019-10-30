@@ -558,7 +558,7 @@
             <footer class="panel-footer">
                 <div class="row">
                     <div class="col-md-12 text-right">
-                        <button id="dialogClose" class="btn btn-default" type="button">Close</button>
+                        <button id="dialogClose" class="btn btn-default" type="button">Cerrar</button>
                     </div>
                 </div>
             </footer>

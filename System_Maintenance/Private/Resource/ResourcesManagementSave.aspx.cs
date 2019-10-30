@@ -51,28 +51,28 @@ namespace System_Maintenance.Private.Resource
 
         private void LoadFieldTranslations()
         {
-            lblRequiredFields.Text = "(*)Required fields.";
+            lblRequiredFields.Text = "(*)Campos requeridos.";
 
-            lblResourceCategory.Text = "Resource Category:";
-            lblResourceType.Text = "Resource Type:";
+            lblResourceCategory.Text = "Categoria de recurso:";
+            lblResourceType.Text = "Tipo:";
 
             lblSystemContact.Text = "System Contact:";
 
-            lblName.Text = "* Name:";
-            lblDescription.Text = "* Description:";
+            lblName.Text = "* Nombre:";
+            lblDescription.Text = "* Descripcion:";
 
 
-            lblUploadFile.Text = "Upload a File:";
+            lblUploadFile.Text = "Subir Archivo:";
 
             lblUrl.Text = "Url:";
 
-            rbFile.Text = "File";
-            rbLink.Text = "Link";
-            lblFileNameL.Text = "* File Name and Location:  <br><small class='col-md-10'> File size max: 5MB</small>";
-            lblEnabled.Text = "Enabled:";
+            rbFile.Text = "Archivo";
+            rbLink.Text = "Enlace";
+            lblFileNameL.Text = "* Nombre de archivo y ubicacion:  <br><small class='col-md-10'> Tamaño maximo: 5MB</small>";
+            lblEnabled.Text = "Habilitado:";
 
-            btnUpload.Text = "Save";
-            btnCancel.Text = "Go back";
+            btnUpload.Text = "Guardar";
+            btnCancel.Text = "Regresar";
 
         }
 
@@ -169,7 +169,7 @@ namespace System_Maintenance.Private.Resource
         {
             if (!string.IsNullOrEmpty(Request.QueryString["q"]))
             {
-                this.ltTitle.Text = "Edit a Resource";
+                this.ltTitle.Text = "Editar recurso";
                 string id = Encryption.Decrypt(Request.QueryString["q"]); 
                 if (!string.IsNullOrEmpty(id))
                     vsId = Convert.ToInt32(id);
@@ -178,7 +178,7 @@ namespace System_Maintenance.Private.Resource
             }
             else
             {
-                this.ltTitle.Text = "Add a Resource";
+                this.ltTitle.Text = "Agregar recurso";
             }
          
         }
