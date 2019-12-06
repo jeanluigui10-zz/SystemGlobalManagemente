@@ -153,6 +153,7 @@
                 </div> 
                 <div style="margin-top:10px"> 
                     <a class="mb-xs mt-xs mr-xs btn btn-primary" onclick="Fn_RecargarLista()" id="a1"><span>Actualizar</span> </a>
+                    <asp:Button ID="btnExport" runat="server" Text="Exportar" CssClass="mb-xs mt-xs mr-xs btn btn-default" OnClick="btnExport_Click" />
                 </div>
                 
             </div>
