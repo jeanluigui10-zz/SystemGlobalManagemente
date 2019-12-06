@@ -33,10 +33,8 @@
         function Fn_content() {
             var inicio = $("input[id$=txtFechaInicio]").val().trim();
             var fin = $("input[id$=txtFechaFin]").val().trim();
-            var idasistente = $("select[id$=ddlAsistente] option:selected").val();
             $("input[id$=hfFechaInicio]").val(inicio);
             $("input[id$=hfFechaFin]").val(fin);
-            $("input[id$=hfIdAsistente]").val(idasistente);
             Fn_LlenarTable($("#<%=hfData.ClientID%>").val());
         }
 
@@ -110,10 +108,8 @@
         function Fn_RecargarLista() {
             var inicio = $("input[id$=txtFechaInicio]").val().trim();
             var fin = $("input[id$=txtFechaFin]").val().trim();
-            var idasistente = $("select[id$=ddlAsistente] option:selected").val();
             $("input[id$=hfFechaInicio]").val(inicio);
             $("input[id$=hfFechaFin]").val(fin);
-            $("input[id$=hfIdAsistente]").val(idasistente);
             var success = function (asw) {
                 if (asw != null) {
                     if (asw.d.Result == "Ok") {
@@ -131,7 +127,7 @@
                 fn_message('e', 'A ocurrido un error cargando la lista', 'message_row');
             };
 
-            fn_callmethod("ReportIncident.aspx/Cargar_Incidencias", JSON.stringify({fechaInicio : inicio, fechaFin:fin, idasistente:idasistente}), success, error);
+            fn_callmethod("ReportIncident.aspx/Cargar_Ventas", JSON.stringify({fechaInicio : inicio, fechaFin:fin}), success, error);
         }
     </script>
 
@@ -154,27 +150,11 @@
                         <i class="fa fa-calendar"></i>
                     </div>
                     <input type="text" class="form-control pull-right" id="txtFechaFin">
-                </div>
-                <label>Asistente</label>
-                <asp:DropDownList ID="ddlAsistente" runat="server" CssClass="form-control"></asp:DropDownList>
-                <div style="margin-top:10px">
-                    <% 
-                        if (BaseSession.SsUser.Id_TipoUsuario == (Int32)EnumTipoUsuario.Administrador)
-                        {
-                    %>
+                </div> 
+                <div style="margin-top:10px"> 
                     <a class="mb-xs mt-xs mr-xs btn btn-primary" onclick="Fn_RecargarLista()" id="a1"><span>Actualizar</span> </a>
-                    <asp:Button ID="btnExport" runat="server" Text="Exportar" CssClass="mb-xs mt-xs mr-xs btn btn-default" OnClick="btnExport_Click" />
-
-                    <%
-                        }
-                        else if (BaseSession.SsUser.Id_TipoUsuario == (Int32)EnumTipoUsuario.Asistente)
-                        {
-                    %>
-                    <a class="mb-xs mt-xs mr-xs btn btn-primary" onclick="Fn_RecargarLista()" id="a1"><span>Actualizar</span> </a>
-                    <%
-                        }
-                    %>
                 </div>
+                
             </div>
         </div>
         <!-- /.box-header -->
@@ -186,17 +166,14 @@
                         <th>
                             <input type="checkbox" id="all" name="all" /></th>
                         <th>#</th>
+                        <th>OrderId</th>
+                        <th>Fecha de Orden</th>
+                        <th>IGV Total</th>
+                        <th>SubTotal</th>
+                        <th>Total</th>
+                        <th>Identificador</th>
                         <th>Nombre</th>
-                        <th>Apellido Paterno</th>
-                        <th>Apellido Materno</th>
-                        <th>Tipo Usuario</th>
-                        <th>Piso Ambiente</th>
-                        <th>Nombre Ambiente</th>
-                        <th>Descripcion</th>
-                        <th>Nombre Categoria</th>
-                        <th>Nombre Equipo</th>
-                        <th>Fecha crecion</th>
-                        <th>Realizado</th>
+                        <th>Estado</th>
                         <%--<th>Accion</th>--%>
                     </tr>
                 </thead>
@@ -209,29 +186,23 @@
     <asp:HiddenField runat="server" ID="hfData" />
     <asp:HiddenField runat="server" ID="hfFechaInicio" />
     <asp:HiddenField runat="server" ID="hfFechaFin" />
-    <asp:HiddenField runat="server" ID="hfIdAsistente" />
 
     <script type="text/x-handlebars-template" id="datatable-resources">
         {{# each request}}
              <tr>
-                 <td style="display: none;">{{Id_Incidencia}}</td>
-                 {{#if IsCheckbox}}<td id='multiselect' style='text-align: center;'>
-                     <input type='checkbox' id='msg_sel' name='msg_sel' /></td>
-                 {{else}}<td id='multiselect' style='text-align: center;'></td>
+                 <td style="display: none;">{{OrderId}}</td>
+                 {{#if IsCheckbox}}<td id='multiselect' style='text-align: center;'> <input type='checkbox' id='msg_sel' name='msg_sel' /></td>{{else}}<td id='multiselect' style='text-align: center;'></td>
                  {{/if}} 
                  <td style='text-align: center;'>{{Index}}</td>
-                 <td>{{Nombre_Usuario}}</td>
-                 <td>{{APaterno_Usuario}}</td>
-                 <td>{{AMaterno_Usuario}}</td>
-                 <td>{{Nombre_TipUsuario}}</td>
-                 <td>{{Piso_Ambiente}}</td>
-                 <td>{{Nombre_Ambiente}}</td>
-                 <td>{{Descripcion}}</td>
-                 <td>{{Nombre_Categoria}}</td>
-                 <td>{{Nombre_Equipo}}</td>
-                 <td>{{FechaCreacion}}</td>
-                 <td>{{IsCompleto}}</td>
-                 <%--<td style='text-align: center;'><a onclick="fn_RowEdit('{{UsuId}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a><a onclick="fn_DownloadFile('{{Index}}')" title='Download' class='gridActionBtn'><i class='fa fa-download'></i></a></td>--%>
+                 <td>{{OrderId}}</td>
+                 <td>{{OrderDateStr}}</td>
+                 <td>{{IGV}}</td>
+                 <td>{{SubTotal}}</td>
+                 <td>{{Ordertotal}}</td>
+                 <td>{{LegacyNumber}}</td>
+                 <td>{{Customer.FirstName}}</td>
+                 <td>{{EstadoDes}}</td>
+                 <%--<td style='text-align: center;'><a onclick="fn_RowEdit('{{OrderId}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a><a onclick="fn_DownloadFile('{{Index}}')" title='Download' class='gridActionBtn'><i class='fa fa-download'></i></a></td>--%>
              </tr>
         {{/each}}
 

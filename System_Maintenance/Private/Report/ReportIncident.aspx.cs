@@ -7,6 +7,7 @@ using System.Web.Services;
 using System.Web.UI;
 using xAPI.BL.Report;
 using xAPI.BL.Security;
+using xAPI.Entity.Order;
 using xAPI.Entity.Report;
 using xAPI.Entity.Security;
 using xAPI.Library.Base;
@@ -20,36 +21,16 @@ namespace System_Maintenance.Private.Report
         {
             if (!Page.IsPostBack)
             {
-                CargarUsuarios();
                 CargaReporte();
             }
-        }
-
-        private void CargarUsuarios()
-        {
-            try
-            {
-                BaseEntity objBase = new BaseEntity();
-                List<Usuarios> lst = UsuarioBL.Instance.ListarUsuarios(ref objBase);
-
-                ddlAsistente.DataSource = lst;
-                ddlAsistente.DataTextField = "Nombre_Usuario";
-                ddlAsistente.DataValueField = "Id_Usuario";
-                ddlAsistente.DataBind();
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-        }
+        }     
 
         private void CargaReporte()
         {
             BaseEntity objBase = new BaseEntity();
             String fechaInicio = (String.IsNullOrEmpty(hfFechaInicio.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaInicio.Value, CultureInfo.InvariantCulture));
             String fechaFin = (String.IsNullOrEmpty(hfFechaFin.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaFin.Value,  CultureInfo.InvariantCulture));
-            Int32 idasistente = String.IsNullOrEmpty(hfIdAsistente.Value) ?  0 : Convert.ToInt32(hfIdAsistente.Value);
-            List<Reporte> list = ReporteBL.Instance.ListarIncidencias(ref objBase, fechaInicio, fechaFin, idasistente);
+            List<OrderHeader> list = ReporteBL.Instance.ListarVentas(ref objBase, fechaInicio, fechaFin);
             if (objBase.Errors.Count == 0)
             {
                 if (list != null)
@@ -70,14 +51,13 @@ namespace System_Maintenance.Private.Report
         }
 
         [WebMethod]
-        public static object Cargar_Incidencias(string fechaInicio, string fechaFin, string idasistente)
+        public static object Cargar_Ventas(string fechaInicio, string fechaFin)
         {
             BaseEntity objBase = new BaseEntity();
             String Inicio = (String.IsNullOrEmpty(fechaInicio)) ? "" : Convert.ToString(Convert.ToDateTime(fechaInicio, CultureInfo.InvariantCulture));
             String Fin = (String.IsNullOrEmpty(fechaFin)) ? "" : Convert.ToString(Convert.ToDateTime(fechaFin, CultureInfo.InvariantCulture));
 
-            Int32 idasist = Convert.ToInt32(idasistente);
-            List<Reporte> list = ReporteBL.Instance.ListarIncidencias(ref objBase, Inicio, Fin, idasist);
+            List<OrderHeader> list = ReporteBL.Instance.ListarVentas(ref objBase, Convert.ToDateTime(Inicio).ToString("MM/dd/yyyy"), Convert.ToDateTime(Fin).ToString("MM/dd/yyyy"));
             if (objBase.Errors.Count == 0)
             {
                 if (list != null)
@@ -133,8 +113,7 @@ namespace System_Maintenance.Private.Report
 
             String fechaInicio = (String.IsNullOrEmpty(hfFechaInicio.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaInicio.Value, CultureInfo.InvariantCulture));
             String fechaFin = (String.IsNullOrEmpty(hfFechaFin.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaFin.Value, CultureInfo.InvariantCulture));
-            Int32 idasistente = String.IsNullOrEmpty(hfIdAsistente.Value) ? 0 : Convert.ToInt32(hfIdAsistente.Value);
-            List<ReporteExport> list = ReporteBL.Instance.ListarIncidenciasExport(ref objBase, fechaInicio,fechaFin, idasistente);
+            List<ReporteVentasExport> list = ReporteBL.Instance.ListarVentasExport(ref objBase, fechaInicio,fechaFin);
             DataTable dt = clsUtilities.ConvertToDataTable(list);
             Export(dt);
         }

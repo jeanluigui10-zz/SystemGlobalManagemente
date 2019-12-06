@@ -42,4 +42,17 @@ namespace xAPI.Entity.Report
         public string FechaCreacion { get; set; }
         public string IsCompleto { get; set; }
     }
+
+    public class ReporteVentasExport
+    {
+        public String OrderId { get; set; }
+        public String LegacyNumber { get; set; }
+        public String OrderDate { get; set; }
+        public String OrderDateStr { get; set; }
+        public String Status { get; set; }
+        public String Ordertotal { get; set; }
+        public String SubTotal { get; set; }
+        public String FirstName { get; set; }
+        public String IGV { get; set; }
+    }
 }

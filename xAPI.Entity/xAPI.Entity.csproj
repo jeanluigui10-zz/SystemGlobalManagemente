@@ -74,10 +74,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category\Categoria.cs" />
+    <Compile Include="Customers\Customer.cs" />
     <Compile Include="Environment\Ambientes.cs" />
     <Compile Include="Environment\Detalle_AmbienteUsuario.cs" />
     <Compile Include="Floor\Piso.cs" />
     <Compile Include="Incidence\Incidencia.cs" />
+    <Compile Include="Order\OrderDetail.cs" />
+    <Compile Include="Order\OrderHeader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\Reporte.cs" />
     <Compile Include="Resource\AppResource.cs" />

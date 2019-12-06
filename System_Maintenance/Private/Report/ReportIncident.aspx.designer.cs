@@ -13,24 +13,6 @@ namespace System_Maintenance.Private.Report {
     public partial class ReportIncident {
         
         /// <summary>
-        /// Control ddlAsistente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList ddlAsistente;
-        
-        /// <summary>
-        /// Control btnExport.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnExport;
-        
-        /// <summary>
         /// Control hfData.
         /// </summary>
         /// <remarks>
@@ -56,14 +38,5 @@ namespace System_Maintenance.Private.Report {
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hfFechaFin;
-        
-        /// <summary>
-        /// Control hfIdAsistente.
-        /// </summary>
-        /// <remarks>
-        /// Campo generado automáticamente.
-        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hfIdAsistente;
     }
 }

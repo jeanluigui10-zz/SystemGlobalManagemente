@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using xAPI.Dao.Report;
+using xAPI.Entity.Order;
 using xAPI.Entity.Report;
 using xAPI.Library.Base;
 
@@ -59,5 +60,37 @@ namespace xAPI.BL.Report
             return lstReport;
         }
 
+        public List<OrderHeader> ListarVentas(ref BaseEntity objBase, String fechaInicio, String fechaFin)
+        {
+            objBase = new BaseEntity();
+            List<OrderHeader> lstVentas = null;
+            try
+            {
+                lstVentas = ReportDAO.Instance.ListarVentas(ref objBase, fechaInicio, fechaFin);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lstVentas;
+        }
+        public List<ReporteVentasExport> ListarVentasExport(ref BaseEntity objBase, String fechaInicio, String fechaFin)
+        {
+            objBase = new BaseEntity();
+            List<ReporteVentasExport> lstReport = null;
+            try
+            {
+                lstReport = ReportDAO.Instance.ListarVentasExport(ref objBase, fechaInicio, fechaFin);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lstReport;
+        }
     }
 }
