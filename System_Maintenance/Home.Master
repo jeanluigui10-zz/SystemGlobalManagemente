@@ -329,9 +329,9 @@
                             <ul class="treeview-menu">
                                 <li><a href="/Private/Report/ReportIncident.aspx"><i class="fa fa-circle-o"></i>Ventas</a></li>
                             </ul>
-                            <ul class="treeview-menu">
+                          <%--  <ul class="treeview-menu">
                                 <li><a href="/Private/Report/ReportIncident.aspx"><i class="fa fa-circle-o"></i>Pedidos</a></li>
-                            </ul>
+                            </ul>--%>
                         </li>
                         <%
                             }
