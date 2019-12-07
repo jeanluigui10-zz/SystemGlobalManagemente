@@ -55,4 +55,18 @@ namespace xAPI.Entity.Report
         public String FirstName { get; set; }
         public String IGV { get; set; }
     }
+    public class CustomerExport
+    {
+        public String CustomerId { get; set; }
+        public String FirstName { get; set; }
+        public String DocumentTypeName { get; set; }
+        public String NumberDocument { get; set; }
+        public String CellPhone { get; set; }
+        public String Email { get; set; }
+        public String CreatedDate { get; set; }
+        public String IsCheckbox { get; set; }
+        public String Index { get; set; }
+        public String Status { get; set; }
+      
+    }
 }

@@ -10,7 +10,7 @@
 namespace System_Maintenance.Private.Report {
     
     
-    public partial class ReportIncident {
+    public partial class ReportCustomer {
         
         /// <summary>
         /// Control btnExport.

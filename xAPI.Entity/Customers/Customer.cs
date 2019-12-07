@@ -13,15 +13,18 @@ namespace xAPI.Entity.Customers
         public String LastNamePaternal { get; set; }
         public String LastNameMaternal { get; set; }
         public Int32 DocumentType { get; set; }
+        public String DocumentTypeName { get; set; }
         public String NumberDocument { get; set; }
         public String CellPhone { get; set; }
         public String Email { get; set; }
         public String Password { get; set; }
         public Int32 Status { get; set; }
-        public DateTime CreatedDate { get; set; }
+        public String CreatedDate { get; set; }
         public DateTime UpdatedDate { get; set; }
         public Int32 CreatedBy { get; set; }
         public Int32 UpdatedBy { get; set; }
+        public string IsCheckbox { get; set; }
+        public string Index { get; set; }
         private String _estadodesc;
         public String EstadoDes
         {

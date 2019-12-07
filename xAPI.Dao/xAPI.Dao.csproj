@@ -64,6 +64,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Customers\CustomersDAO.cs" />
     <Compile Include="Environment\AmbienteDAO.cs" />
     <Compile Include="Environment\Detalle_AmbienteUsuarioDAO.cs" />
     <Compile Include="Floor\PisoDAO.cs" />

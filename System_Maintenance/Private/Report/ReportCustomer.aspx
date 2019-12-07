@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ReportIncident.aspx.cs" Inherits="System_Maintenance.Private.Report.ReportIncident" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ReportCustomer.aspx.cs" Inherits="System_Maintenance.Private.Report.ReportCustomer" %>
 
 <%@ Import Namespace="xSystem_Maintenance.src.app_code" %>
 <%@ Import Namespace="xAPI.Library.General" %>
@@ -127,7 +127,7 @@
                 fn_message('e', 'A ocurrido un error cargando la lista', 'message_row');
             };
 
-            fn_callmethod("ReportIncident.aspx/Cargar_Ventas", JSON.stringify({fechaInicio : inicio, fechaFin:fin}), success, error);
+            fn_callmethod("ReportCustomer.aspx/Cargar_Clientes", JSON.stringify({fechaInicio : inicio, fechaFin:fin}), success, error);
         }
     </script>
 
@@ -167,13 +167,13 @@
                         <th>
                             <input type="checkbox" id="all" name="all" /></th>
                         <th>#</th>
-                        <th>OrderId</th>
-                        <th>Fecha de Orden</th>
-                        <th>IGV Total</th>
-                        <th>SubTotal</th>
-                        <th>Total</th>
-                        <th>Identificador</th>
+                        <th>CustomerId</th>
                         <th>Nombre</th>
+                        <th>Documento</th>
+                        <th>Numero Documento</th>
+                        <th>Ceular</th>
+                        <th>Email</th>
+                        <th>Fecha registro</th>
                         <th>Estado</th>
                         <%--<th>Accion</th>--%>
                     </tr>
@@ -191,17 +191,17 @@
     <script type="text/x-handlebars-template" id="datatable-resources">
         {{# each request}}
              <tr>
-                 <td style="display: none;">{{OrderId}}</td>
+                 <td style="display: none;">{{CustomerId}}</td>
                  {{#if IsCheckbox}}<td id='multiselect' style='text-align: center;'> <input type='checkbox' id='msg_sel' name='msg_sel' /></td>{{else}}<td id='multiselect' style='text-align: center;'></td>
                  {{/if}} 
                  <td style='text-align: center;'>{{Index}}</td>
-                 <td>{{OrderId}}</td>
-                 <td>{{OrderDateStr}}</td>
-                 <td>{{IGV}}</td>
-                 <td>{{SubTotal}}</td>
-                 <td>{{Ordertotal}}</td>
-                 <td>{{LegacyNumber}}</td>
-                 <td>{{Customer.FirstName}}</td>
+                 <td>{{CustomerId}}</td>                 
+                 <td>{{FirstName}}</td>
+                 <td>{{DocumentTypeName}}</td>
+                 <td>{{NumberDocument}}</td>
+                 <td>{{CellPhone}}</td>
+                 <td>{{Email}}</td>
+                 <td>{{CreatedDate}}</td>
                  <td>{{EstadoDes}}</td>
                  <%--<td style='text-align: center;'><a onclick="fn_RowEdit('{{OrderId}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a><a onclick="fn_DownloadFile('{{Index}}')" title='Download' class='gridActionBtn'><i class='fa fa-download'></i></a></td>--%>
              </tr>

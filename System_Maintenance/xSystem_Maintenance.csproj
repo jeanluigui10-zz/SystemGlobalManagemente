@@ -1154,6 +1154,7 @@
     <Content Include="plugins\ValidationEngine\languages\jquery.validationEngine-en.js" />
     <Content Include="plugins\ValidationEngine\jquery.validationEngine.js" />
     <Content Include="Private\Chat\RedirectChatModule.aspx" />
+    <Content Include="Private\Report\ReportCustomer.aspx" />
     <Content Include="src\control\Chat\ucRedirectChatModule.ascx" />
     <Content Include="Private\Incidents\Home.aspx" />
     <Content Include="Private\Incidents\Incident.aspx" />
@@ -1164,7 +1165,7 @@
     <Content Include="Private\Registro\AsignacionUsuarioAmbiente.aspx" />
     <Content Include="Private\Registro\RegistroUsuario.aspx" />
     <Content Include="Private\Registro\Usuario.aspx" />
-    <Content Include="Private\Report\ReportIncident.aspx" />
+    <Content Include="Private\Report\ReportVentas.aspx" />
     <Content Include="Private\Resource\ResourcesManagement.aspx" />
     <Content Include="Private\Resource\ResourcesManagementSave.aspx" />
     <Content Include="Private\Security\Login.aspx" />
@@ -1241,6 +1242,13 @@
     <Compile Include="Private\Chat\RedirectChatModule.aspx.designer.cs">
       <DependentUpon>RedirectChatModule.aspx</DependentUpon>
     </Compile>
+    <Compile Include="Private\Report\ReportCustomer.aspx.cs">
+      <DependentUpon>ReportCustomer.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Private\Report\ReportCustomer.aspx.designer.cs">
+      <DependentUpon>ReportCustomer.aspx</DependentUpon>
+    </Compile>
     <Compile Include="src\control\Chat\ucRedirectChatModule.ascx.cs">
       <DependentUpon>ucRedirectChatModule.ascx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1311,12 +1319,12 @@
     <Compile Include="Private\Registro\Usuario.aspx.designer.cs">
       <DependentUpon>Usuario.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Private\Report\ReportIncident.aspx.cs">
-      <DependentUpon>ReportIncident.aspx</DependentUpon>
+    <Compile Include="Private\Report\ReportVentas.aspx.cs">
+      <DependentUpon>ReportVentas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Private\Report\ReportIncident.aspx.designer.cs">
-      <DependentUpon>ReportIncident.aspx</DependentUpon>
+    <Compile Include="Private\Report\ReportVentas.aspx.designer.cs">
+      <DependentUpon>ReportVentas.aspx</DependentUpon>
     </Compile>
     <Compile Include="Private\Resource\ResourcesManagement.aspx.cs">
       <DependentUpon>ResourcesManagement.aspx</DependentUpon>

@@ -327,7 +327,8 @@
                             </a>
 
                             <ul class="treeview-menu">
-                                <li><a href="/Private/Report/ReportIncident.aspx"><i class="fa fa-circle-o"></i>Ventas</a></li>
+                                <li><a href="/Private/Report/ReportVentas.aspx"><i class="fa fa-circle-o"></i>Ventas</a></li>
+                                <li><a href="/Private/Report/ReportCustomer.aspx"><i class="fa fa-circle-o"></i>Clientes</a></li>
                             </ul>
                           <%--  <ul class="treeview-menu">
                                 <li><a href="/Private/Report/ReportIncident.aspx"><i class="fa fa-circle-o"></i>Pedidos</a></li>
@@ -390,7 +391,7 @@
                             </ul>
                         </li>   
 
-                        <li class="treeview">
+                       <%-- <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i>
                                 <span>Clientes</span>
@@ -399,9 +400,9 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Private/Customer/Customer.aspx"><i class="fa fa-circle-o"></i>Registro Clientes</a></li>
+                                <li><a href="/Private/Customer/ReportCustomer.aspx"><i class="fa fa-circle-o"></i>Registro Clientes</a></li>
                             </ul>
-                        </li>
+                        </li>--%>
                          <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i>

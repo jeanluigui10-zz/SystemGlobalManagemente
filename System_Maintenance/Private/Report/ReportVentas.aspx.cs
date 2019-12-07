@@ -6,16 +6,14 @@ using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.UI;
 using xAPI.BL.Report;
-using xAPI.BL.Security;
 using xAPI.Entity.Order;
 using xAPI.Entity.Report;
-using xAPI.Entity.Security;
 using xAPI.Library.Base;
 using xAPI.Library.General;
 
 namespace System_Maintenance.Private.Report
 {
-    public partial class ReportIncident : Page
+    public partial class ReportVentas : Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -28,8 +26,8 @@ namespace System_Maintenance.Private.Report
         private void CargaReporte()
         {
             BaseEntity objBase = new BaseEntity();
-            String fechaInicio = (String.IsNullOrEmpty(hfFechaInicio.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaInicio.Value, CultureInfo.InvariantCulture));
-            String fechaFin = (String.IsNullOrEmpty(hfFechaFin.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaFin.Value,  CultureInfo.InvariantCulture));
+            String fechaInicio = (String.IsNullOrEmpty(hfFechaInicio.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaInicio.Value, CultureInfo.InvariantCulture).ToString("MM/dd/yyyy"));
+            String fechaFin = (String.IsNullOrEmpty(hfFechaFin.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaFin.Value,  CultureInfo.InvariantCulture).ToString("MM/dd/yyyy"));
             List<OrderHeader> list = ReporteBL.Instance.ListarVentas(ref objBase, fechaInicio, fechaFin);
             if (objBase.Errors.Count == 0)
             {
@@ -54,10 +52,10 @@ namespace System_Maintenance.Private.Report
         public static object Cargar_Ventas(string fechaInicio, string fechaFin)
         {
             BaseEntity objBase = new BaseEntity();
-            String Inicio = (String.IsNullOrEmpty(fechaInicio)) ? "" : Convert.ToString(Convert.ToDateTime(fechaInicio, CultureInfo.InvariantCulture));
-            String Fin = (String.IsNullOrEmpty(fechaFin)) ? "" : Convert.ToString(Convert.ToDateTime(fechaFin, CultureInfo.InvariantCulture));
+            String Inicio = (String.IsNullOrEmpty(fechaInicio)) ? "" : Convert.ToString(Convert.ToDateTime(fechaInicio, CultureInfo.InvariantCulture).ToString("MM/dd/yyyy"));
+            String Fin = (String.IsNullOrEmpty(fechaFin)) ? "" : Convert.ToString(Convert.ToDateTime(fechaFin, CultureInfo.InvariantCulture).ToString("MM/dd/yyyy"));
 
-            List<OrderHeader> list = ReporteBL.Instance.ListarVentas(ref objBase, Convert.ToDateTime(Inicio).ToString("MM/dd/yyyy"), Convert.ToDateTime(Fin).ToString("MM/dd/yyyy"));
+            List<OrderHeader> list = ReporteBL.Instance.ListarVentas(ref objBase, Inicio, Fin);
             if (objBase.Errors.Count == 0)
             {
                 if (list != null)
@@ -79,40 +77,20 @@ namespace System_Maintenance.Private.Report
 
         public void Export(DataTable dt)
         {
-            String titulo = "Reporte_Incidencia";
+            String titulo = "Reporte_Ventas";
             String archivo = titulo + " " + DateTime.Now.ToString("MM-dd-yyyy") + ".xlsx";
             clsExcel objExcel = new clsExcel();
 
             objExcel.ToExcelXL(dt, archivo, Page.Response);
         }
 
-        private void ExportCSV(DataTable dt, String Title)
-        {
-            BaseEntity entity = new BaseEntity();
-            DataTable srList = dt;
-            Int32 Rcount = dt.Rows.Count;
-            String title = Title.Replace(" ", "_").Trim() + "_" + DateTime.Now.ToString("MM-dd-yyyy") + ".csv";
-            clsCsv objCsv = new clsCsv();
-            Boolean Success = false;
-
-            Success = objCsv.CreateCSVFromDataTable(srList, "");
-
-            if (Success)
-            {
-                Response.Clear();
-                Response.ContentType = "text/csv";
-                Response.AppendHeader("Content-Disposition", String.Format("attachment; filename={0}", title));
-                Response.End();
-            }
-        }
-
-
+    
         protected void btnExport_Click(object sender, EventArgs e)
         {
             BaseEntity objBase = new BaseEntity();
 
-            String fechaInicio = (String.IsNullOrEmpty(hfFechaInicio.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaInicio.Value, CultureInfo.InvariantCulture));
-            String fechaFin = (String.IsNullOrEmpty(hfFechaFin.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaFin.Value, CultureInfo.InvariantCulture));
+            String fechaInicio = (String.IsNullOrEmpty(hfFechaInicio.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaInicio.Value, CultureInfo.InvariantCulture).ToString("MM/dd/yyyy"));
+            String fechaFin = (String.IsNullOrEmpty(hfFechaFin.Value)) ? "" : Convert.ToString(Convert.ToDateTime(hfFechaFin.Value, CultureInfo.InvariantCulture).ToString("MM/dd/yyyy"));
             List<ReporteVentasExport> list = ReporteBL.Instance.ListarVentasExport(ref objBase, fechaInicio,fechaFin);
             DataTable dt = clsUtilities.ConvertToDataTable(list);
             Export(dt);

@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Category\CategoriaBL.cs" />
+    <Compile Include="Customers\CustomersBL.cs" />
     <Compile Include="Environment\AmbienteBL.cs" />
     <Compile Include="Environment\Detalle_AmbienteUsuarioBL.cs" />
     <Compile Include="Floor\PisoBL.cs" />
