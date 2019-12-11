@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using xAPI.Entity.Customers;
 
 namespace xAPI.Entity.Order
@@ -10,9 +7,7 @@ namespace xAPI.Entity.Order
     public class OrderHeader
     {
         public int OrderId { get; set; }
-        public Int64 LegacyNumber { get; set; }
         public DateTime OrderDate { get; set; }
-        public String OrderDateStr { get; set; }
         public int Status { get; set; }
         public Decimal Ordertotal { get; set; }
         public Decimal SubTotal { get; set; }
@@ -25,17 +20,7 @@ namespace xAPI.Entity.Order
         public Customer Customer { get; set; }
 
         public Decimal IGV { get; set; }
-        public string IsCheckbox { get; set; }
-        public string Index { get; set; }
-        private String _estadodesc;
-        public String EstadoDes
-        {
-            get
-            {
-                if (Status == 1) _estadodesc = "Pagada"; else _estadodesc = "Pendiente";
-                return _estadodesc;
-            }
-        }
+
         List<OrderDetail> objListOrderDetail;
         public List<OrderDetail> ListOrderDetail
         {
@@ -65,7 +50,7 @@ namespace xAPI.Entity.Order
             Decimal TotalIgv = 0.00M;
             foreach (OrderDetail item in this.ListOrderDetail)
             {
-                Subtotal += item.Totalprice;               
+                Subtotal += item.Totalprice;
             }
 
             TotalIgv = Subtotal * 0.18M;

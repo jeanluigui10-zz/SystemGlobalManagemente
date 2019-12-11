@@ -123,7 +123,20 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <button type="button" runat="server" class="btn btn-primary" onclick="Fn_ShowModalOrder()"><i class="fa fa-save"></i>Generar Orden</button>
+    
+    <div class="col-lg-12">
+        <div class="col-lg-6" style="width:10%; padding-left:0px">  
+            <button type="button" runat="server" class="btn btn-primary" onclick="Fn_ShowModalOrder()"><i class="fa fa-save"></i>Generar Orden</button>
+        </div>
+        <div class="col-lg-6">
+              <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" id="chkViewChatBot">
+                                    Mostrar Chatbot
+                                </label>
+                            </div>
+        </div>   
+     </div>
     <ucCustom:ucRedirectChatModule runat="server" ID="ucRedirectChatModule" />
     <script>
         $('#menu_chatmodule').attr("class", "nav-active");

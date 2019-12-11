@@ -4386,6 +4386,42 @@ namespace xAPI.Entity
     }
 
 
+    [Serializable]
+    public class tBaseDetailOrder
+    {
+        public Int32 ProductId { get; set; }
+        public Decimal Price { get; set; }
+        public Int32 Quantity { get; set; }
+        public Int32 CreatedBy { get; set; }
+        public Int32 UpdatedBy { get; set; }
+        public Byte Status { get; set; }
+    }
+
+    [Serializable]
+    public class tBaseDetailOrderList : List<tBaseDetailOrder>, IEnumerable<SqlDataRecord>
+    {
+        IEnumerator<SqlDataRecord> IEnumerable<SqlDataRecord>.GetEnumerator()
+        {
+            SqlDataRecord ret = new SqlDataRecord(
+                new SqlMetaData("ProductId", SqlDbType.Int),
+                new SqlMetaData("Price", SqlDbType.Decimal),
+                new SqlMetaData("Quantity", SqlDbType.Int),
+                new SqlMetaData("CreatedBy", SqlDbType.Int),
+                new SqlMetaData("UpdatedBy", SqlDbType.Int),
+                new SqlMetaData("Status", SqlDbType.TinyInt)
+                );
+            foreach (tBaseDetailOrder data in this)
+            {
+                ret.SetInt32(0, data.ProductId);
+                ret.SetDecimal(1, data.Price);
+                ret.SetInt32(2, data.Quantity);
+                ret.SetInt32(3, data.CreatedBy);
+                ret.SetInt32(4, data.UpdatedBy);
+                ret.SetByte(5, data.Status);
+                yield return ret;
+            }
+        }
+    }
 
 
 
