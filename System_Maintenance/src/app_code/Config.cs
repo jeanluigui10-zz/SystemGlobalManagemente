@@ -18,5 +18,7 @@ namespace xSystem_Maintenance.src.app_code
         public static String RedirectChatModule { get { return HttpUtility.UrlDecode(WebConfigurationManager.AppSettings["Domain_ChatModule"]); } }
         public static String ChatModuleId { get { return HttpUtility.UrlDecode(WebConfigurationManager.AppSettings["ChatModuleId"]); } }
         public static string Impremtawendomain { get { return WebConfigurationManager.AppSettings["impremtawendomain"]; } }
+        public static string impremtawendomainReview { get { return WebConfigurationManager.AppSettings["impremtawendomainReview"]; } }
+        
     }
 }

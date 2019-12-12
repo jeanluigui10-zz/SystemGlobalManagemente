@@ -41,7 +41,7 @@ namespace xAPI.Dao.Order
                 cmd.Parameters.AddWithValue("@Description", objOrder.Description);
                 cmd.Parameters.AddWithValue("@Status", objOrder.Status);
                 cmd.Parameters.Add(new SqlParameter { ParameterName = "@TY_OrderDetail", Value = objDetail, SqlDbType = SqlDbType.Structured, TypeName = "TY_OrdersDetail" });
-                cmd.ExecuteNonQuery();
+                cmd.ExecuteReader();
                 success = true;
                 if (!cmd.Parameters["@OrderId"].Value.ToString().Equals(string.Empty))
                     objOrder.OrderId = Convert.ToInt32(cmd.Parameters["@OrderId"].Value);

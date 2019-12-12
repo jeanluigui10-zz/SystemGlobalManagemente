@@ -67,6 +67,7 @@ namespace xAPI.Entity.Report
         public String IsCheckbox { get; set; }
         public String Index { get; set; }
         public String Status { get; set; }
-      
+        public String StatusDes { get; set; }
+
     }
 }

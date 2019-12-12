@@ -88,14 +88,14 @@ namespace xAPI.Dao.Customers
                 {
                     count++;
                     CustomerExport objCliente = new CustomerExport();
-                    objCliente.CustomerId = dr.GetColumnValue<String>("CustomerId");
+                    objCliente.CustomerId = dr.GetColumnValue<Int32>("CustomerId").ToString();
                     objCliente.FirstName = dr.GetColumnValue<String>("FirstName");
                     objCliente.DocumentTypeName = dr.GetColumnValue<String>("DocumentType");
                     objCliente.NumberDocument = dr.GetColumnValue<String>("NumberDocument");
                     objCliente.CellPhone = dr.GetColumnValue<String>("CellPhone");
                     objCliente.Email = dr.GetColumnValue<String>("Email");
                     objCliente.CreatedDate = dr.GetColumnValue<DateTime>("CreatedDate").ToString();
-                    objCliente.Status = dr.GetColumnValue<String>("Status");
+                    objCliente.StatusDes = (dr.GetColumnValue<String>("Status") == "1") ? "PAGADO":"PENDIENTE";
 
                     lstClientes.Add(objCliente);
                 }

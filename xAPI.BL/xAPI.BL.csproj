@@ -70,6 +70,7 @@
     <Compile Include="Environment\Detalle_AmbienteUsuarioBL.cs" />
     <Compile Include="Floor\PisoBL.cs" />
     <Compile Include="Incidence\IncidenciaBL.cs" />
+    <Compile Include="Order\OrderBL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ReporteBL.cs" />
     <Compile Include="Resource\ResourceBL.cs" />

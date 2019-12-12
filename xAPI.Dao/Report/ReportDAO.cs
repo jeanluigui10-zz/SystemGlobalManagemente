@@ -187,14 +187,14 @@ namespace xAPI.Dao.Report
                 {
                     count++;
                     ReporteVentasExport objOrderHeader = new ReporteVentasExport();
-                    objOrderHeader.OrderId = dr.GetColumnValue<String>("OrderId");
+                    objOrderHeader.OrderId = dr.GetColumnValue<Int32>("OrderId").ToString();
                     objOrderHeader.OrderDateStr = dr.GetColumnValue<DateTime>("OrderDate").ToString();
-                    objOrderHeader.IGV = dr.GetColumnValue<String>("IgvTotal");
-                    objOrderHeader.SubTotal = dr.GetColumnValue<String>("SubTotal");
-                    objOrderHeader.Ordertotal = dr.GetColumnValue<String>("Total");
-                    objOrderHeader.LegacyNumber = dr.GetColumnValue<String>("LegacyNumber");
-                    objOrderHeader.FirstName = dr.GetColumnValue<String>("FirstName");                    
-                    objOrderHeader.Status = dr.GetColumnValue<String>("Status");
+                    objOrderHeader.IGV = dr.GetColumnValue<Decimal>("IgvTotal").ToString();
+                    objOrderHeader.SubTotal = dr.GetColumnValue<Decimal>("SubTotal").ToString();
+                    objOrderHeader.Ordertotal = dr.GetColumnValue<Decimal>("Total").ToString();
+                    objOrderHeader.LegacyNumber = dr.GetColumnValue<Int64>("LegacyNumber").ToString();
+                    objOrderHeader.FirstName = dr.GetColumnValue<String>("FirstName").ToString();                    
+                    objOrderHeader.OrderDateStr = (dr.GetColumnValue<Int32>("Status").ToString() =="1") ? "PAGADO" : "PENDIENTE";
 
                     lstOrders.Add(objOrderHeader);
                 }

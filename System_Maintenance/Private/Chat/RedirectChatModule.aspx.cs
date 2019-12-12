@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.UI;
@@ -166,17 +167,20 @@ namespace xSystem_Maintenance.Private.Chat
                             Quantity = orderHeader.ListOrderDetail[i].Quantity,
                             CreatedBy = orderHeader.Customer.CustomerId,
                             UpdatedBy = orderHeader.Customer.CustomerId,
-                            Status = Convert.ToByte(EnumStatus.Enabled)
+                            Status = Convert.ToByte(EnumStatus.Disabled)
                         });
                     }
 
                     Boolean success = OrderBL.Instance.Insertar_Pedido(ref objBase, ref orderHeader, objListDetail);
                     if (success)
                     {
+                        String UrlPaymentOrder = String.Format("{0}?ordid={1}", Config.impremtawendomainReview,
+                                        HttpUtility.UrlEncode(Convert.ToString(orderHeader.OrderId)));
                         objReturn = new
                         {
                             Result = "Ok",
                             Msg = "Orden Registrada correctamente.",
+                            UrlPaymentOrder = UrlPaymentOrder
                         };
                     }
                     else

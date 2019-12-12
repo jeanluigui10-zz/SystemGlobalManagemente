@@ -69,6 +69,7 @@
     <Compile Include="Environment\Detalle_AmbienteUsuarioDAO.cs" />
     <Compile Include="Floor\PisoDAO.cs" />
     <Compile Include="Incidence\IncidenceDAO.cs" />
+    <Compile Include="Order\OrderDAO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Report\ReportDAO.cs" />
     <Compile Include="Resource\AppResourceDao.cs" />

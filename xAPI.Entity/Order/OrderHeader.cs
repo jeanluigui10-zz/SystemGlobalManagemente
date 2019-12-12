@@ -19,9 +19,21 @@ namespace xAPI.Entity.Order
         public int IsCotization { get; set; }
         public String Description { get; set; }
         public Customer Customer { get; set; }
-
+        public String OrderDateStr { get; set; }
         public Decimal IGV { get; set; }
+        public Int64 LegacyNumber { get; set; }
+        public String Index { get; set; }
+        public String IsCheckbox { get; set; }
 
+        private String _estadodesc;
+        public String EstadoDes
+        {
+            get
+            {
+                if (Status == 1) _estadodesc = "Pagada"; else _estadodesc = "Pendiente";
+                return _estadodesc;
+            }
+        }
         List<OrderDetail> objListOrderDetail;
         public List<OrderDetail> ListOrderDetail
         {
