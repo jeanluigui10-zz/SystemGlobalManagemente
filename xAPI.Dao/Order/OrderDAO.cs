@@ -37,6 +37,8 @@ namespace xAPI.Dao.Order
                 cmd.Parameters.AddWithValue("@Total", objOrder.Ordertotal);
                 cmd.Parameters.AddWithValue("@IgvTotal", objOrder.IGV);
                 cmd.Parameters.AddWithValue("@SubTotal", objOrder.SubTotal);
+                cmd.Parameters.AddWithValue("@IsCotization", objOrder.IsCotization);
+                cmd.Parameters.AddWithValue("@Description", objOrder.Description);
                 cmd.Parameters.AddWithValue("@Status", objOrder.Status);
                 cmd.Parameters.Add(new SqlParameter { ParameterName = "@TY_OrderDetail", Value = objDetail, SqlDbType = SqlDbType.Structured, TypeName = "TY_OrdersDetail" });
                 cmd.ExecuteNonQuery();

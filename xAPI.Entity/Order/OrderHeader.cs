@@ -16,7 +16,8 @@ namespace xAPI.Entity.Order
         public DateTime UpdatedDate { get; set; }
         public int CreatedBy { get; set; }
         public int UpdatedBy { get; set; }
-
+        public int IsCotization { get; set; }
+        public String Description { get; set; }
         public Customer Customer { get; set; }
 
         public Decimal IGV { get; set; }

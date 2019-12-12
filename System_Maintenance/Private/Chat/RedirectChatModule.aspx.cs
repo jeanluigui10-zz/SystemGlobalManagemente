@@ -75,7 +75,7 @@ namespace xSystem_Maintenance.Private.Chat
                         ddlProductos.DataTextField = "NAME";
                         ddlProductos.DataValueField = "ID";
                         ddlProductos.DataBind();
-                        ddlProductos.Items.Add(new ListItem("Paquete de productos", "00001"));
+                        ddlProductos.Items.Add(new ListItem("Paquete de productos", "26"));
                     }
                     else
                     {
@@ -101,11 +101,8 @@ namespace xSystem_Maintenance.Private.Chat
         {
             Object objReturn = new Object();
             BaseEntity objBase = new BaseEntity();
-            tBaseDetailOrderList objListDetail = new tBaseDetailOrderList();
             try
             {
-           
-                
                 #region Obtener Cliente
                 JavaScriptSerializer sr = new JavaScriptSerializer();
                 List<String> lstClientesString = sr.Deserialize<List<String>>(clientes);
@@ -120,15 +117,16 @@ namespace xSystem_Maintenance.Private.Chat
 
                 #region Obtener Producto
                 JavaScriptSerializer srp = new JavaScriptSerializer();
-                List<String> lstProductString = sr.Deserialize<List<String>>(clientes);
+                List<String> lstProductString = sr.Deserialize<List<String>>(productos);
                 List<Int32> lstProductsInt = new List<Int32>();
                 if (lstProductString.Count > 0)
                 {
                     if (lstProductString[0].Equals("multiselect-all")) { lstProductString.RemoveAt(0); }
-                    lstClientesInt = lstProductString.Select(Int32.Parse).ToList();
+                    lstProductsInt = lstProductString.Select(Int32.Parse).ToList();
                 }
-                else { lstClientesInt.Insert(0, 0); }
+                else { lstProductsInt.Insert(0, 0); }
                 #endregion
+
 
                 Int32 CustomerId = (lstClientesInt.Count > 0) ? lstClientesInt[0] : 0;
                 Int32 ProductId = (lstProductsInt.Count > 0) ? lstProductsInt[0] : 0;
@@ -136,87 +134,72 @@ namespace xSystem_Maintenance.Private.Chat
                 Int32 Quantity = Convert.ToInt32(cantidad);
                 Byte Status = Convert.ToByte(estado);
 
-                OrderHeader objOrder = new OrderHeader();
-
-                objListDetail.Add(new tBaseDetailOrder()
+                AppResource obj = ResourceBL.Instance.AppResource_GetByID(ref objBase, ProductId);               
+                if (obj != null)
                 {
-                    ProductId = ProductId,
-                    Price = UnitPrice,
-                    Quantity = Quantity,
-                    CreatedBy = CustomerId,
-                    UpdatedBy = CustomerId,
-                    Status = (Status == 1) ? Convert.ToByte(EnumStatus.Enabled) : Convert.ToByte(0)
-                });
-                OrderDetail orderDetail = new OrderDetail();
-                orderDetail.ProductId = ProductId;
-                orderDetail.Product.UnitPrice = UnitPrice;
-                orderDetail.Quantity = Quantity;
-                orderDetail.CreatedBy = CustomerId;
-                orderDetail.UpdatedBy = CustomerId;
-                orderDetail.Status = (Status == 1) ? Convert.ToByte(EnumStatus.Enabled) : Convert.ToByte(0);
+                    OrderHeader orderHeader = new OrderHeader();
+                    obj.NameResource = Config.Impremtawendomain + obj.NameResource;
 
-                List<OrderDetail> lstOrderDetail = new List<OrderDetail>();
-                lstOrderDetail.Add(orderDetail);
+                    OrderDetail Detalle = new OrderDetail();
+                    Detalle.Product = obj;
+                    Detalle.ProductId = ProductId;
+                    Detalle.Product.UnitPrice = UnitPrice;
+                    Detalle.Quantity = Quantity;
+                    Detalle.CreatedBy = CustomerId;
+                    Detalle.UpdatedBy = CustomerId;
+                    Detalle.Status = (Status == 1) ? Convert.ToByte(EnumStatus.Enabled) : Convert.ToByte(0);
 
-                //objOrder.ListOrderDetail(lstOrderDetail); AQUI ME QUEDE
+                    orderHeader.IsCotization = 1;
+                    orderHeader.Description = descripcion;
+                    orderHeader.ListOrderDetail.Add(Detalle);
+                    Detalle.CalculateTotalPricexProduct();
+                    orderHeader.CalculateTotals();
 
-                Boolean success = OrderBL.Instance.Insertar_Pedido(ref objBase, ref objOrder, objListDetail);
-                if (success)
-                {
-                    //Ok
-                    //Response.Redirect("Confirmation.aspx", true);
+                    tBaseDetailOrderList objListDetail = new tBaseDetailOrderList();
+
+                    for (int i = 0; i < orderHeader.ListOrderDetail.Count; i++)
+                    {
+                        objListDetail.Add(new tBaseDetailOrder()
+                        {
+                            ProductId = orderHeader.ListOrderDetail[i].Product.Id,
+                            Price = orderHeader.ListOrderDetail[i].Product.UnitPrice,
+                            Quantity = orderHeader.ListOrderDetail[i].Quantity,
+                            CreatedBy = orderHeader.Customer.CustomerId,
+                            UpdatedBy = orderHeader.Customer.CustomerId,
+                            Status = Convert.ToByte(EnumStatus.Enabled)
+                        });
+                    }
+
+                    Boolean success = OrderBL.Instance.Insertar_Pedido(ref objBase, ref orderHeader, objListDetail);
+                    if (success)
+                    {
+                        objReturn = new
+                        {
+                            Result = "Ok",
+                            Msg = "Orden Registrada correctamente.",
+                        };
+                    }
+                    else
+                    {
+                        objReturn = new
+                        {
+                            Result = "NoOk",
+                            Msg = "No se pudo registrar la Orden.",
+                        };
+                    }
                 }
-                else
-                {
-                    //this.Message(EnumAlertType.Info, "No se pudo guardar la Orden");
-                }
-
-              
-
 
             }
             catch (Exception exception)
             {
-             
+                objReturn = new
+                {
+                    Result = "NoOk",
+                    Msg = "No se pudo registrar la Orden.",
+                };
             }
             return objReturn;
         }
-
-        private void SaveOrder(OrderHeader objOrder)
-        {
-            try
-            {
-                BaseEntity objBase = new BaseEntity();
-                tBaseDetailOrderList objListDetail = new tBaseDetailOrderList();
-
-                for (int i = 0; i < objOrder.ListOrderDetail.Count; i++)
-                {
-                    objListDetail.Add(new tBaseDetailOrder()
-                    {
-                        ProductId = objOrder.ListOrderDetail[i].Product.Id,
-                        Price = objOrder.ListOrderDetail[i].Product.UnitPrice,
-                        Quantity = objOrder.ListOrderDetail[i].Quantity,
-                        CreatedBy = objOrder.Customer.CustomerId,
-                        UpdatedBy = objOrder.Customer.CustomerId,
-                        Status = Convert.ToByte(EnumStatus.Enabled)
-                    });
-                }
-                Boolean success = OrderBL.Instance.Insertar_Pedido(ref objBase, ref objOrder, objListDetail);
-                if (success)
-                {
-                    //Ok
-                    Response.Redirect("Confirmation.aspx", true);
-                }
-                else
-                {
-                    this.Message(EnumAlertType.Info, "No se pudo guardar la Orden");
-                }
-            }
-            catch (Exception ex)
-            {
-                this.Message(EnumAlertType.Error, "Ocurrio un error al guardar la Orden");
-            }
-        }
-
+           
     }
 }
