@@ -31,6 +31,7 @@ namespace xAPI.Dao
             AppResource obj = new AppResource
             {
                 ID = ObjDr.GetColumnValue<Int32>("ID"),
+                Id = ObjDr.GetColumnValue<Int32>("ID"),
                 FileName = ObjDr.GetColumnValue<String>("FileName"),
                 FileDescription = ObjDr.GetColumnValue<String>("DESCRIPTION"),
                 FileExtension = ObjDr.GetColumnValue<String>("FileExtension"),
@@ -350,6 +351,33 @@ namespace xAPI.Dao
                 clsConnection.DisposeCommand(cmd);
             }
             return quantity;
+        }
+
+        public Boolean ChatOnline_Status(ref BaseEntity objBase, Int32 Status, Int32 settingId)
+        {
+            Boolean success;
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("ChatOnLine_UpdateStatus", clsConnection.GetConnection());
+                cmd.Parameters.AddWithValue("@IdSetting", settingId);
+                cmd.Parameters.AddWithValue("@Status", Status);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.ExecuteNonQuery();
+                success = true;
+
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  change status."));
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(cmd);
+            }
+            return success;
+
         }
     }
 }

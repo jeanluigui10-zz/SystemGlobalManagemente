@@ -118,7 +118,7 @@ namespace xSystem_Maintenance.Private.Chat
 
                 #region Obtener Producto
                 JavaScriptSerializer srp = new JavaScriptSerializer();
-                List<String> lstProductString = sr.Deserialize<List<String>>(productos);
+                List<String> lstProductString = srp.Deserialize<List<String>>(productos);
                 List<Int32> lstProductsInt = new List<Int32>();
                 if (lstProductString.Count > 0)
                 {
@@ -135,63 +135,78 @@ namespace xSystem_Maintenance.Private.Chat
                 Int32 Quantity = Convert.ToInt32(cantidad);
                 Byte Status = Convert.ToByte(estado);
 
-                AppResource obj = ResourceBL.Instance.AppResource_GetByID(ref objBase, ProductId);               
-                if (obj != null)
+                AppResource obj = ResourceBL.Instance.AppResource_GetByID(ref objBase, ProductId);
+                if (objBase.Errors.Count == 0)
                 {
-                    OrderHeader orderHeader = new OrderHeader();
-                    obj.NameResource = Config.Impremtawendomain + obj.NameResource;
-
-                    OrderDetail Detalle = new OrderDetail();
-                    Detalle.Product = obj;
-                    Detalle.ProductId = ProductId;
-                    Detalle.Product.UnitPrice = UnitPrice;
-                    Detalle.Quantity = Quantity;
-                    Detalle.CreatedBy = CustomerId;
-                    Detalle.UpdatedBy = CustomerId;
-                    Detalle.Status = (Status == 1) ? Convert.ToByte(EnumStatus.Enabled) : Convert.ToByte(0);
-
-                    orderHeader.IsCotization = 1;
-                    orderHeader.Description = descripcion;
-                    orderHeader.ListOrderDetail.Add(Detalle);
-                    Detalle.CalculateTotalPricexProduct();
-                    orderHeader.CalculateTotals();
-
-                    tBaseDetailOrderList objListDetail = new tBaseDetailOrderList();
-
-                    for (int i = 0; i < orderHeader.ListOrderDetail.Count; i++)
+                    if (obj != null)
                     {
-                        objListDetail.Add(new tBaseDetailOrder()
-                        {
-                            ProductId = orderHeader.ListOrderDetail[i].Product.Id,
-                            Price = orderHeader.ListOrderDetail[i].Product.UnitPrice,
-                            Quantity = orderHeader.ListOrderDetail[i].Quantity,
-                            CreatedBy = orderHeader.Customer.CustomerId,
-                            UpdatedBy = orderHeader.Customer.CustomerId,
-                            Status = Convert.ToByte(EnumStatus.Disabled)
-                        });
-                    }
+                        OrderHeader orderHeader = new OrderHeader();
+                        obj.NameResource = Config.Impremtawendomain + obj.NameResource;
 
-                    Boolean success = OrderBL.Instance.Insertar_Pedido(ref objBase, ref orderHeader, objListDetail);
-                    if (success)
-                    {
-                        String UrlPaymentOrder = String.Format("{0}?ordid={1}", Config.impremtawendomainReview,
-                                        HttpUtility.UrlEncode(Convert.ToString(orderHeader.OrderId)));
-                        objReturn = new
+                        OrderDetail Detalle = new OrderDetail();
+                        Detalle.Product = obj;
+                        Detalle.ProductId = ProductId;
+                        Detalle.Product.UnitPrice = UnitPrice;
+                        Detalle.Quantity = Quantity;
+                        Detalle.CreatedBy = CustomerId;
+                        Detalle.UpdatedBy = CustomerId;
+                        Detalle.Status = (Status == 1) ? Convert.ToByte(EnumStatus.Enabled) : Convert.ToByte(0);
+
+                        orderHeader.IsCotization = 1;
+                        orderHeader.Description = descripcion;
+                        orderHeader.ListOrderDetail.Add(Detalle);
+                        Detalle.CalculateTotalPricexProduct();
+                        orderHeader.CalculateTotals();
+
+                        orderHeader.Customer = new Customer();
+                        orderHeader.Customer.CustomerId = CustomerId;
+                        tBaseDetailOrderList objListDetail = new tBaseDetailOrderList();
+
+                        for (int i = 0; i < orderHeader.ListOrderDetail.Count; i++)
                         {
-                            Result = "Ok",
-                            Msg = "Orden Registrada correctamente.",
-                            UrlPaymentOrder = UrlPaymentOrder
-                        };
-                    }
-                    else
-                    {
-                        objReturn = new
+                            objListDetail.Add(new tBaseDetailOrder()
+                            {
+                                ProductId = orderHeader.ListOrderDetail[i].Product.Id,
+                                Price = orderHeader.ListOrderDetail[i].Product.UnitPrice,
+                                Quantity = orderHeader.ListOrderDetail[i].Quantity,
+                                CreatedBy = orderHeader.Customer.CustomerId,
+                                UpdatedBy = orderHeader.Customer.CustomerId,
+                                Status = Convert.ToByte(EnumStatus.Disabled)
+                            });
+                        }
+
+                        Boolean success = OrderBL.Instance.Insertar_Pedido(ref objBase, ref orderHeader, objListDetail);
+                        if (success)
                         {
-                            Result = "NoOk",
-                            Msg = "No se pudo registrar la Orden.",
-                        };
+                            String UrlPaymentOrder = String.Format("{0}?ordid={1}", Config.impremtawendomainReview,
+                                            HttpUtility.UrlEncode(Encryption.Encrypt(Convert.ToString(orderHeader.OrderId))));
+                            objReturn = new
+                            {
+                                Result = "Ok",
+                                Msg = "Orden Registrada correctamente.",
+                                UrlPaymentOrder = UrlPaymentOrder
+                            };
+                        }
+                        else
+                        {
+                            objReturn = new
+                            {
+                                Result = "NoOk",
+                                Msg = "No se pudo registrar la Orden.",
+                            };
+                        }
                     }
                 }
+                else
+                {
+                    objReturn = new
+                    {
+                        Result = "NoOk",
+                        Msg = "No se pudo registrar la Orden.",
+                    };
+
+                }
+              
 
             }
             catch (Exception exception)
@@ -204,6 +219,48 @@ namespace xSystem_Maintenance.Private.Chat
             }
             return objReturn;
         }
-           
+
+        [WebMethod]
+        public static object ActiveChatOnLine(String estado)
+        {
+            Object objReturn = new Object();
+            BaseEntity objBase = new BaseEntity();
+            try
+            {
+                Int32 Status = Convert.ToInt32(estado);
+                Boolean Success = ResourceBL.Instance.ChatOnline_Status(ref objBase, Status, 1);
+                if (objBase.Errors.Count == 0)
+                {
+                    if (Success)
+                    {
+                        objReturn = new
+                        {
+                            Result = "Ok",
+                            Msg = "",
+                            Status = Status
+                        };
+                    }
+                    else
+                    {
+                        objReturn = new
+                        {
+                            Result = "NoOk",
+                            Msg = "Ocurrio un error al realizar el cambio.",
+                        };
+                    }
+                }
+
+            }
+            catch (Exception exception)
+            {
+                objReturn = new
+                {
+                    Result = "NoOk",
+                    Msg = "Ocurrio un error al realizar el cambio.",
+                };
+            }
+            return objReturn;
+        }
+
     }
 }

@@ -49,6 +49,8 @@ namespace xAPI.Entity.Report
         public String LegacyNumber { get; set; }
         public String OrderDate { get; set; }
         public String OrderDateStr { get; set; }
+        public String Description { get; set; }
+        public String IsCotization { get; set; }
         public String Status { get; set; }
         public String Ordertotal { get; set; }
         public String SubTotal { get; set; }

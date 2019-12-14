@@ -34,6 +34,15 @@ namespace xAPI.Entity.Order
                 return _estadodesc;
             }
         }
+        private String _iscotization;
+        public String EsCotizado
+        {
+            get
+            {
+                if (IsCotization == 1) _iscotization = "Si"; else _iscotization = "No";
+                return _iscotization;
+            }
+        }
         List<OrderDetail> objListOrderDetail;
         public List<OrderDetail> ListOrderDetail
         {

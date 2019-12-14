@@ -154,6 +154,8 @@ namespace xAPI.Dao.Report
                      objOrderHeader.IsCheckbox = "1";
                      objOrderHeader.Index = count.ToString();
                      objOrderHeader.Status = dr.GetColumnValue<Int32>("Status");
+                     objOrderHeader.Description = dr.GetColumnValue<String>("Description");
+                     objOrderHeader.IsCotization = dr.GetColumnValue<Int32>("IsCotization");
 
                     lstOrders.Add(objOrderHeader);
                 }
@@ -195,6 +197,8 @@ namespace xAPI.Dao.Report
                     objOrderHeader.LegacyNumber = dr.GetColumnValue<Int64>("LegacyNumber").ToString();
                     objOrderHeader.FirstName = dr.GetColumnValue<String>("FirstName").ToString();                    
                     objOrderHeader.OrderDateStr = (dr.GetColumnValue<Int32>("Status").ToString() =="1") ? "PAGADO" : "PENDIENTE";
+                    objOrderHeader.Description = dr.GetColumnValue<String>("Description");
+                    objOrderHeader.IsCotization = (dr.GetColumnValue<Int32>("IsCotization").ToString() == "1") ? "SI" : "NO";
 
                     lstOrders.Add(objOrderHeader);
                 }

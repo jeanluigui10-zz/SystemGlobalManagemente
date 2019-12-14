@@ -72,40 +72,95 @@
                 selectAllText: "Seleccionar todos"
             });
 
+            $('#chkViewChatBot').change(function () {
+                if (this.checked) {
+                    Fn_ActivarChat(1);
+                } else {
+                    Fn_ActivarChat(0);
+                }
+                
+            });
+
         }
 
         function Fn_ShowModalOrder() {
             $('#MyModalRegisterOrder').modal('show');
         }
 
+        function Fn_Clean() {
+            $("textarea[id$=txtDescripcion]").val("");
+            $("input[id$=txtCatidad]").val("");
+            $("input[id$=txtPrecio]").val("");
+        }
+
+        function Fn_ActivarChat(isChecked)
+        {
+            var sendData = JSON.stringify({
+                estado: isChecked
+            });
+
+            success = function (aws) {
+                var obj = aws.d;
+                if (obj !== null) {
+                    if (obj.Result = "Ok") {
+                        if (obj.Status == "1") {
+                            fn_custommessage("s", "Se Activo chat en Linea", "message_row");
+                        } else {
+                            fn_custommessage("s", "Se Activo ChatBot", "message_row");
+                        }         
+                    }
+                    else {
+                        fn_custommessage("i", "Hubo un problema al Cambiar Estado", "message_row");
+                    }
+                } else {
+                    fn_custommessage("e", "Error al Cambiar Estado", "message_row");
+                }
+            };
+
+            var error = function (xhr, ajaxOptions, thrownError) {
+                fn_custommessage("e", "Error Cambiar Estado", "message_row");
+            };
+
+            var complete = function () {
+            };
+            fn_callmethod("RedirectChatModule.aspx/ActiveChatOnLine", sendData, success, error, complete);
+        }
 
         function Fn_GuardarOrden() {
 
-            if (success) {
-
-                var isChecked = 0;
-                if ($('#chkEstado').is(':checked')) {
-                    isChecked = 1
-                } else {
-                    isChecked = 0;
-                }
-
-                var sendData = JSON.stringify({                   
-                    clientes: JSON.stringify(lstCliente),
-                    productos: JSON.stringify(lstProductos),
-                    descripcion: $("input[id$=txtDescripcion]").val(),
-                    cantidad: $("input[id$=txtCatidad]").val(),
-                    precio: $("input[id$=txtPrecio]").val(),
-                    estado: isChecked
-                });
+           var isChecked = 0;
+           if ($('#chkEstado').is(':checked')) {
+               isChecked = 1
+           } else {
+               isChecked = 0;
+           }
+         
+           var sendData = JSON.stringify({                   
+               clientes: JSON.stringify(lstCliente),
+               productos: JSON.stringify(lstProductos),
+               descripcion: $("textarea[id$=txtDescripcion]").val(),
+               cantidad: $("input[id$=txtCatidad]").val(),
+               precio: $("input[id$=txtPrecio]").val(),
+               estado: isChecked
+           });
 
              success = function (aws) {
                     var obj = aws.d;
-                    if (obj !== null) {
-                       
-                    } else {
+                 if (obj !== null)
+                 {
+                     if (obj.Result = "Ok")
+                     {
+                         Fn_Clean();
+                         $("input[id$=txtUrlgenerate]").val(obj.UrlPaymentOrder);
+                         fn_custommessage("s", obj.Msg, "message_row_order");
+                     }
+                     else
+                     {
+                         fn_custommessage("i", "Hubo un problema al guardar la Orden", "message_row_order");
+                     }
+                 } else {
                         fn_custommessage("e", "Error al guardar la orden", "message_row_order");
-                    }
+                  }
                 };
 
                 var error = function (xhr, ajaxOptions, thrownError) {
@@ -114,25 +169,22 @@
 
                 var complete = function () {
                 };
-                fn_callmethod("RegistroUsuario.aspx/RegistroOrden", sendData, success, error, complete);
-
-            }
-            return false;
-        }
+                fn_callmethod("RedirectChatModule.aspx/RegistroOrden", sendData, success, error, complete);
+          }
     </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
+    <div id="message_row"></div>
     <div class="col-lg-12">
         <div class="col-lg-6" style="width:10%; padding-left:0px">  
-            <button type="button" runat="server" class="btn btn-primary" onclick="Fn_ShowModalOrder()"><i class="fa fa-save"></i>Generar Orden</button>
+            <button type="button" runat="server" class="btn btn-primary" onclick="Fn_ShowModalOrder()"><i class="fa fa-save" style="margin-right: 5px"></i>Generar Orden</button>
         </div>
         <div class="col-lg-6">
               <div class="checkbox">
                                 <label>
                                     <input type="checkbox" id="chkViewChatBot">
-                                    Mostrar Chatbot
+                                    Mostrar chat en Linea
                                 </label>
                             </div>
         </div>   
@@ -186,11 +238,15 @@
                                 </label>
                             </div>
                         </div>
+                        <div class="form-group">
+                            <label>URL GENERADA:</label>
+                            <asp:TextBox Enabled="false" ID="txtUrlgenerate" runat="server" type="text" CssClass="form-control"></asp:TextBox>
+                        </div>
 
                     </div>
                 </div>
                 <footer class="panel-footer">
-                    <button type="button" class="btn btn-primary"<%-- onclick="Fn_Save()"--%> data-dismiss="modal">Guardar</button>
+                    <button type="button" class="btn btn-primary"onclick="Fn_GuardarOrden()">Guardar</button>
                     <button type="button" runat="server" class="btn btn-sec"><i class="fa fa-refresh"></i>Actualizar</button>
                     <button type="button" runat="server" class="btn btn-sec"><i class="fa fa-circle"></i>Limpiar</button>
                 </footer>

@@ -120,5 +120,12 @@ namespace xAPI.BL.Resource
 
             return success;
         }
+        public Boolean ChatOnline_Status(ref BaseEntity objBase, Int32 Status, Int32 settingId)
+        {
+            objBase = new BaseEntity();
+            Boolean StatusChat;
+            StatusChat = AppResourceDAO.Instance.ChatOnline_Status(ref objBase, Status, settingId);
+            return StatusChat;
+        }
     }
 }
