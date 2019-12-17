@@ -94,8 +94,8 @@ namespace xAPI.Dao.Customers
                     objCliente.NumberDocument = dr.GetColumnValue<String>("NumberDocument");
                     objCliente.CellPhone = dr.GetColumnValue<String>("CellPhone");
                     objCliente.Email = dr.GetColumnValue<String>("Email");
-                    objCliente.CreatedDate = dr.GetColumnValue<DateTime>("CreatedDate").ToString();
-                    objCliente.StatusDes = (dr.GetColumnValue<String>("Status") == "1") ? "PAGADO":"PENDIENTE";
+                    //objCliente.CreatedDate = dr.GetColumnValue<DateTime>("CreatedDate").ToString();
+                    objCliente.StatusDes = (dr.GetColumnValue<String>("Status") == "1") ? "PAGADO" : "PENDIENTE";
 
                     lstClientes.Add(objCliente);
                 }

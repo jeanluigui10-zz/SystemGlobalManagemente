@@ -134,7 +134,7 @@
     <div class="box">
         <div id="message_row"></div>
         <div class="box-header">
-            <h3 class="box-title">Lista de Ventas</h3>
+            <h3 class="box-title">Lista de Clientes</h3>
 
             <div class="form-group col-lg-5" style="margin-left: auto;margin-right: auto;text-align: center;float: none;">
                 <label>Inicio:</label>
