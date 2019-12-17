@@ -127,5 +127,13 @@ namespace xAPI.BL.Resource
             StatusChat = AppResourceDAO.Instance.ChatOnline_Status(ref objBase, Status, settingId);
             return StatusChat;
         }
+        public DataTable Settings_GetAll(ref BaseEntity entity)
+        {
+            entity = new BaseEntity();
+            DataTable dt = null;
+            dt = AppResourceDAO.Instance.Settings_GetAll(ref entity);
+
+            return dt;
+        }
     }
 }

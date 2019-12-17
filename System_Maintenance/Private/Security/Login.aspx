@@ -80,7 +80,7 @@
     <div class="row" style="text-align: center">
         <!-- /.col -->
         <%--<asp:LinkButton ID="btnLogin" runat="server" CssClass="mb-xs mt-xs mr-xs btn btn-primary"><span>Ingresar</span></asp:LinkButton>--%>
-                <button type="button" runat="server" class="btn btn-primary" onclick="Fn_Login()"><i class="fa fa-save"></i>Ingresar</button>
+                <button type="button" runat="server" class="btn btn-primary" onclick="Fn_Login()"><i class="fa fa-save" style="margin-right: 5px"></i>Ingresar</button>
         <!-- /.col -->
     </div>
 

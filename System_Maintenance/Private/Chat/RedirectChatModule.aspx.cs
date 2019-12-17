@@ -27,6 +27,7 @@ namespace xSystem_Maintenance.Private.Chat
             {
                 CargarClientes();
                 CargarProductos();
+                Load_Settings();
             }
 
             ucRedirectChatModule.SetUserId(BaseSession.SsUser.Id_Usuario);
@@ -92,6 +93,22 @@ namespace xSystem_Maintenance.Private.Chat
             {
                 Message(EnumAlertType.Error, exception.Message);
             }
+        }
+        private void Load_Settings()
+        {
+            BaseEntity objBase = new BaseEntity();
+            DataTable dt = ResourceBL.Instance.Settings_GetAll(ref objBase);
+            if (objBase.Errors.Count == 0)
+            {
+                if (dt != null)
+                {
+                    foreach (DataRow item in dt.Rows)
+                    {
+                        hfIsVisiableChat.Value = item["ChatOnlineActive"].ToString();
+                    }
+                }
+            }
+
         }
         public void Message(EnumAlertType type, string message)
         {

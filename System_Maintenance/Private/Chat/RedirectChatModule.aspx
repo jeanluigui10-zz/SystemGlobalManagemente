@@ -81,6 +81,14 @@
                 
             });
 
+            if ($("#<%=hfIsVisiableChat.ClientID%>").val() != "") {
+                if ($("#<%=hfIsVisiableChat.ClientID%>").val() == "1") {     //Chat en linea
+                    $('#chkViewChatBot').prop('checked', true);
+                 } else {                                           //chat bot
+                    $('#chkViewChatBot').prop('checked', false);
+                 }
+             }
+
         }
 
         function Fn_ShowModalOrder() {
@@ -175,9 +183,10 @@
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+     <asp:HiddenField runat="server" ID="hfIsVisiableChat" />
     <div id="message_row"></div>
     <div class="col-lg-12">
-        <div class="col-lg-6" padding-left:0px">  
+        <div class="col-lg-6" style="padding-left:0px">  
             <button type="button" runat="server" class="btn btn-primary" onclick="Fn_ShowModalOrder()"><i class="fa fa-save" style="margin-right: 5px"></i>Generar Orden</button>
         </div>
         <div class="col-lg-6">
