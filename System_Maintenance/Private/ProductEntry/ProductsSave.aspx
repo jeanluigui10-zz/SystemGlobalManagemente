@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ResourcesManagementSave.aspx.cs" Inherits="System_Maintenance.Private.Resource.ResourcesManagementSave" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ProductsSave.aspx.cs" Inherits="System_Maintenance.Private.Resource.ProductsSave" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
     <script src="../../src/js/jquery.MultiFile.js"></script>
 
@@ -21,7 +21,6 @@
         });
         var PreviewOriginal = "";
         var Edit = 0;
-        //var listLanguages = [];
         var image;
         var sizeImage = "";
         jQuery.fn.preventDoubleSubmission = function () {
@@ -39,7 +38,6 @@
         function fn_init() {
             fn_setimage();
             fn_bind();
-            fn_LoadListDDL();
             fn_setValidator();
             fn_setmenu();
             fn_validate();
@@ -50,44 +48,6 @@
                     return false;
             });
         }
-
-
-        function fn_LoadListDDL() {
-
-
-            <%--$("#<%=ddlListLanguage.ClientID%>").multiselect({
-                includeSelectAllOption: true,
-                onChange: function (option, checked) {
-                    listLanguages = [];
-                    $($("#ContentPlaceHolder_ContentPlaceHolder2_ddlListLanguage").val()).each(function () {
-                        if (listLanguages.length > 0) {
-
-                            var added = false;
-                            for (var i = 0; i < listLanguages.length; i++) {
-
-                                if (listLanguages[i] == this["trim"]()) {
-                                    added = true;
-                                }
-                            }
-                            if (!added) {
-                                listLanguages.push(this["trim"]());
-                            }
-                        } else {
-                            listLanguages.push(this["trim"]());
-                        }
-                    });
-                }
-            });
-
-            $("select[id$=ddlListLanguage]").multiselect({
-                includeSelectAllOption: true,
-                nonSelectedText: "None Selected",
-                selectAllText: "All Selected"
-            });--%>
-        }
-
-
-
 
         function fn_setmenu() {
             $('#mgresources').attr("class", "nav-active");
@@ -108,45 +68,12 @@
         }
 
         function fn_validate2(event) {
-            (function () {
-                //listLanguages = [];
-                //$($("#ContentPlaceHolder_ContentPlaceHolder2_ddlListLanguage").val()).each(function () {
-                //    if (listLanguages.length > 0) {
-
-                //        var added = false;
-                //        for (var i = 0; i < listLanguages.length; i++) {
-
-                //            if (listLanguages[i] == this["trim"]()) {
-                //                added = true;
-                //            }
-                //        }
-                //        if (!added) {
-                //            listLanguages.push(this["trim"]());
-                //        }
-                //    } else {
-                //        listLanguages.push(this["trim"]());
-                //    }
-                //});
-
-                //$("select[id$=ddlListLanguage]").multiselect({
-                //    includeSelectAllOption: true,
-                //    nonSelectedText: 'None Selected',
-                //    selectAllText: 'All Selected'
-                //});
-
-            })();
-
+         
             if (sizeImage > 10485760) {
                 fn_message('i', "The image upload is too big");
                 return false;
             }
-            //if (listLanguages.length === 0) {
-            //    fn_message('i', "You must select at least one language");
-            //    event.preventDefault();
-            //    return false;
-            //}
-            //var jsonList = JSON.stringify(listLanguages);
-            //$("[id$=hfListLanguage]").val(fn_jsonreplace(jsonList));
+           
             if (!fn_validateform('editBasic')) {
                 event.preventDefault();
                 return false;
@@ -180,7 +107,6 @@
                     Edit = 1;
                 }
                 else {
-                    //prev = "/src/images/FileTypeIcon/" + extension + ".png";
                     $(".previewFile").show();
                     PreviewOriginal = path;
                     $("#divImage").append("<a class='MultiFile-remove' href='#' title='Delete' onclick='fn_delete()'>x</a><img style='max-height: 50px;max-width: 50px;margin:0 auto;' src='http://www.sciencedomain.org/assets/themes/frontend/images/icon-file.png' /> ");
@@ -375,8 +301,6 @@
             <asp:HiddenField ID="hfFileName" runat="server" />
             <asp:HiddenField ID="hfPublicName" runat="server" />
             <asp:HiddenField ID="hfFileExtension" runat="server" />
-            <%--<asp:HiddenField ID="hfListLanguage" runat="server" />--%>
-
 
             <section class="panel">
                 <div id="message_row">
@@ -398,25 +322,11 @@
                                 <asp:Label ID="lblRequiredFields" runat="server" Text=""></asp:Label>
                             </div>
                         </div>
-                   <%--     <div class="form-group">
-                            <asp:Label ID="lblLanguage" Text="" runat="server" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
-
-                            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:DropDownList ID="ddlLanguage" runat="server" CssClass="form-control mb-md hide"></asp:DropDownList>
-
-                                <asp:ListBox ID="ddlListLanguage" multiple="multiple" SelectionMode="Multiple" CssClass="form-control" runat="server"></asp:ListBox>
-
-                            </div>
-                        </div>--%>
 
                         <div class="form-group">
                             <asp:Label ID="lblResourceCategory" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <%-- FALTA IMPLEMENTAR EL METEDO PARA TRAER DESDE LA BD--%>
                                 <asp:DropDownList runat="server" ID="ddlResourceCategory" CssClass="form-control mb-md">
-                                    <%--<asp:ListItem Value="0" Text="Category 1"></asp:ListItem>
-                                    <asp:ListItem Value="1" Text="Category 2"></asp:ListItem>
-                                    <asp:ListItem Value="2" Text="Category 3"></asp:ListItem>--%>
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -435,10 +345,7 @@
                         <div class="form-group" style="display: none;">
                             <asp:Label ID="lblSystemContact" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <%-- FALTA IMPLEMENTAR EL METEDO PARA TRAER DESDE LA BD--%>
                                 <asp:DropDownList runat="server" ID="ddlSystemContact" CssClass="">
-                                    <%--<asp:ListItem Value="0" Text="Business"></asp:ListItem>
-                                    <asp:ListItem Value="1" Text="Product"></asp:ListItem>--%>
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -467,12 +374,7 @@
 
                         <div class="form-group" id="dvUrl" style="display: none">
                             <asp:Label ID="lblUrl" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
-                            <%--<div class="col-md-4">
-								    user.&nbsp;<asp:TextBox runat="server" ID="txtUrl" CssClass="form-control"></asp:TextBox>                                    
-                                    <div class="col-md-4">
-                                    For example: user.<p style="font-weight: bold; display: inline-block;">myasealive.com/newsite/products/Asea.aspx</p>
-                                    </div>
-							    </div>--%>
+                       
                             <div class=" col-xs-11 col-sm-7 col-md-6 col-lg-7 cnt-controles">
                                 <div class="input-group">
                                     <asp:Label runat="server" CssClass="input-group-addon"> user.&nbsp;</asp:Label>
@@ -502,11 +404,8 @@
                         <div class="form-group" id="DivFile">
                             <asp:Label ID="lblFileNameL" runat="server" CssClass="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label" Text=""></asp:Label>
                             <div class="col-md-6">
-                                <%-- AKLC_#[4914]_[lpacheco]_BEGIN --%>
                                 <asp:FileUpload ID="fuResource" runat="server" CssClass="Width_2_file fuResource" />
-                                <input type="button" value="Preview" onclick="preview('file')" class="btn btn-default previewFile" style="margin-top: 5px; display: none" />
-                                <%--accept-doc|docx|xls|xlsx|ppt|pdf|pptx|gif|jpeg|jpg|tif|avi|mp4|wmv|png--%>
-                                <%-- END --%>
+                                <input type="button" value="Preview" onclick="preview('file')" class="btn btn-default previewFile" style="margin-top: 5px; display: none" />                         
                             </div>
                             <div id="divImage" style="margin-left: 210px;"></div>
                         </div>
@@ -522,12 +421,6 @@
                
                     </div>
                 </div>
-
-                <%--<div class="myForm1 themeBlue">
-					<div class="myForm1_buttons" style="margin-left: 204px;">
-						
-					</div>
-				</div>--%>
 
                 <footer class="panel-footer" id="f_Company">
                     <div class="row">
@@ -548,12 +441,10 @@
                 <h2 class="panel-title">View resource</h2>
             </header>
             <div class="panel-body">
-                <%--<div class="modal-wrapper">--%>
                 <div class='embed-responsive embed-responsive-16by9'>
                     <iframe id="piframe" class="embed-responsive-item" width="610" height="345" src="" frameborder="0" allowfullscreen></iframe>
                 </div>
                 <img id="imgpreview" class="img-responsive">
-                <%--</div>--%>
             </div>
             <footer class="panel-footer">
                 <div class="row">

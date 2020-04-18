@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using xAPI.Library.General;
 namespace xSystem_Maintenance.src.app_code
 {
     [Serializable]
@@ -345,7 +344,9 @@ namespace xSystem_Maintenance.src.app_code
         public string desc { get; set; }
         public string Status { get; set; }
     }
-     [Serializable]
+
+
+    [Serializable]
     public class srRespLogin
     {
          public string SESSION { get; set; }
@@ -467,80 +468,6 @@ namespace xSystem_Maintenance.src.app_code
 
     }
 
-
-    //[Serializable]
-    //public class srProducts
-    //{
-    //    public String Id { get; set; }
-    //    public String Name { get; set; }
-
-    //    public String MarketId { get; set; }
-    //    public String MarketName { get; set; }
-
-    //    public String ExchangeRate { get; set; }
-
-    //    public String VendorId { get; set; }
-    //    public String VendorName { get; set; }
-
-    //    public String CategoryId { get; set; }
-    //    public String CategoryName { get; set; }
-
-    //    public String ProductSubType { get; set; }
-    //    public String ProductUnit { get; set; }
-    //    public String ShortDescription { get; set; }
-    //    public String FullDescription { get; set; }
-    //    public String SkuId { get; set; }
-    //    public String SkuName { get; set; }
-    //    public String AddDate { get; set; }
-    //    public Decimal SalesTax { get; set; }
-    //    public Decimal RetailPrice { get; set; }
-    //    public Decimal WholeSalePrice { get; set; }
-    //    public Decimal ShippingAndHandlingPrice { get; set; }
-    //    public Decimal CommissionValue { get; set; }
-    //    public Decimal QualifyingVolume { get; set; }
-    //    public Decimal MinOrderQty { get; set; }
-    //    public Int32 QuantityOnHand { get; set; }
-    //    public Int32 WarehouseId { get; set; }
-    //    public Int32 OutOfStockAction { get; set; }
-    //    public Boolean NotifyWhenMinimum { get; set; }
-    //    public String Package { get; set; }
-    //    public String Width { get; set; }
-    //    public String Depth { get; set; }
-    //    public String Weight_Lbs { get; set; }
-    //    public String Dimensions { get; set; }
-    //    public Boolean ShowType { get; set; }
-    //    public Boolean DisplayInShoppingCart { get; set; }
-    //    public Boolean MultiPackage { get; set; }
-    //    public Boolean ChargeShipping { get; set; }
-    //    public Boolean ChargeTax { get; set; }
-    //    public Boolean ChargeTaxOnShipping { get; set; }
-    //    public Boolean AutoShip { get; set; }
-    //    public String ImageLocation { get; set; }
-    //    public String ImageForDistributor { get; set; }
-    //    public Decimal SalesPrice { get; set; }
-    //    public Boolean IsBussinessPack { get; set; }
-    //    public String ShowInQuickAdd { get; set; }
-    //    public String Status { get; set; }
-    //}
-
-    //[Serializable]
-    //public class srBase
-    //{
-    //    public String Id { get; set; }
-    //    public String Name { get; set; }
-    //    public String Description { get; set; }
-    //    public String CreatedDate { get; set; }
-    //    public String Disabled { get; set; }
-    //    public String Status { get; set; }
-    //    public String Createdby { get; set; }
-    //    public String Query { get; set; }
-    //    public String isCheckbox { get; set; }
-    //    public String UpdatedDate { get; set; }
-    //    public String UpdatedBy { get; set; }
-    //    public String Index { get; set; }
-    //    public String Index2 { get; set; }
-    //    public String Default { get; set; }
-    //}
 
     [Serializable]
     public class srReportCategory
@@ -1330,6 +1257,30 @@ namespace xSystem_Maintenance.src.app_code
         public string isCheckbox { get; set; }
 
     }
+    [Serializable]
+    public class srProducts
+    {
+        public String Id { get; set; }
+        public String SKU { get; set; }
+        public String Name { get; set; }
+        public String Category { get; set; }
+        public String FileName { get; set; }
+        public String Description { get; set; }
+        public String CategoryId { get; set; }
+        public String FileExtension { get; set; }
+        public String FilePublicName { get; set; }
+        public String UnitPrice { get; set; }
+        public String Stock { get; set; }
+        public String PriceOffer { get; set; }
+        public String UniMed { get; set; }
+        public String NameResource { get; set; }
+        public String Status { get; set; }
+        public String DocType { get; set; }
+        public String IsUpload { get; set; }
+        public String isCheckbox { get; set; }
+        public String Index { get; set; }
+    }
+
     [Serializable]
     public class srBanner
     {
@@ -2362,12 +2313,13 @@ namespace xSystem_Maintenance.src.app_code
     [Serializable]
     public class srCategory
     {
-        public string Id { get; set; }
-        public string Name { get; set; }
-        public string Status { get; set; }
-        public string CreatedDate { get; set; }
-        public string IsCheckbox { get; set; }
-        public string Index { get; set; }
+        public String Id { get; set; }
+        public String Name { get; set; }
+        public String Description { get; set; }
+        public String Status { get; set; }
+        public String CreatedDate { get; set; }
+        public String isCheckbox { get; set; }
+        public String Index { get; set; }
     }
 
     #region shippingcosts
@@ -2507,7 +2459,6 @@ namespace xSystem_Maintenance.src.app_code
         public String Default { get; set; }
         public String trad { get; set; }
 
-        //public String id { get; set; }
     }
 
 }

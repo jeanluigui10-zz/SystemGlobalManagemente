@@ -17,7 +17,7 @@ using xSystem_Maintenance.src.app_code;
 
 namespace System_Maintenance.Private.Resource
 {
-    public partial class ResourcesManagementSave : Page
+    public partial class ProductsSave : Page
     {
 
         public int vsId
@@ -48,34 +48,23 @@ namespace System_Maintenance.Private.Resource
                 LoadFieldTranslations();
             }
         }
-
         private void LoadFieldTranslations()
         {
             lblRequiredFields.Text = "(*)Campos requeridos.";
-
             lblResourceCategory.Text = "Categoria de recurso:";
             lblResourceType.Text = "Tipo:";
-
             lblSystemContact.Text = "System Contact:";
-
             lblName.Text = "* Nombre:";
             lblDescription.Text = "* Descripcion:";
-
-
             lblUploadFile.Text = "Subir Archivo:";
-
             lblUrl.Text = "Url:";
-
             rbFile.Text = "Archivo";
             rbLink.Text = "Enlace";
             lblFileNameL.Text = "* Nombre de archivo y ubicacion:  <br><small class='col-md-10'> Tamaño maximo: 5MB</small>";
             lblEnabled.Text = "Habilitado:";
-
             btnUpload.Text = "Guardar";
             btnCancel.Text = "Regresar";
-
         }
-
         public class clsResourceType
         {
             public string Value { get; set; }
@@ -83,26 +72,20 @@ namespace System_Maintenance.Private.Resource
         }
 
         #region LoadData
-
         private void LoadData()
         {
             try
             {
                 LoadDDL();
                 BaseEntity entity = new BaseEntity();
-
                 DataTable dtResCat = ResourceBL.Instance.ResourceCategories_GetAll(ref entity, 1);     
-
                 LoadDDLResourceCategory(ddlResourceCategory, dtResCat);
-              
             }
             catch (Exception ex)
             {
                 Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
-
-
 
         private void LoadDdlListLanguage(ListBox ddl, DataTable dt)
         {
@@ -121,8 +104,6 @@ namespace System_Maintenance.Private.Resource
                 Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
-
-
         private void LoadDDL()
         {
             BaseEntity objEntity = new BaseEntity();
@@ -185,7 +166,6 @@ namespace System_Maintenance.Private.Resource
         #endregion
 
         #region SetData
-
         private void SetData()
         {
             if (vsId > 0)
@@ -204,7 +184,6 @@ namespace System_Maintenance.Private.Resource
                     Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
-
         private void SetControls()
         {
             ddlResourceType.SelectedIndex = 0;
@@ -217,9 +196,7 @@ namespace System_Maintenance.Private.Resource
             chkEnable.Checked = true;
             rbFile.Checked = true;
             rbLink.Checked = false;
-       
         }
-
         private void SetControls(AppResource objAppResource)
         {
             try
@@ -255,14 +232,10 @@ namespace System_Maintenance.Private.Resource
             {
                Message(EnumAlertType.Error,"An error occurred while loading data");
             }
-
-
         }
-
         #endregion
 
         #region CRUD
-
         public bool ParseEnum2<TEnum>(string sEnumValue) where TEnum : struct
         {
             bool success = false;
@@ -272,7 +245,6 @@ namespace System_Maintenance.Private.Resource
                 if (Enum.GetName(typeof(TEnum), value) == sEnumValue)
                     success = true;
             }
-
             return success;
         }
 
@@ -471,7 +443,7 @@ namespace System_Maintenance.Private.Resource
         }
         private void GoBack()
         {
-            Response.Redirect("ResourcesManagement.aspx", false);
+            Response.Redirect("Products.aspx", false);
         }
 
         private void LoadDdlApplications(DropDownList ddl, DataTable dt)

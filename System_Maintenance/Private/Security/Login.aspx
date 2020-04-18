@@ -14,7 +14,6 @@
         function Fn_Login()
         {
             try {
-                //var senddata = '{user:"' + $("input[id$=txtdni]").val() + '",password:"' + $("input[id$=txtpassword]").val() + '}';
                 var objUsuario = {
                     Dni: $("input[id$=txtdni]").val(),
                     Password: $("input[id$=txtpassword]").val(),

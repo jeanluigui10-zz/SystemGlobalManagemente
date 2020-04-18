@@ -202,8 +202,8 @@ namespace xAPI.Library.General
         xBackOffice = 2,
         [StringValue("xCorporate")]
         xCorporate = 3,
-        [StringValue("ResourcesManagement")]
-        ResourcesManagement = 4,
+        [StringValue("Products")]
+        Products = 4,
         [StringValue("MyProductPhotos")]
         MyProductPhotos = 7,
         [StringValue("PartyPlan")]

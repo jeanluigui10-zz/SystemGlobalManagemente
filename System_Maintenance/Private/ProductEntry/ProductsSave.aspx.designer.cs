@@ -10,7 +10,7 @@
 namespace System_Maintenance.Private.Resource {
     
     
-    public partial class ResourcesManagementSave {
+    public partial class ProductsSave {
         
         /// <summary>
         /// Control hfDistributorId.

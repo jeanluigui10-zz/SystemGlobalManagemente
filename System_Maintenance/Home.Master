@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Argos S.A.C</title>
+    <title>EL CANASTON - Market</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -223,7 +223,7 @@
                     <!-- mini logo for sidebar mini 50x50 pixels -->
                     <span class="logo-mini"><b></b></span>
                     <!-- logo for regular state and mobile devices -->
-                    <span class="logo-lg"><b>Argos S.A.C</b></span>
+                    <span class="logo-lg"><b>Sistema</b></span>
                 </a>
                 <!-- Header Navbar: style can be found in header.less -->
                 <nav class="navbar navbar-static-top">
@@ -260,22 +260,7 @@
                                         <small></small>
                                         </p>
                                     </li>
-                                    <!-- Menu Body -->
-                                    <%--    <li class="user-body">
-                                        <div class="row">
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Followers</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Sales</a>
-                                            </div>
-                                            <div class="col-xs-4 text-center">
-                                                <a href="#">Friends</a>
-                                            </div>
-                                        </div>
-                                        <!-- /.row -->
-                                    </li>--%>
-                                    <!-- Menu Footer-->
+                                   
                                     <li class="user-footer">
                                         <div class="pull-left">
                                             <a href="#" class="btn btn-default btn-flat">Perfil</a>
@@ -306,19 +291,39 @@
                         </div>
                         <div class="pull-left info">
                             <p id="nameUserId" runat="server">Usuario</p>
-                            <%--<a href="#"><i class="fa fa-circle text-success"></i>Online</a>--%>
                         </div>
                     </div>
 
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                        <%
-                            if (BaseSession.SsUser.Id_TipoUsuario == (Int32)xAPI.Library.General.EnumTipoUsuario.Administrador || BaseSession.SsUser.Id_TipoUsuario == (Int32)xAPI.Library.General.EnumTipoUsuario.Asistente)
-                            {
-
-
-                        %>
+                          <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Productos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/ProductManagement/ProductEntry.aspx"><i class="fa fa-circle-o"></i>Registro Productos</a></li>
+                            </ul>
+                        </li>   
+                    
+                        
                         <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Categorías</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/CategoryManagement/CategoryEntry.aspx"><i class="fa fa-circle-o"></i>Registro Categorías</a></li>
+                            </ul>
+                        </li> 
+
+                          <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-dashboard"></i><span>Reporte</span>
                                 <span class="pull-right-container">
@@ -330,41 +335,7 @@
                                 <li><a href="/Private/Report/ReportVentas.aspx"><i class="fa fa-circle-o"></i>Ventas</a></li>
                                 <li><a href="/Private/Report/ReportCustomer.aspx"><i class="fa fa-circle-o"></i>Clientes</a></li>
                             </ul>
-                          <%--  <ul class="treeview-menu">
-                                <li><a href="/Private/Report/ReportIncident.aspx"><i class="fa fa-circle-o"></i>Pedidos</a></li>
-                            </ul>--%>
                         </li>
-                        <%
-                            }
-                        %>
-
-                        <%
-                            if (BaseSession.SsUser.Id_TipoUsuario == (Int32)xAPI.Library.General.EnumTipoUsuario.Asistente)
-                            {
-
-                        %>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-pie-chart"></i>
-                                <span>Incidencias</span>
-                                <span class="pull-right-container">
-                                    <span class="label label-primary pull-right" runat="server" id="txtnumberIncidentsR">0</span>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="/Private/Incidents/Incident.aspx"><i class="fa fa-circle-o"></i>Registro Incidencias</a></li>
-                            </ul>
-                        </li>
-                        <%
-                            }
-                        %>
-
-                        <%
-                            if (BaseSession.SsUser.Id_TipoUsuario == (Int32)xAPI.Library.General.EnumTipoUsuario.Administrador)
-                            {
-
-
-                        %>
                         <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i>
@@ -378,31 +349,7 @@
                           
                             </ul>
                         </li>
-                        <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-pie-chart"></i>
-                                <span>Resource</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="/Private/Resource/ResourcesManagement.aspx"><i class="fa fa-circle-o"></i>Registro Diseño</a></li>
-                            </ul>
-                        </li>   
 
-                       <%-- <li class="treeview">
-                            <a href="#">
-                                <i class="fa fa-pie-chart"></i>
-                                <span>Clientes</span>
-                                <span class="pull-right-container">
-                                    <i class="fa fa-angle-left pull-right"></i>
-                                </span>
-                            </a>
-                            <ul class="treeview-menu">
-                                <li><a href="/Private/Customer/ReportCustomer.aspx"><i class="fa fa-circle-o"></i>Registro Clientes</a></li>
-                            </ul>
-                        </li>--%>
                          <li class="treeview">
                             <a href="#">
                                 <i class="fa fa-pie-chart"></i>
@@ -415,9 +362,7 @@
                                 <li><a href="/Private/Chat/RedirectChatModule.aspx"><i class="fa fa-circle-o"></i>Panel Chat</a></li>
                             </ul>
                         </li>
-                        <%
-                            }
-                        %>
+                       
                     </ul>
                 </section>
                 <!-- /.sidebar -->
