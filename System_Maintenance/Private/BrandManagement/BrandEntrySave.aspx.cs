@@ -1,15 +1,15 @@
 ﻿using System;
 using System.Web.Services;
 using System.Web.UI;
-using xAPI.BL.Category;
-using xAPI.Entity.Category;
+using xAPI.BL.Brand;
+using xAPI.Entity.Brand;
 using xAPI.Library.Base;
 using xAPI.Library.General;
 using xSystem_Maintenance.src.app_code;
 
-namespace System_Maintenance.Private.CategoryManagement
+namespace System_Maintenance.Private.BrandManagement
 {
-    public partial class CategoryEntrySave : System.Web.UI.Page
+    public partial class BrandEntrySave : System.Web.UI.Page
     {
         public int vsId
         {
@@ -29,7 +29,6 @@ namespace System_Maintenance.Private.CategoryManagement
         {
             lblRequiredFields.Text = "(*)Campos requeridos.";
             lblName.Text = "* Nombre:";
-            lblDescription.Text = "* Descripción:";
             lblEnabled.Text = "Activar";
             btnCancel.Text = "Regresar";
         }
@@ -38,12 +37,12 @@ namespace System_Maintenance.Private.CategoryManagement
         {
             if (!String.IsNullOrEmpty(Request.QueryString["q"]))
             {
-                this.ltTitle.Text = "Editar Categoría";
+                this.ltTitle.Text = "Editar Marca";
                 String id = Encryption.Decrypt(Request.QueryString["q"]);
                 if (!String.IsNullOrEmpty(id))
                 {
                     vsId = Convert.ToInt32(id);
-                    hfCategoryId.Value = id;
+                    hfBrandId.Value = id;
                 }
                 else
                 {
@@ -63,9 +62,9 @@ namespace System_Maintenance.Private.CategoryManagement
             {
                 if (vsId > 0)
                 {
-                    Categorys obj = null;
+                    Brands obj = null;
                     BaseEntity entity = new BaseEntity();
-                    obj = CategoryBL.Instance.Category_Get_ById(ref entity, vsId);
+                    obj = BrandBL.Instance.Brand_Get_ById(ref entity, vsId);
                     if (entity.Errors.Count == 0)
                         if (obj != null)
                         {
@@ -89,19 +88,17 @@ namespace System_Maintenance.Private.CategoryManagement
         }
         private void SetControls()
         {
-            hfCategoryId.Value = String.Empty;
+            hfBrandId.Value = String.Empty;
             txtName.Text = String.Empty;
-            txtDescription.Text = String.Empty;
             chkStatus.Checked = true;
         }
-        private void SetControls(Categorys objCategory)
+        private void SetControls(Brands objBrand)
         {
             try
             {
-                hfCategoryId.Value = objCategory.ID.ToString();
-                txtName.Text = objCategory.Name;
-                txtDescription.Text = objCategory.Description;
-                chkStatus.Checked = objCategory.Status == (int)EnumStatus.Enabled ? true : false;
+                hfBrandId.Value = objBrand.ID.ToString();
+                txtName.Text = objBrand.Name;
+                chkStatus.Checked = objBrand.Status == (int)EnumStatus.Enabled ? true : false;
             }
             catch (Exception ex)
             {
@@ -111,21 +108,20 @@ namespace System_Maintenance.Private.CategoryManagement
         #endregion
 
         [WebMethod]
-        public static Object Category_Save(srCategory u)
+        public static Object Brand_Save(srBrand u)
         {
             BaseEntity entity = new BaseEntity();
             Boolean success = false;
             try
             {
-                Categorys objCategory = new Categorys
+                Brands objBrand = new Brands
                 {
                     ID = String.IsNullOrEmpty(u.Id) ? 0 : Convert.ToInt32(u.Id),
                     Name = u.Name.ToString(),
-                    Description = u.Description.ToString(),
                     Status = Convert.ToInt32(u.Status)
                 };
 
-                success = CategoryBL.Instance.Category_Save(ref entity, objCategory);
+                success = BrandBL.Instance.Brand_Save(ref entity, objBrand);
                 if (entity.Errors.Count <= 0 && success)
                 {
                     return new { Msg = "Se guardo correctamente!", Result = "Ok" };
@@ -147,7 +143,7 @@ namespace System_Maintenance.Private.CategoryManagement
         }
         private void GoBack()
         {
-            Response.Redirect("CategoryEntry.aspx", false);
+            Response.Redirect("BrandEntry.aspx", false);
         }
         public void Message(EnumAlertType type, string message)
         {

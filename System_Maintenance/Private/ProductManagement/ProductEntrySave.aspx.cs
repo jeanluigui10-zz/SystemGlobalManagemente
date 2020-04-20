@@ -6,6 +6,7 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using xAPI.BL.Brand;
 using xAPI.BL.Category;
 using xAPI.BL.Product;
 using xAPI.BL.Resource;
@@ -27,8 +28,8 @@ namespace System_Maintenance.Private.ProductManagement
         {
             if (!Page.IsPostBack)
             {
-                LoadData();
                 SetQuery();
+                LoadData();
                 SetData();
                 LoadFieldTranslations();
             }
@@ -40,13 +41,14 @@ namespace System_Maintenance.Private.ProductManagement
             lblResourceType.Text = "Tipo:";
             lblSystemContact.Text = "System Contact:";
             lblName.Text = "* Nombre:";
+            lblBrand.Text = "* Marca";
             lblDescription.Text = "* Descripción:";
             lblUploadFile.Text = "Subir Archivo:";
             lblUrl.Text = "Url:";
             rbFile.Text = "Subir Imagen";
             rbLink.Text = "Enlace";
             lblFileNameL.Text = "* Nombre de archivo y ubicación:  <br><small class='col-md-10'> Tamaño maximo: 5MB</small>";
-            lblEnabled.Text = "Habilitado:";
+            lblEnabled.Text = "Activar";
             btnUpload.Text = "Guardar";
             btnCancel.Text = "Regresar";
             lblUniMed.Text = "Unidad de Medida";
@@ -56,22 +58,21 @@ namespace System_Maintenance.Private.ProductManagement
             lblSKU.Text = "SKU";
         }
      
-        #region LoadData
+        #region LoadDLL
         private void LoadData()
         {
             try
             {
-                LoadDDL();
-                BaseEntity entity = new BaseEntity();
-                DataTable dt = CategoryBL.Instance.Product_Category_GetList(ref entity);
-                LoadDDLCategory(ddlCategory, dt);
+                DDLType();
+                LoadDDLCategory();
+                LoadDDLBrand();
             }
             catch (Exception ex)
             {
                 Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
-        private void LoadDDL()
+        private void DDLType()
         {
             BaseEntity objEntity = new BaseEntity();
             DataTable dt = ResourceBL.Instance.ResourceType_GetAll(ref objEntity);
@@ -94,15 +95,34 @@ namespace System_Maintenance.Private.ProductManagement
             }
         }
 
-        private void LoadDDLCategory(DropDownList ddl, DataTable dt)
+        private void LoadDDLCategory()
         {
+            BaseEntity entity = new BaseEntity();
+            DataTable dt = CategoryBL.Instance.Product_Category_GetList(ref entity);
             try
             {
-                ddl.DataSource = dt;
-                ddl.DataTextField = "Name";
-                ddl.DataValueField = "ID";
-                ddl.DataBind();
-                ddl.Items.Add(new ListItem("-- Seleccionar Opción --", "0"));
+                ddlCategory.DataSource = dt;
+                ddlCategory.DataTextField = "Name";
+                ddlCategory.DataValueField = "ID";
+                ddlCategory.DataBind();
+                ddlCategory.Items.Add(new ListItem("-- Seleccionar Opción --", "0"));
+            }
+            catch (Exception ex)
+            {
+                Message(EnumAlertType.Error, "An error occurred while loading data");
+            }
+        }
+        private void LoadDDLBrand()
+        {
+            BaseEntity entity = new BaseEntity();
+            DataTable dt = BrandBL.Instance.Product_Brand_GetList(ref entity);
+            try
+            {
+                ddlBrand.DataSource = dt;
+                ddlBrand.DataTextField = "Name";
+                ddlBrand.DataValueField = "ID";
+                ddlBrand.DataBind();
+                ddlBrand.Items.Add(new ListItem("-- Seleccionar Opción --", "0"));
             }
             catch (Exception ex)
             {
@@ -117,8 +137,8 @@ namespace System_Maintenance.Private.ProductManagement
             if (!string.IsNullOrEmpty(Request.QueryString["q"]))
             {
                 ltTitle.Text = "Editar Producto";
-                string id = Encryption.Decrypt(Request.QueryString["q"]);
-                if (!string.IsNullOrEmpty(id))
+                String id = Encryption.Decrypt(Request.QueryString["q"]);
+                if (!String.IsNullOrEmpty(id))
                     vsId = Convert.ToInt32(id);
                 else
                     GoBack();
@@ -152,6 +172,7 @@ namespace System_Maintenance.Private.ProductManagement
         {
             ddlResourceType.SelectedIndex = 0;
             ddlCategory.SelectedIndex = 0;
+            ddlBrand.SelectedIndex = 0;
             hfProductId.Value = String.Empty;
             txtSku.Text = String.Empty;
             txtUnitPrice.Text = String.Empty;
@@ -174,12 +195,13 @@ namespace System_Maintenance.Private.ProductManagement
                 ddlResourceType.Enabled = false;
 
                 txtName.Text = objProduct.Name;
+                ddlBrand.SelectedValue = objProduct.brand.ID.ToString();
                 txtStock.Text = objProduct.Stock.ToString();
                 txtUniMed.Text = objProduct.UniMed;
                 txtUnitPrice.Text = objProduct.UnitPrice.ToString();
                 txtPriceOffer.Text = objProduct.PriceOffer.ToString();
 
-                ddlCategory.SelectedValue = objProduct.CategoryId.ToString();
+                ddlCategory.SelectedValue = objProduct.category.ID.ToString();
                 chkEnable.Checked = objProduct.Status == (int)EnumStatus.Enabled ? true : false;
                 rbFile.Checked = objProduct.IsUpload == 1 ? true : false;
 
@@ -194,7 +216,9 @@ namespace System_Maintenance.Private.ProductManagement
                 }
                 else
                 {
-                    txtLink.Text = objProduct.NameResource;
+                    //txtLink.Text = objProduct.NameResource;
+                    txtLink.Text = Config.EnterpriseVirtualPath + EnumFolderSettings.FolderImages.GetStringValue() + objProduct.FilePublicName;
+
                 }
 
                 Page.ClientScript.RegisterStartupScript(GetType(), "DivfileDivLink", "fn_hide_show();", true);
@@ -232,7 +256,8 @@ namespace System_Maintenance.Private.ProductManagement
                 hfc = Request.Files;
                 objProduct.ID = vsId;
                 objProduct.DocType = ddlResourceType.SelectedItem.Text.Trim();
-                objProduct.CategoryId = Convert.ToInt32(ddlCategory.SelectedValue);
+                objProduct.category.ID = Convert.ToInt32(ddlCategory.SelectedValue);
+                objProduct.brand.ID = Convert.ToInt32(ddlBrand.SelectedValue);
                 objProduct.Name = HtmlSanitizer.SanitizeHtml(txtName.Text.Trim());
                 objProduct.Stock = Convert.ToInt32(txtStock.Text.Trim());
                 objProduct.UniMed = HtmlSanitizer.SanitizeHtml(txtUniMed.Text.Trim());
@@ -272,7 +297,7 @@ namespace System_Maintenance.Private.ProductManagement
                     Message(EnumAlertType.Error, "Debe ingresar un precio. ");
                     return;
                 }
-                if (rbFile.Checked == true)
+                if (rbFile.Checked == true || rbFile.Checked == false)
                 {
                     objProduct.IsUpload = 1;
                     if (vsId == 0 && hfc.Count > 0)
@@ -302,7 +327,7 @@ namespace System_Maintenance.Private.ProductManagement
                     objProduct.IsUpload = 0;
                     objProduct.NameResource = txtLink.Text;
                     objProduct.FileName = "External Url";
-                    objProduct.FilePublicName = txtLink.Text;
+                    objProduct.FilePublicName = clsUtilities.GeneratePublicName(BaseSession.SsUser.Id_Usuario);
                     objProduct.FileExtension = "ext";
                 }
 

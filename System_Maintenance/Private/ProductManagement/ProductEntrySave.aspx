@@ -72,6 +72,10 @@
                 fn_message('i', "Seleccione una Categoria");
                 return false;
             }
+            if ($('#ContentPlaceHolder1_ddlBrand option:selected').val() == "0") {
+                fn_message('i', "Seleccione una Marca");
+                return false;
+            }
 
             if (sizeImage > 10485760) {
                 fn_message('i', "The image upload is too big");
@@ -83,7 +87,6 @@
                 return false;
             }
            
-
             if (/[<>]+/.test($("#<%=txtName.ClientID %>").val())) {
                 fn_message('i', "Invalid Name input. The tags '>' and '<' are not allowed.");
                 event.preventDefault();
@@ -355,17 +358,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
-                            <asp:Label ID="lblResourceType" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
-                            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:DropDownList runat="server" ID="ddlResourceType" CssClass="form-control mb-md">
-                                </asp:DropDownList>
-                            </div>
-                            <div>
-                                <asp:Label ID="lblExtDesc" runat="server" Text=""></asp:Label>
-                            </div>
-                        </div>
-
                         <div class="form-group" style="display: none;">
                             <asp:Label ID="lblSystemContact" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
@@ -382,11 +374,19 @@
                         </div>
 
                         <div class="form-group">
+                            <asp:Label ID="lblBrand" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
+                            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
+                                <asp:DropDownList runat="server" ID="ddlBrand" CssClass="form-control mb-md">
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
                             <div class="col-sm-4 col-md-3 col-lg-2  cnt-text-label">
                                 <asp:Label ID="lblUnitPrice" runat="server" ></asp:Label>
                             </div>
                             <div class="col-sm-8 col-lg-3 col-md-6">
-                             <asp:TextBox ID="txtUnitPrice" runat="server" CssClass="form-control  validate[required]" ></asp:TextBox>
+                             <asp:TextBox ID="txtUnitPrice" runat="server" CssClass="form-control validate[required]" ></asp:TextBox>
                             </div>
 
                             <div class="col-sm-1 control-label">
@@ -415,13 +415,23 @@
                             </div>
                         </div>
 
-                        <div class="form-group">
+                          <div class="form-group">
                             <asp:Label ID="lblDescription" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
                                 <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control  validate[required,maxSize[50]]" TextMode="MultiLine" MaxLength="50"></asp:TextBox>
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            <asp:Label ID="lblResourceType" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
+                            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
+                                <asp:DropDownList runat="server" ID="ddlResourceType" CssClass="form-control mb-md">
+                                </asp:DropDownList>
+                            </div>
+                            <div>
+                                <asp:Label ID="lblExtDesc" runat="server" Text=""></asp:Label>
+                            </div>
+                        </div>
 
                         <div class="form-group" id="dvUrl" style="display: none">
                             <asp:Label ID="lblUrl" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
@@ -448,7 +458,7 @@
                         <div class="form-group" id="DivLink" style="display: none">
                             <asp:Label ID="Label22" runat="server" Text="" CssClass="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label" data-trigger="hover" data-placement="top" data-content="&nbsp;" data-original-title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">"Link"<i class="icon-question-sign"></i></asp:Label>
                             <div class="col-md-6">
-                                <asp:TextBox ID="txtLink" placeholder="ex. http://www.youtube.com/embed/w8IfaW-38yE" runat="server" CssClass="form-control"></asp:TextBox>
+                                <asp:TextBox ID="txtLink" placeholder="ex. http://www.youtube.com/embed/w8IfaW-38yE" runat="server" CssClass="form-control" readonly></asp:TextBox>
                                 <input type="button" value="Preview" onclick="preview('link')" class="btn btn-default" style="margin-top: 5px;" />
                             </div>
                         </div>
@@ -484,7 +494,7 @@
                 <asp:HiddenField ID="hfCi" runat="server" />
             </section>
         </div>
-    </div>
+    
 
     <div id="resource" class="modal-block mfp-hide">
         <section class="panel">

@@ -1,36 +1,39 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using xAPI.Entity;
-using xAPI.Entity.Category;
+using xAPI.Entity.Brand;
 using xAPI.Library.Base;
 using xAPI.Library.Connection;
 using xAPI.Library.General;
 
-namespace xAPI.Dao.Category
+namespace xAPI.Dao.Brand
 {
-    public class CategoryDao
+    public class BrandDao
     {
         #region Singleton
-        private static CategoryDao instance = null;
-        public static CategoryDao Instance
+        private static BrandDao instance = null;
+        public static BrandDao Instance
         {
             get
             {
                 if (instance == null)
-                    instance = new CategoryDao();
+                    instance = new BrandDao();
                 return instance;
             }
         }
         #endregion
-
-        public DataTable Category_GetList(ref BaseEntity Base)
+        public DataTable Brand_GetList(ref BaseEntity Base)
         {
             DataTable dt = new DataTable();
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("Category_GetList_Sp", clsConnection.GetConnection())
+                cmd = new SqlCommand("Brand_GetList_Sp", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -48,37 +51,13 @@ namespace xAPI.Dao.Category
             }
             return dt;
         }
-        public DataTable Product_Category_GetList(ref BaseEntity Base)
-        {
-            DataTable dt = new DataTable();
-            SqlCommand cmd = null;
-            try
-            {
-                cmd = new SqlCommand("Product_Category_GetList_Sp", clsConnection.GetConnection())
-                {
-                    CommandType = CommandType.StoredProcedure
-                };
-                dt.Load(cmd.ExecuteReader());
-            }
-            catch (Exception ex)
-            {
-                dt = null;
-                Base.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  while loading data"));
-
-            }
-            finally
-            {
-                clsConnection.DisposeCommand(cmd);
-            }
-            return dt;
-        }
-        public Boolean Category_Delete(ref BaseEntity Entity, tBaseIdList BaseList)
+        public Boolean Brand_Delete(ref BaseEntity Entity, tBaseIdList BaseList)
         {
             Boolean success = false;
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("Category_Delete_Sp", clsConnection.GetConnection());
+                cmd = new SqlCommand("Brand_Delete_Sp", clsConnection.GetConnection());
                 cmd.Parameters.Add(new SqlParameter { ParameterName = "@Type_BaseId", Value = BaseList, SqlDbType = SqlDbType.Structured, TypeName = "dbo.TY_BASEID" });
                 cmd.CommandType = CommandType.StoredProcedure;
                 success = cmd.ExecuteNonQuery() > 0 ? true : false;
@@ -95,14 +74,14 @@ namespace xAPI.Dao.Category
             }
             return success;
         }
-        public Categorys Category_Get_ById(ref BaseEntity Base, Int32 Id)
+        public Brands Brand_Get_ById(ref BaseEntity Base, Int32 Id)
         {
-            Categorys objBrand = new Categorys();
+            Brands objBrand = new Brands();
             SqlDataReader dr = null;
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("Category_Get_ById_Sp", clsConnection.GetConnection())
+                cmd = new SqlCommand("Brand_Get_ById_Sp", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -110,7 +89,7 @@ namespace xAPI.Dao.Category
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    objBrand = GetEntity_C(dr);
+                    objBrand = GetEntity_Brand(dr);
                 }
             }
             catch (Exception ex)
@@ -124,32 +103,29 @@ namespace xAPI.Dao.Category
             }
             return objBrand;
         }
-        private Categorys GetEntity_C(SqlDataReader ObjDr)
+        private Brands GetEntity_Brand(SqlDataReader ObjDr)
         {
-            Categorys obj = new Categorys
+            Brands obj = new Brands
             {
                 ID = ObjDr.GetColumnValue<Int32>("ID"),
                 Name = ObjDr.GetColumnValue<String>("Name"),
-                Description = ObjDr.GetColumnValue<String>("Description"),
                 Status = ObjDr.GetColumnValue<Byte>("Status")
             };
             return obj;
         }
-        public Boolean Category_Save(ref BaseEntity Entity, Categorys objCategory)
-        
+        public Boolean Brand_Save(ref BaseEntity Entity, Brands objBrand)
         {
             Boolean success = false;
             SqlCommand cmd = null;
             try
             {
-                cmd = new SqlCommand("Category_Save_Sp", clsConnection.GetConnection())
+                cmd = new SqlCommand("Brand_Save_Sp", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@id", objCategory.ID);
-                cmd.Parameters.AddWithValue("@name", objCategory.Name);
-                cmd.Parameters.AddWithValue("@description", objCategory.Description);
-                cmd.Parameters.AddWithValue("@status", objCategory.Status);
+                cmd.Parameters.AddWithValue("@id", objBrand.ID);
+                cmd.Parameters.AddWithValue("@name", objBrand.Name);
+                cmd.Parameters.AddWithValue("@status", objBrand.Status);
 
                 success = cmd.ExecuteNonQuery() > 0;
             }
@@ -163,6 +139,30 @@ namespace xAPI.Dao.Category
                 clsConnection.DisposeCommand(cmd);
             }
             return success;
+        }
+        public DataTable Product_Brand_GetList(ref BaseEntity Base)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("Product_Brand_GetList_Sp", clsConnection.GetConnection())
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                dt = null;
+                Base.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  while loading data"));
+
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(cmd);
+            }
+            return dt;
         }
     }
 }

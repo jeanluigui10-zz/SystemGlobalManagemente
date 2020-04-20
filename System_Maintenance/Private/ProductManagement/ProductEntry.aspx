@@ -204,6 +204,7 @@
                                                 <th>Descripción</th>
                                                 <th>Tipo</th>
                                                 <th>Categoría</th>
+                                                <th>Marca</th>
                                                 <th>Imagen</th>
                                                 <th>Precio Unitario</th>
                                                 <th>Precio Oferta</th>
@@ -239,6 +240,7 @@
                     <td>{{Description}}</td> 
                     <td>{{DocType}}</td> 
                     <td>{{Category}}</td> 
+                    <td>{{Brand}}</td> 
                     <td><img style='max-height: 50px; max-width: 50px;' src='{{NameResource}}' onerror='this.src="../../../src/images/image_not_found_res.jpg"'/></td>  
                     <td>{{UnitPrice}}</td>
                     <td>{{PriceOffer}}</td> 

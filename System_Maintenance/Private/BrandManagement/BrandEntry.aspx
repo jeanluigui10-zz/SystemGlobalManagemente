@@ -1,13 +1,5 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="Products.aspx.cs" Inherits="System_Maintenance.Private.Resource.Products" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
-    <style type="text/css">
-        #popup-languages div.modal-dialog div div.modal-body{
-        height:auto;
-        }
-  </style>
-
- <script type="text/javascript">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="BrandEntry.aspx.cs" Inherits="System_Maintenance.Private.BrandManagement.BrandEntry" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"> <script type="text/javascript">
  
         var idSelected = "";
         var obj;
@@ -15,21 +7,21 @@
         var rows_selected = [];
         var isTooltip = false;
         $(function () {
-            fn_init();
+            Fn_init();
         });
 
-        function fn_init() {
-            fn_content();
-            fn_bind();
-            fn_setmenu();
+        function Fn_init() {
+            Fn_content();
+            Fn_bind();
+            Fn_setmenu();
         }
-        function fn_setmenu() {
-            $('#mgresources').attr("class", "nav-active");
+        function Fn_setmenu() {
+            $('#mgbrand').attr("class", "nav-active");
             $('#menu_comm_center').addClass("nav-active nav-expanded");
             $(".labelDash").html("Global");
         }
 
-        function fn_bind() {
+        function Fn_bind() {
             $("td [role='gridcell'][aria-describedby='tbGrid_ACTION']").attr("title", '');
             $('#tbDataTable tbody').on('click', 'input[type="checkbox"]', function (e) {
                 var $row = $(this).closest('tr');
@@ -63,17 +55,17 @@
             });
         }
      
-        function fn_content() {
-            fn_fillTable2($("#<%=hfData.ClientID%>").val());
+        function Fn_content() {
+            Fn_fillTable2($("#<%=hfDataBrand.ClientID%>").val());
         }
 
-        function fn_fillTable2(data) {
+        function Fn_fillTable2(data) {
             var glancedata = data;
             try {
                 obj = $.parseJSON(glancedata);
                 var object = {};
                 object.request = obj;
-                var item = fn_LoadTemplates("datatable-resources", object);
+                var item = fn_LoadTemplates("datatable-brand", object);
                 $("#tbDataTable tbody").html(item);
                 table = $("#tbDataTable").DataTable({
                     'columnDefs': [{
@@ -103,12 +95,12 @@
             }
         }        
 
-        function fn_RowEdit(index) {
-            window.location.href = "ProductsSave.aspx?q=" + index; <%--+ "&l=" + $("#<%=hfLng.ClientID %>").val();--%>
+        function Fn_RowEdit(Id) {
+            window.location.href = "BrandEntrySave.aspx?q=" + Id; 
         }
 
-    	   function fn_new() {
-           window.location.href = "ProductsSave.aspx"; <%--?l=" + $("#<%=hfLng.ClientID %>").val();--%>
+    	   function Fn_new() {
+                    window.location.href = "BrandEntrySave.aspx"; 
         }
 
         function fn_delete3() {
@@ -116,7 +108,7 @@
             var lista = [];
             var len = table.rows('.selected').data().length;
             if (len > 0) {
-                bootbox.confirm("Are you sure you want to delete this record(s)?", function (result) {
+                bootbox.confirm("¿Está seguro de que desea eliminar este registro(s)?", function (result) {
                     if (result) {
                         table.rows('.selected').data().each(function (element, index) {
                             lista[index] = element[0];
@@ -124,51 +116,32 @@
                         var json = JSON.stringify(lista);
                         var senddata = '{ jsondata:"' + fn_jsonreplace(json) + '" }';
                         var success = function (asw) {
-                            if (asw.d.sJSON == "Deleted successfully") {
+                            if (asw.d.sJSON == "Ok") {
                                 var lista = asw.d.Lista;
-                                $("#<%=hfData.ClientID%>").val(lista);
+                                $("#<%=hfDataBrand.ClientID%>").val(lista);
                                 table.destroy();
-                                fn_fillTable2(lista);
+                                Fn_fillTable2(lista);
                                 fn_message('s', 'Se elimino correctamente');
                             }
                             else
                                 fn_message('e', 'No se puede eliminar el registro(s)');
                         };
                         var error = function (xhr, ajaxOptions, thrownError) {
-                            fn_message('e', 'An error occurred while sending data');
+                            fn_message('e', 'No se puede eliminar el registro(s)');
                         };
 
-                        fn_callmethod("Products.aspx/SendDelete", senddata, success, error);
+                        fn_callmethod("BrandEntry.aspx/SendDelete", senddata, success, error);
                     }
                 });
             }
             else fn_message('i', "Por favor, seleccione una fila para eliminar");
         }
 
-
-        function fn_DownloadFile(resourceNameFile) {
-            
-            try {               
-                resourceNameFile = decodeURI(resourceNameFile);
-                var extensionFile = resourceNameFile.split('.')[1].toLowerCase();
-
-                if (extensionFile != "pdf") {
-                    window.location.href = resourceNameFile;
-                }
-                else {
-                    window.open(resourceNameFile, "Download", "status=yes,min-width=300,height=300,scrollbars=yes");
-                }
-
-            } catch (e) {
-                fn_message('e', 'A ocurrido un error mientras se descargaba el archivo');
-            }
-        }
     </script>
-
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
- <asp:HiddenField runat="server" ID="hfData" />
+    <asp:HiddenField runat="server" ID="hfDataBrand" />
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
@@ -177,7 +150,7 @@
                 <header class="panel-heading">
                     <div class="panel-actions">
                     </div>
-                    <h2 class="panel-title">Productos</h2>
+                    <h2 class="panel-title">Marcas</h2>
                     <div class="title" style="text-align: right; margin-top: -20px;">
                         <a id= "helpdesk" class="helpDesk" data-keyname="PROCESS_COMMUNICATION_CENTER_RESOURCES_MANAGEMENT"><i class="fa fa-question-circle fa-2x"></i></a>
                     </div>
@@ -188,10 +161,9 @@
 
                         <div class="row">
                             <div class="col-md-9 cnt-controles">
-                                <a class="mb-xs mt-xs mr-xs btn btn-primary" onclick="fn_new()"  id="a1"><i
+                                <a class="mb-xs mt-xs mr-xs btn btn-primary" onclick="Fn_new()"  id="a1"><i
                                     class="fa fa-plus"></i><span>&nbsp;Agregar</span> </a>
                                 <a class="mb-xs mt-xs mr-xs btn btn-danger" onclick="fn_delete3()" id="A2"><i class="fa fa-times"></i><span>&nbsp;Eliminar</span> </a>
-
                             </div>
                         </div>
                         <div class="myForm1 themeBlue" style="margin-top:10px">
@@ -202,16 +174,11 @@
                                         <thead>
                                             <tr>
                                                 <th style="display: none;"></th>
+                                                <th></th>
                                                 <th><input type="checkbox" id="all" name="all" /></th>
-                                                <th>ID</th>
-                                                <th>Tipo</th>
-                                                <th>Categoria</th>
                                                 <th>Name</th>
-                                                <th>Descripcion</th>
-                                                <th>Archivo</th>
-                                                <th>Estado</th>
-                                                <th>Precio</th>
-                                                <th>Accion</th>
+                                                <th>Status</th>
+                                                <th>Acción</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -225,25 +192,20 @@
             </section>
         </div>
     </div>
-  
-    <script type="text/x-handlebars-template" id="datatable-resources">
+    
+    <script type="text/x-handlebars-template" id="datatable-brand">
         {{# each request}}
             <tr>
                 <td style="display: none;">{{Id}}</td> 
+                <td style='text-align:center;'>{{Index}}</td> 
                 {{#if isCheckbox}}
                     <td id='multiselect' style='text-align:center;'><input type='checkbox' id='msg_sel1' name='msg_sel'/></td>
                 {{else}}
                     <td id='multiselect' style='text-align:center;'></td>
                 {{/if}} 
-                    <td style='text-align:center;'>{{Index}}</td>                      
-                    <td>{{DocType}}</td>
-                    <td>{{Category}}</td>
-                    <td>{{Name}}</td> 
-                    <td>{{FileDescription}}</td> 
-                    <td><img style='max-height: 50px; max-width: 50px;' src='{{NameResource}}' onerror='this.src="../../../src/images/image_not_found_res.jpg"'/></td>  
-                    <td>{{Status}}</td>  
-                    <td>{{UnitPrice}}</td>  
-                    <td style='text-align:center;'><a onclick="fn_RowEdit('{{Id}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a><a onclick="fn_DownloadFile('{{{NameResource}}}')"  title='Download' class='gridActionBtn'><i class='fa fa-download'></i></a></td>                 
+                    <td>{{Name}}</td>
+                    <td>{{Status}}</td>
+                    <td style='text-align:center;'><a onclick="Fn_RowEdit('{{Id}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a></td>                 
                   </tr>
         {{/each}}
     </script>

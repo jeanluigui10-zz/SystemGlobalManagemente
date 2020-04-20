@@ -1276,6 +1276,7 @@ namespace xSystem_Maintenance.src.app_code
         public String NameResource { get; set; }
         public String Status { get; set; }
         public String DocType { get; set; }
+        public String Brand { get; set; }
         public String IsUpload { get; set; }
         public String isCheckbox { get; set; }
         public String Index { get; set; }
@@ -2318,6 +2319,14 @@ namespace xSystem_Maintenance.src.app_code
         public String Description { get; set; }
         public String Status { get; set; }
         public String CreatedDate { get; set; }
+        public String isCheckbox { get; set; }
+        public String Index { get; set; }
+    }
+    public class srBrand
+    {
+        public String Id { get; set; }
+        public String Name { get; set; }
+        public String Status { get; set; }
         public String isCheckbox { get; set; }
         public String Index { get; set; }
     }

@@ -5,7 +5,7 @@
 <html>
 <head runat="server">
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>EL CANASTON - Market</title>
+    <title>El Canastón</title>
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
@@ -62,7 +62,7 @@
         var translateWidget = "Select a Language to Search";
 
         /*  Validation Engine translations - ve (Validation Engine) */
-        var veFieldRequired = "This field is required";
+        var veFieldRequired = "Este campo es requerido";
 
         var veSelectOption = "Please select an option";
 
@@ -308,7 +308,6 @@
                                 <li><a href="/Private/ProductManagement/ProductEntry.aspx"><i class="fa fa-circle-o"></i>Registro Productos</a></li>
                             </ul>
                         </li>   
-                    
                         
                         <li class="treeview">
                             <a href="#">
@@ -322,6 +321,19 @@
                                 <li><a href="/Private/CategoryManagement/CategoryEntry.aspx"><i class="fa fa-circle-o"></i>Registro Categorías</a></li>
                             </ul>
                         </li> 
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-pie-chart"></i>
+                                <span>Marcas</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/BrandManagement/BrandEntry.aspx"><i class="fa fa-circle-o"></i>Registro de Marcas</a></li>
+                            </ul>
+                        </li>   
 
                           <li class="treeview">
                             <a href="#">

@@ -1,18 +1,13 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="CategoryEntrySave.aspx.cs" Inherits="System_Maintenance.Private.CategoryManagement.CategoryEntrySave" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="BrandEntrySave.aspx.cs" Inherits="System_Maintenance.Private.BrandManagement.BrandEntrySave" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    
-    <script type="text/javascript">
-    function Fn_ValidateCategory(event) {
+      <script type="text/javascript">
+    function Fn_ValidateBrand(event) {
       
-        if (!fn_validateform('divCategory')) {
+        if (!fn_validateform('divBrand')) {
             event.preventDefault();
             return false;
         }
-        if (/[<>]+/.test($("#<%=txtDescription.ClientID %>").val())) {
-                fn_message('i', "Invalid Description input. The tags '>' and '<' are not allowed.");
-                return false;
-            }
-
+       
             if (/[<>]+/.test($("#<%=txtName.ClientID %>").val())) {
             fn_message('i', "Invalid Name input. The tags '>' and '<' are not allowed.");
             event.preventDefault();
@@ -20,15 +15,14 @@
         }
 
         objUser = {
-                Id: $("#<%=hfCategoryId.ClientID%>").val(),
+                Id: $("#<%=hfBrandId.ClientID%>").val(),
                 Name: $("#<%=txtName.ClientID%>").val(),
-                Description: $("#<%=txtDescription.ClientID%>").val(),
                 Status: $("#<%=chkStatus.ClientID%>").is(':checked') ? 1 : 0
         }
-        Fn_saveCategory(objUser);
+        Fn_saveBrand(objUser);
     }
 
-    function Fn_saveCategory(obj) {
+       function Fn_saveBrand(obj) {
 
         var success = function (asw) {
             if (asw != null) {
@@ -45,16 +39,15 @@
         
         var senddata = { u: obj };
 
-        fn_callmethod("CategoryEntrySave.aspx/Category_Save", JSON.stringify(senddata), success, error);
+        fn_callmethod("BrandEntrySave.aspx/Brand_Save", JSON.stringify(senddata), success, error);
     }
 </script>
 
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
-    <div class="row">
+      <div class="row">
         <div class="col-lg-12">
-            <asp:HiddenField ID="hfCategoryId" runat="server" />
+            <asp:HiddenField ID="hfBrandId" runat="server" />
 
             <section class="panel">
                 <div id="message_row">
@@ -70,7 +63,7 @@
                 </header>
 
                 <div class="panel-body">
-                    <div id="divCategory" class="form-horizontal form-bordered">
+                    <div id="divBrand" class="form-horizontal form-bordered">
                         <div class="form-group">
                             <div class="col-sm-6 col-md-4 col-lg-4 cnt-text-label text-custom">
                                 <asp:Label ID="lblRequiredFields" runat="server" Text=""></asp:Label>
@@ -81,13 +74,6 @@
                             <asp:Label ID="lblName" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
                                 <asp:TextBox ID="txtName" runat="server" CssClass="form-control  validate[required,maxSize[50]]" MaxLength="50"></asp:TextBox>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <asp:Label ID="lblDescription" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
-                            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control  validate[required,maxSize[50]]" TextMode="MultiLine" MaxLength="50"></asp:TextBox>
                             </div>
                         </div>
 
@@ -104,7 +90,7 @@
                 <footer class="panel-footer" id="f_Company">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-                            <button type="button" id="btnUpload" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" onclick="Fn_ValidateCategory(event);">Guardar</button>    
+                            <button type="button" id="btnUpload" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" onclick="Fn_ValidateBrand(event);">Guardar</button>    
                             <asp:Button ID="btnCancel" runat="server" class="mb-xs mt-xs mr-xs btn btn-lg btn-default" Text="" OnClick="btnCancel_Click" />
                         </div>
                     </div>

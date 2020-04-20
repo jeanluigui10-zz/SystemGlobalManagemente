@@ -1153,6 +1153,8 @@
     <Content Include="plugins\timepicker\bootstrap-timepicker.min.js" />
     <Content Include="plugins\ValidationEngine\languages\jquery.validationEngine-en.js" />
     <Content Include="plugins\ValidationEngine\jquery.validationEngine.js" />
+    <Content Include="Private\BrandManagement\BrandEntry.aspx" />
+    <Content Include="Private\BrandManagement\BrandEntrySave.aspx" />
     <Content Include="Private\CategoryManagement\CategoryEntry.aspx" />
     <Content Include="Private\CategoryManagement\CategoryEntrySave.aspx" />
     <Content Include="Private\Chat\RedirectChatModule.aspx" />
@@ -1170,8 +1172,6 @@
     <Content Include="Private\Registro\RegistroUsuario.aspx" />
     <Content Include="Private\Registro\Usuario.aspx" />
     <Content Include="Private\Report\ReportVentas.aspx" />
-    <Content Include="Private\ProductEntry\Products.aspx" />
-    <Content Include="Private\ProductEntry\ProductsSave.aspx" />
     <Content Include="Private\Security\Login.aspx" />
     <Content Include="Private\Registro\RegistroEquipo.aspx" />
     <Content Include="Scripts\bootstrap.js" />
@@ -1238,6 +1238,20 @@
     </Compile>
     <Compile Include="Login.Master.designer.cs">
       <DependentUpon>Login.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Private\BrandManagement\BrandEntry.aspx.cs">
+      <DependentUpon>BrandEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Private\BrandManagement\BrandEntry.aspx.designer.cs">
+      <DependentUpon>BrandEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Private\BrandManagement\BrandEntrySave.aspx.cs">
+      <DependentUpon>BrandEntrySave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Private\BrandManagement\BrandEntrySave.aspx.designer.cs">
+      <DependentUpon>BrandEntrySave.aspx</DependentUpon>
     </Compile>
     <Compile Include="Private\CategoryManagement\CategoryEntry.aspx.cs">
       <DependentUpon>CategoryEntry.aspx</DependentUpon>
@@ -1358,20 +1372,6 @@
     <Compile Include="Private\Report\ReportVentas.aspx.designer.cs">
       <DependentUpon>ReportVentas.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Private\ProductEntry\Products.aspx.cs">
-      <DependentUpon>Products.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Private\ProductEntry\Products.aspx.designer.cs">
-      <DependentUpon>Products.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="Private\ProductEntry\ProductsSave.aspx.cs">
-      <DependentUpon>ProductsSave.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="Private\ProductEntry\ProductsSave.aspx.designer.cs">
-      <DependentUpon>ProductsSave.aspx</DependentUpon>
-    </Compile>
     <Compile Include="Private\Security\Login.aspx.cs">
       <DependentUpon>Login.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -1402,9 +1402,7 @@
       <DependentUpon>ViewSwitcher.ascx</DependentUpon>
     </Compile>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />

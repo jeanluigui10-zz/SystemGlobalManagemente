@@ -72,7 +72,7 @@ namespace xAPI.Dao.Product
         }
         public Products Products_GetList_ById(ref BaseEntity Base, Int32 Id)
         {
-            Products objAppResource = new Products();
+            Products objProduct = new Products();
             SqlDataReader dr = null;
             SqlCommand cmd = null;
             try
@@ -85,19 +85,19 @@ namespace xAPI.Dao.Product
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    objAppResource = GetEntity_Product(dr);
+                    objProduct = GetEntity_Product(dr);
                 }
             }
             catch (Exception ex)
             {
-                objAppResource = null;
+                objProduct = null;
                 Base.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  getting a AppResource by it's Id."));
             }
             finally
             {
                 clsConnection.DisposeCommand(cmd);
             }
-            return objAppResource;
+            return objProduct;
         }
         private Products GetEntity_Product(SqlDataReader ObjDr)
         {
@@ -109,13 +109,16 @@ namespace xAPI.Dao.Product
                 Description = ObjDr.GetColumnValue<String>("Description"),
                 DocType = ObjDr.GetColumnValue<String>("DocType"),
                 NameResource = ObjDr.GetColumnValue<String>("NameResource"),
+                FilePublicName = ObjDr.GetColumnValue<String>("FilePublicName"),
                 Status = ObjDr.GetColumnValue<Byte>("Status"),
-                CategoryId = ObjDr.GetColumnValue<Int32>("CategoryId"),
                 UnitPrice = ObjDr.GetColumnValue<Decimal>("UnitPrice"),
                 PriceOffer = ObjDr.GetColumnValue<Decimal>("PriceOffer"),
                 UniMed = ObjDr.GetColumnValue<String>("UniMed"),
                 Stock = ObjDr.GetColumnValue<Int32>("Stock")
             };
+            obj.category.ID = ObjDr.GetColumnValue<Int32>("CategoryId");
+            obj.brand.ID = ObjDr.GetColumnValue<Int32>("BrandId");
+
             return obj;
         }
         public Int32 Get_QuantityLegalDocuments(ref BaseEntity Entity, Products resource)
@@ -128,7 +131,7 @@ namespace xAPI.Dao.Product
                 {
                     CommandType = CommandType.StoredProcedure
                 };
-                cmd.Parameters.AddWithValue("@categoryId", resource.CategoryId);
+                cmd.Parameters.AddWithValue("@categoryId", resource.category.ID);
                 cmd.Parameters.AddWithValue("@productId", resource.ID);
                 SqlParameter outputParam = cmd.Parameters.Add("@quantity", SqlDbType.Int);
                 outputParam.Direction = ParameterDirection.Output;
@@ -169,7 +172,8 @@ namespace xAPI.Dao.Product
                 cmd.Parameters.AddWithValue("@name", Product.Name);
                 cmd.Parameters.AddWithValue("@fileName", Product.FileName);
                 cmd.Parameters.AddWithValue("@description", Product.Description);
-                cmd.Parameters.AddWithValue("@categoryId", Product.CategoryId);
+                cmd.Parameters.AddWithValue("@categoryId", Product.category.ID);
+                cmd.Parameters.AddWithValue("@brandId", Product.brand.ID);
                 cmd.Parameters.AddWithValue("@fileExtension", Product.FileExtension);
                 cmd.Parameters.AddWithValue("@filePublicName", Product.FilePublicName);
                 cmd.Parameters.AddWithValue("@unitPrice", Product.UnitPrice);
