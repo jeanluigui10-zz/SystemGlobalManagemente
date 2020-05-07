@@ -52,7 +52,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-    <div class="row">
+    <div class="row">t
         <div class="col-lg-12">
             <asp:HiddenField ID="hfCategoryId" runat="server" />
 
@@ -87,7 +87,7 @@
                         <div class="form-group">
                             <asp:Label ID="lblDescription" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control  validate[required,maxSize[50]]" TextMode="MultiLine" MaxLength="50"></asp:TextBox>
+                                <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control " TextMode="MultiLine" MaxLength="50"></asp:TextBox>
                             </div>
                         </div>
 

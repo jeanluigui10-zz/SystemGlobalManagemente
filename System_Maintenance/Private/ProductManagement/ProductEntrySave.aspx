@@ -40,14 +40,9 @@
             fn_bind();
             fn_setValidator();
             fn_setmenu();
-            fn_validate();
+           
         }
-        function fn_validate() {
-            $("#<%=btnUpload.ClientID%>").on("click", function () {
-                if ($.trim($("#<%=txtName.ClientID%>").val()) == "" || $.trim($("#<%=txtDescription.ClientID%>").val()) == "")
-                    return false;
-            });
-        }
+      
 
         function fn_setmenu() {
             $('#mgresources').attr("class", "nav-active");
@@ -104,10 +99,7 @@
                 event.preventDefault();
                 return false;
             }
-            if (/[<>]+/.test($("#<%=txtDescription.ClientID %>").val())) {
-                fn_message('i', "Invalid Description input. The tags '>' and '<' are not allowed.");
-                return false;
-            }
+        
             return true;
         }
 
@@ -367,16 +359,16 @@
                         </div>
 
                         <div class="form-group">
-                            <asp:Label ID="lblName" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
+                            <asp:Label ID="lblName" runat="server" Text="" class="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:TextBox ID="txtName" runat="server" CssClass="form-control  validate[required,maxSize[50]]"></asp:TextBox>
+                                <asp:TextBox ID="txtName" runat="server" class="form-control  validate[required,maxSize[50]]"></asp:TextBox>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <asp:Label ID="lblBrand" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
+                            <asp:Label ID="lblBrand" runat="server" Text="" class="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:DropDownList runat="server" ID="ddlBrand" CssClass="form-control mb-md">
+                                <asp:DropDownList runat="server" ID="ddlBrand" class="form-control mb-md">
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -386,14 +378,14 @@
                                 <asp:Label ID="lblUnitPrice" runat="server" ></asp:Label>
                             </div>
                             <div class="col-sm-8 col-lg-3 col-md-6">
-                             <asp:TextBox ID="txtUnitPrice" runat="server" CssClass="form-control validate[required]" ></asp:TextBox>
+                             <asp:TextBox ID="txtUnitPrice" runat="server" class="form-control validate[required]" ></asp:TextBox>
                             </div>
 
                             <div class="col-sm-1 control-label">
                                 <asp:Label ID="lblPriceOffer" runat="server" ></asp:Label>
                             </div>
                             <div class="col-sm-8 col-lg-3 col-md-6">
-                             <asp:TextBox ID="txtPriceOffer" runat="server" CssClass="form-control "></asp:TextBox>
+                             <asp:TextBox ID="txtPriceOffer" runat="server" class="form-control "></asp:TextBox>
 
                             </div>
                         </div>
@@ -403,29 +395,29 @@
                                 <asp:Label ID="lblStock" runat="server" ></asp:Label>
                             </div>
                             <div class="col-sm-8 col-lg-3 col-md-6">
-                             <asp:TextBox ID="txtStock" runat="server" CssClass="form-control  validate[required]" ></asp:TextBox>
+                             <asp:TextBox ID="txtStock" runat="server" class="form-control  validate[required]" ></asp:TextBox>
                             </div>
 
                             <div class="col-sm-1 control-label">
                                 <asp:Label ID="lblUniMed" runat="server" ></asp:Label>
                             </div>
                             <div class="col-sm-8 col-lg-3 col-md-6">
-                             <asp:TextBox ID="txtUniMed" runat="server" CssClass="form-control"></asp:TextBox>
+                             <asp:TextBox ID="txtUniMed" runat="server" class="form-control"></asp:TextBox>
 
                             </div>
                         </div>
 
                           <div class="form-group">
-                            <asp:Label ID="lblDescription" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
+                            <asp:Label ID="lblDescription" runat="server" Text="" class="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:TextBox ID="txtDescription" runat="server" CssClass="form-control  validate[required,maxSize[50]]" TextMode="MultiLine" MaxLength="50"></asp:TextBox>
+                                <asp:TextBox ID="txtDescription" runat="server" class="form-control" TextMode="MultiLine" MaxLength="50"></asp:TextBox>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <asp:Label ID="lblResourceType" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
+                            <asp:Label ID="lblResourceType" runat="server" Text="" class="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:DropDownList runat="server" ID="ddlResourceType" CssClass="form-control mb-md">
+                                <asp:DropDownList runat="server" ID="ddlResourceType" class="form-control mb-md">
                                 </asp:DropDownList>
                             </div>
                             <div>
@@ -434,11 +426,11 @@
                         </div>
 
                         <div class="form-group" id="dvUrl" style="display: none">
-                            <asp:Label ID="lblUrl" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
+                            <asp:Label ID="lblUrl" runat="server" Text="" class="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                        
                             <div class=" col-xs-11 col-sm-7 col-md-6 col-lg-7 cnt-controles">
                                 <div class="input-group">
-                                    <asp:Label runat="server" CssClass="input-group-addon"> user.&nbsp;</asp:Label>
+                                    <asp:Label runat="server" class="input-group-addon"> user.&nbsp;</asp:Label>
                                     <asp:TextBox runat="server" ID="txtUrl" class="form-control"></asp:TextBox>
                                 </div>
                                 <div>
@@ -448,7 +440,7 @@
                         </div>
 
                         <div class="form-group">
-                            <asp:Label ID="lblUploadFile" runat="server" Text="" CssClass="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label"></asp:Label>
+                            <asp:Label ID="lblUploadFile" runat="server" Text="" class="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label"></asp:Label>
                             <div class="col-md-6">
                                 <asp:RadioButton ID="rbFile" Text="" GroupName="Location" runat="server" Checked="true" />
                                 <asp:RadioButton ID="rbLink" Text="" GroupName="Location" class="col-md-offset-1" runat="server" Checked="false" />
@@ -456,16 +448,16 @@
                             </div>
                         </div>
                         <div class="form-group" id="DivLink" style="display: none">
-                            <asp:Label ID="Label22" runat="server" Text="" CssClass="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label" data-trigger="hover" data-placement="top" data-content="&nbsp;" data-original-title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">"Link"<i class="icon-question-sign"></i></asp:Label>
+                            <asp:Label ID="Label22" runat="server" Text="" class="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label" data-trigger="hover" data-placement="top" data-content="&nbsp;" data-original-title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">"Link"<i class="icon-question-sign"></i></asp:Label>
                             <div class="col-md-6">
-                                <asp:TextBox ID="txtLink" placeholder="ex. http://www.youtube.com/embed/w8IfaW-38yE" runat="server" CssClass="form-control" readonly></asp:TextBox>
+                                <asp:TextBox ID="txtLink" placeholder="ex. http://www.youtube.com/embed/w8IfaW-38yE" runat="server" class="form-control" readonly></asp:TextBox>
                                 <input type="button" value="Preview" onclick="preview('link')" class="btn btn-default" style="margin-top: 5px;" />
                             </div>
                         </div>
                         <div class="form-group" id="DivFile">
-                            <asp:Label ID="lblFileNameL" runat="server" CssClass="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label" Text=""></asp:Label>
+                            <asp:Label ID="lblFileNameL" runat="server" class="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label" Text=""></asp:Label>
                             <div class="col-md-6">
-                                <asp:FileUpload ID="fuResource" runat="server" CssClass="Width_2_file fuResource" />
+                                <asp:FileUpload ID="fuResource" runat="server" class="Width_2_file fuResource" />
                                 <input type="button" value="Preview" onclick="preview('file')" class="btn btn-default previewFile" style="margin-top: 5px; display: none" />                         
                             </div>
                             <div id="divImage" style="margin-left: 210px;"></div>
@@ -473,7 +465,7 @@
 
 
                         <div class="form-group">
-                            <asp:Label ID="lblEnabled" runat="server" Text="" CssClass="col-xs-5 col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
+                            <asp:Label ID="lblEnabled" runat="server" Text="" class="col-xs-5 col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
 
                             <div class="col-xs-2 col-sm-7 col-md-6 col-lg-7 cnt-text">
                                 <asp:CheckBox runat="server" Checked="true" ID="chkEnable" />
@@ -494,7 +486,7 @@
                 <asp:HiddenField ID="hfCi" runat="server" />
             </section>
         </div>
-    
+</div>
 
     <div id="resource" class="modal-block mfp-hide">
         <section class="panel">

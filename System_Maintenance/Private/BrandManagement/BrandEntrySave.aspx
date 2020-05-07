@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="BrandEntrySave.aspx.cs" Inherits="System_Maintenance.Private.BrandManagement.BrandEntrySave" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-      <script type="text/javascript">
+    <script type="text/javascript">
     function Fn_ValidateBrand(event) {
       
         if (!fn_validateform('divBrand')) {

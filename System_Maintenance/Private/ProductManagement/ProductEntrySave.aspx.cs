@@ -42,7 +42,7 @@ namespace System_Maintenance.Private.ProductManagement
             lblSystemContact.Text = "System Contact:";
             lblName.Text = "* Nombre:";
             lblBrand.Text = "* Marca";
-            lblDescription.Text = "* Descripción:";
+            lblDescription.Text = " Descripción:";
             lblUploadFile.Text = "Subir Archivo:";
             lblUrl.Text = "Url:";
             rbFile.Text = "Subir Imagen";
@@ -175,9 +175,11 @@ namespace System_Maintenance.Private.ProductManagement
             ddlBrand.SelectedIndex = 0;
             hfProductId.Value = String.Empty;
             txtSku.Text = String.Empty;
+            txtStock.Text = String.Empty;
             txtUnitPrice.Text = String.Empty;
             txtPriceOffer.Text = String.Empty;
-            txtUnitPrice.Text = String.Empty;
+            txtUniMed.Text = String.Empty;
+            txtName.Text = String.Empty;
             txtDescription.Text = String.Empty;
             txtUrl.Text = String.Empty;
             txtLink.Text = String.Empty;
@@ -287,11 +289,6 @@ namespace System_Maintenance.Private.ProductManagement
                     Message(EnumAlertType.Error, "Debe ingresar precio del producto ");
                     return;
                 }
-                if (String.IsNullOrEmpty(txtDescription.Text.Trim()))
-                {
-                    Message(EnumAlertType.Error, "Debe ingresar una descripcion ");
-                    return;
-                }
                 if (String.IsNullOrEmpty(txtName.Text.Trim()))
                 {
                     Message(EnumAlertType.Error, "Debe ingresar un precio. ");
@@ -336,7 +333,7 @@ namespace System_Maintenance.Private.ProductManagement
                 Int32 quantityLegalDocument = ProductBL.Instance.Get_QuantityLegalDocuments(ref entity, objProduct);
                 if (quantityLegalDocument == 0)
                 {
-                    SaveResource(objProduct, hpf);
+                    SaveProduct(objProduct, hpf);
                 }
                 else
                 {
@@ -451,7 +448,7 @@ namespace System_Maintenance.Private.ProductManagement
             Response.Redirect("ProductEntry.aspx", false);
         }
 
-        private void SaveResource(Products objProduct, HttpPostedFile hpf)
+        private void SaveProduct(Products objProduct, HttpPostedFile hpf)
         {
             BaseEntity entity = new BaseEntity();
             bool success = ProductBL.Instance.Product_Save(ref entity, objProduct);

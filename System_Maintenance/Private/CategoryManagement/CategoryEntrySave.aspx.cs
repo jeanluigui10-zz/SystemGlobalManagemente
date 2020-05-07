@@ -29,7 +29,7 @@ namespace System_Maintenance.Private.CategoryManagement
         {
             lblRequiredFields.Text = "(*)Campos requeridos.";
             lblName.Text = "* Nombre:";
-            lblDescription.Text = "* Descripción:";
+            lblDescription.Text = " Descripción:";
             lblEnabled.Text = "Activar";
             btnCancel.Text = "Regresar";
         }

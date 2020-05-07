@@ -1,6 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ProductEntry.aspx.cs" Inherits="System_Maintenance.Private.ProductManagement.ProductEntry" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-
+    
  <script type="text/javascript">
  
         var idSelected = "";
@@ -206,8 +206,8 @@
                                                 <th>Categoría</th>
                                                 <th>Marca</th>
                                                 <th>Imagen</th>
-                                                <th>Precio Unitario</th>
-                                                <th>Precio Oferta</th>
+                                                <th>Precio Unitario (S/.)</th>
+                                                <th>Precio Oferta (S/.)</th>
                                                 <th>Stock</th>
                                                 <th>Unidad Medida</th>
                                                 <th>Status</th>
