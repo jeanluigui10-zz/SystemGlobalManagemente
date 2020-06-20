@@ -191,14 +191,14 @@ namespace xAPI.Dao.Report
                     ReporteVentasExport objOrderHeader = new ReporteVentasExport();
                     objOrderHeader.OrderId = dr.GetColumnValue<Int32>("OrderId").ToString();
                     objOrderHeader.OrderDateStr = dr.GetColumnValue<DateTime>("OrderDate").ToString();
-                    objOrderHeader.IGV = dr.GetColumnValue<Decimal>("IgvTotal").ToString();
+                    //objOrderHeader.IGV = dr.GetColumnValue<Decimal>("IgvTotal").ToString();
                     objOrderHeader.SubTotal = dr.GetColumnValue<Decimal>("SubTotal").ToString();
                     objOrderHeader.Ordertotal = dr.GetColumnValue<Decimal>("Total").ToString();
                     objOrderHeader.LegacyNumber = dr.GetColumnValue<Int64>("LegacyNumber").ToString();
                     objOrderHeader.FirstName = dr.GetColumnValue<String>("FirstName").ToString();                    
                     objOrderHeader.OrderDateStr = (dr.GetColumnValue<Int32>("Status").ToString() =="1") ? "PAGADO" : "PENDIENTE";
-                    objOrderHeader.Description = dr.GetColumnValue<String>("Description");
-                    objOrderHeader.IsCotization = (dr.GetColumnValue<Int32>("IsCotization").ToString() == "1") ? "SI" : "NO";
+                    //objOrderHeader.Description = dr.GetColumnValue<String>("Description");
+                    //objOrderHeader.IsCotization = (dr.GetColumnValue<Int32>("IsCotization").ToString() == "1") ? "SI" : "NO";
 
                     lstOrders.Add(objOrderHeader);
                 }

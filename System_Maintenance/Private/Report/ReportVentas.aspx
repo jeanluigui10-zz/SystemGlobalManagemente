@@ -169,13 +169,13 @@
                         <th>#</th>
                         <th>OrderId</th>
                         <th>Fecha de Orden</th>
-                        <th>IGV Total</th>
+                        <%--<th>IGV Total</th>--%>
                         <th>SubTotal</th>
                         <th>Total</th>                       
                         <th>Identificador</th>
                         <th>Nombre</th> 
-                        <th>Descripcion</th>
-                        <th>Cotizado</th>
+                        <%--<th>Descripcion</th>--%>
+                        <%--<th>Cotizado</th>--%>
                         <th>Estado</th>
                         <%--<th>Accion</th>--%>
                     </tr>
@@ -199,13 +199,13 @@
                  <td style='text-align: center;'>{{Index}}</td>
                  <td>{{OrderId}}</td>
                  <td>{{OrderDateStr}}</td>
-                 <td>{{IGV}}</td>
+                 <%--<td>{{IGV}}</td>--%>
                  <td>{{SubTotal}}</td>
                  <td>{{Ordertotal}}</td>     
                  <td>{{LegacyNumber}}</td>
                  <td>{{Customer.FirstName}}</td>
-                 <td>{{Description}}</td>
-                 <td>{{EsCotizado}}</td>
+                 <%--<td>{{Description}}</td>--%>
+                 <%--<td>{{EsCotizado}}</td>--%>
                  <td>{{EstadoDes}}</td>
                  <%--<td style='text-align: center;'><a onclick="fn_RowEdit('{{OrderId}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a><a onclick="fn_DownloadFile('{{Index}}')" title='Download' class='gridActionBtn'><i class='fa fa-download'></i></a></td>--%>
              </tr>
