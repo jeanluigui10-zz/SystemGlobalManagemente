@@ -2208,6 +2208,7 @@
     <Content Include="Private\CategoryManagement\CategoryEntry.aspx" />
     <Content Include="Private\CategoryManagement\CategoryEntrySave.aspx" />
     <Content Include="Private\Chat\RedirectChatModule.aspx" />
+    <Content Include="Private\Correo\ReporteContactanos.aspx" />
     <Content Include="Private\ProductManagement\ProductEntry.aspx" />
     <Content Include="Private\ProductManagement\ProductEntrySave.aspx" />
     <Content Include="Private\Report\ReportCustomer.aspx" />
@@ -2323,6 +2324,13 @@
     </Compile>
     <Compile Include="Private\Chat\RedirectChatModule.aspx.designer.cs">
       <DependentUpon>RedirectChatModule.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Private\Correo\ReporteContactanos.aspx.cs">
+      <DependentUpon>ReporteContactanos.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Private\Correo\ReporteContactanos.aspx.designer.cs">
+      <DependentUpon>ReporteContactanos.aspx</DependentUpon>
     </Compile>
     <Compile Include="Private\ProductManagement\ProductEntry.aspx.cs">
       <DependentUpon>ProductEntry.aspx</DependentUpon>

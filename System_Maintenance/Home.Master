@@ -376,6 +376,18 @@
                                 <li><a href="/Private/Chat/RedirectChatModule.aspx"><i class="fa fa-circle-o"></i>Panel Chat</a></li>
                             </ul>
                         </li>
+                            <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-dashboard"></i><span>Correos</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/Correo/ReporteContactanos.aspx"><i class="fa fa-circle-o"></i>Bandeja Contactanos</a></li>
+                            </ul>
+                        </li>
                        
                     </ul>
                 </section>

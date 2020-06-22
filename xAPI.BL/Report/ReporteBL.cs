@@ -92,5 +92,38 @@ namespace xAPI.BL.Report
 
             return lstReport;
         }
+
+        public List<ContactExport> ListarContactanosExport(ref BaseEntity objBase, String fechaInicio, String fechaFin)
+        {
+            objBase = new BaseEntity();
+            List<ContactExport> lstReport = null;
+            try
+            {
+                lstReport = ReportDAO.Instance.ListarContactanosExport(ref objBase, fechaInicio, fechaFin);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lstReport;
+        }
+        public List<Contact> ListarContactanos(ref BaseEntity objBase, String fechaInicio, String fechaFin)
+        {
+            objBase = new BaseEntity();
+            List<Contact> lstReport = null;
+            try
+            {
+                lstReport = ReportDAO.Instance.ListarContactanos(ref objBase, fechaInicio, fechaFin);
+
+            }
+            catch (Exception ex)
+            {
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  on application level 2"));
+            }
+
+            return lstReport;
+        }
     }
 }

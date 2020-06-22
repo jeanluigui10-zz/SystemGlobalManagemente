@@ -85,6 +85,7 @@
     <Compile Include="Order\OrderHeader.cs" />
     <Compile Include="Product\Products.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Report\Contact.cs" />
     <Compile Include="Report\Reporte.cs" />
     <Compile Include="Resource\AppResource.cs" />
     <Compile Include="Resource\Resource.cs" />
