@@ -196,7 +196,7 @@ namespace xAPI.Dao.Report
                     objOrderHeader.Ordertotal = dr.GetColumnValue<Decimal>("Total").ToString();
                     objOrderHeader.LegacyNumber = dr.GetColumnValue<Int64>("LegacyNumber").ToString();
                     objOrderHeader.FirstName = dr.GetColumnValue<String>("FirstName").ToString();                    
-                    objOrderHeader.OrderDateStr = (dr.GetColumnValue<Int32>("Status").ToString() =="1") ? "PAGADO" : "PENDIENTE";
+                    objOrderHeader.EstadoDes = (dr.GetColumnValue<Int32>("Status").ToString() =="1") ? "PAGADO" : "PENDIENTE";
                     //objOrderHeader.Description = dr.GetColumnValue<String>("Description");
                     //objOrderHeader.IsCotization = (dr.GetColumnValue<Int32>("IsCotization").ToString() == "1") ? "SI" : "NO";
 
@@ -215,5 +215,83 @@ namespace xAPI.Dao.Report
             return lstOrders;
         }
 
+        public List<Contact> ListarContactanos(ref BaseEntity objBase, String fechaInicio, String fechaFin)
+        {
+            SqlCommand ObjCmd = null;
+            List<Contact> listReport = null;
+            SqlDataReader dr = null;
+            try
+            {
+                ObjCmd = new SqlCommand("Contact_GetAll_Sp", clsConnection.GetConnection());
+                ObjCmd.CommandType = CommandType.StoredProcedure;
+                ObjCmd.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                ObjCmd.Parameters.AddWithValue("@fechaFin", fechaFin);
+                listReport = new List<Contact>();
+                dr = ObjCmd.ExecuteReader();
+                int count = 0;
+                while (dr.Read())
+                {
+                    count++;
+                    Contact objReport = new Contact();
+                    objReport.Id = dr.GetColumnValue<Int32>("Id");
+                    objReport.FirstName = dr.GetColumnValue<String>("Name");
+                    objReport.Email = dr.GetColumnValue<String>("Email");
+                    objReport.Subject = dr.GetColumnValue<String>("Subject");
+                    objReport.Message = dr.GetColumnValue<String>("Message");
+                    objReport.CreatedDate = dr.GetColumnValue<DateTime>("CreatedDate").ToString();
+                    objReport.IsCheckbox = "1";
+                    objReport.Index = count.ToString();
+                    listReport.Add(objReport);
+                }
+            }
+            catch (Exception ex)
+            {
+                listReport = null;
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "Report not found."));
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(ObjCmd);
+            }
+            return listReport;
+        }
+        public List<ContactExport> ListarContactanosExport(ref BaseEntity objBase, String fechaInicio, String fechaFin)
+        {
+            SqlCommand ObjCmd = null;
+            List<ContactExport> listReport = null;
+            SqlDataReader dr = null;
+            try
+            {
+                ObjCmd = new SqlCommand("Contact_GetAll_Sp", clsConnection.GetConnection());
+                ObjCmd.CommandType = CommandType.StoredProcedure;
+                ObjCmd.Parameters.AddWithValue("@fechaInicio", fechaInicio);
+                ObjCmd.Parameters.AddWithValue("@fechaFin", fechaFin);
+                listReport = new List<ContactExport>();
+                dr = ObjCmd.ExecuteReader();
+                int count = 0;
+                while (dr.Read())
+                {
+                    count++;
+                    ContactExport objReport = new ContactExport();
+                    objReport.Id = dr.GetColumnValue<Int32>("Id");
+                    objReport.FirstName = dr.GetColumnValue<String>("Name");
+                    objReport.Email = dr.GetColumnValue<String>("Email");
+                    objReport.Subject = dr.GetColumnValue<String>("Subject");
+                    objReport.Message = dr.GetColumnValue<String>("Message");
+                    objReport.CreatedDate = dr.GetColumnValue<DateTime>("CreatedDate").ToString();
+                    listReport.Add(objReport);
+                }
+            }
+            catch (Exception ex)
+            {
+                listReport = null;
+                objBase.Errors.Add(new BaseEntity.ListError(ex, "Report not found."));
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(ObjCmd);
+            }
+            return listReport;
+        }
     }
 }
