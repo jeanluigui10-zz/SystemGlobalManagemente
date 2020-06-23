@@ -65,14 +65,27 @@ namespace xAPI.BL.Category
                 entity.Errors.Add(new BaseEntity.ListError(new Exception { }, "An error occurred sending data"));
             return dt;
         }
-        public Boolean Category_Save(ref BaseEntity Entity, Categorys objCategory)
+        public Int32 Get_QuantityLegalDocuments(ref BaseEntity Base, Categorys resource)
+        {
+            return CategoryDao.Instance.Get_QuantityLegalDocuments(ref Base, resource);
+        }
+        public Boolean Category_Save(ref BaseEntity Entity, Categorys Category, Boolean RegisterTBL = false, String Username = "")
         {
             Boolean success = false;
             Entity = new BaseEntity();
 
-            success = CategoryDao.Instance.Category_Save(ref Entity, objCategory);
+            success = CategoryDao.Instance.Category_Save(ref Entity, Category, RegisterTBL, Username);
 
             return success;
         }
+        //public Boolean Category_Save(ref BaseEntity Entity, Categorys objCategory)
+        //{
+        //    Boolean success = false;
+        //    Entity = new BaseEntity();
+
+        //    success = CategoryDao.Instance.Category_Save(ref Entity, objCategory);
+
+        //    return success;
+        //}
     }
 }

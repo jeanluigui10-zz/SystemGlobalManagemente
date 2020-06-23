@@ -447,6 +447,7 @@
 
                             </div>
                         </div>
+
                         <div class="form-group" id="DivLink" style="display: none">
                             <asp:Label ID="Label22" runat="server" Text="" class="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label" data-trigger="hover" data-placement="top" data-content="&nbsp;" data-original-title="&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;">"Link"<i class="icon-question-sign"></i></asp:Label>
                             <div class="col-md-6">
@@ -454,6 +455,7 @@
                                 <input type="button" value="Preview" onclick="preview('link')" class="btn btn-default" style="margin-top: 5px;" />
                             </div>
                         </div>
+
                         <div class="form-group" id="DivFile">
                             <asp:Label ID="lblFileNameL" runat="server" class="col-xs-5 col-sm-4 col-md-3 col-lg-3 cnt-text-label" Text=""></asp:Label>
                             <div class="col-md-6">

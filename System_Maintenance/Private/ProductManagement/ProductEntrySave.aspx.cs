@@ -232,7 +232,7 @@ namespace System_Maintenance.Private.ProductManagement
         }
         #endregion
 
-        #region CRUD
+        #region Save
         public bool ParseEnum2<TEnum>(string sEnumValue) where TEnum : struct
         {
             bool success = false;
@@ -244,7 +244,6 @@ namespace System_Maintenance.Private.ProductManagement
             }
             return success;
         }
-
         protected void btnSave_Click(object sender, EventArgs e)
         {
             HttpFileCollection hfc = null;
@@ -252,9 +251,6 @@ namespace System_Maintenance.Private.ProductManagement
             Products objProduct = new Products();
             try
             {
-                BaseEntity objEntity = new BaseEntity();
-                JavaScriptSerializer sr = new JavaScriptSerializer();
-
                 hfc = Request.Files;
                 objProduct.ID = vsId;
                 objProduct.DocType = ddlResourceType.SelectedItem.Text.Trim();
@@ -272,7 +268,7 @@ namespace System_Maintenance.Private.ProductManagement
                     objProduct.PriceOffer = Convert.ToDecimal(txtPriceOffer.Text.Trim());
                 }
                 objProduct.Description = HtmlSanitizer.SanitizeHtml(txtDescription.Text);
-                objProduct.Status = chkEnable.Checked ? (short)EnumStatus.Enabled : (short)EnumStatus.Disabled;
+                objProduct.Status = chkEnable.Checked ? (Int16)EnumStatus.Enabled : (Int16)EnumStatus.Disabled;
                 if (String.IsNullOrEmpty(txtName.Text.Trim()))
                 {
                     Message(EnumAlertType.Error, "Debe ingresar un nombre ");
@@ -289,11 +285,7 @@ namespace System_Maintenance.Private.ProductManagement
                     Message(EnumAlertType.Error, "Debe ingresar precio del producto ");
                     return;
                 }
-                if (String.IsNullOrEmpty(txtName.Text.Trim()))
-                {
-                    Message(EnumAlertType.Error, "Debe ingresar un precio. ");
-                    return;
-                }
+               
                 if (rbFile.Checked == true || rbFile.Checked == false)
                 {
                     objProduct.IsUpload = 1;
@@ -345,9 +337,44 @@ namespace System_Maintenance.Private.ProductManagement
                 Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
+        private void SaveProduct(Products objProduct, HttpPostedFile hpf)
+        {
+            BaseEntity entity = new BaseEntity();
+            bool success = ProductBL.Instance.Product_Save(ref entity, objProduct);
+            if (entity.Errors.Count <= 0)
+            {
+                if (success)
+                {
+                    string savedFileName = string.Empty;
+                    if (hpf != null)
+                    {
 
-        #endregion
+                        if (objProduct.FileExtension.ToLower() == ".bmp" || objProduct.FileExtension.ToLower() == ".jpeg" || objProduct.FileExtension.ToLower() == ".jpg" || objProduct.FileExtension.ToLower() == ".png" || objProduct.FileExtension.ToLower() == ".gif")
+                            savedFileName = Config.EnterprisePhysicalPath + EnumFolderSettings.FolderImages.GetStringValue() + objProduct.FilePublicName;
+                        else
+                            savedFileName = Config.EnterprisePhysicalPath + EnumFolderSettings.FolderDocs.GetStringValue() + objProduct.FilePublicName;
+                        if (!Directory.Exists(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderDocs.GetStringValue()))
+                        {
+                            Directory.CreateDirectory(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderDocs.GetStringValue());
+                        }
+                        if (!Directory.Exists(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderImages.GetStringValue()))
+                        {
+                            Directory.CreateDirectory(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderImages.GetStringValue());
+                        }
+                        hpf.SaveAs(savedFileName);
+                    }
 
+                    if (vsId == 0)
+                        SetControls();
+
+                    Message(EnumAlertType.Success, "Se guardo correctamente!");
+                }
+                else
+                {
+                    Message(EnumAlertType.Error, "Invalid Language");
+                }
+            }
+        }
         private Products UploadanImage(Products resources)
         {
             string FileName = "";
@@ -439,6 +466,9 @@ namespace System_Maintenance.Private.ProductManagement
             return objProduct;
         }
 
+        #endregion
+
+
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             GoBack();
@@ -448,45 +478,7 @@ namespace System_Maintenance.Private.ProductManagement
             Response.Redirect("ProductEntry.aspx", false);
         }
 
-        private void SaveProduct(Products objProduct, HttpPostedFile hpf)
-        {
-            BaseEntity entity = new BaseEntity();
-            bool success = ProductBL.Instance.Product_Save(ref entity, objProduct);
-            if (entity.Errors.Count <= 0)
-            {
-                if (success)
-                {
-                    string savedFileName = string.Empty;
-                    if (hpf != null)
-                    {
-
-                        if (objProduct.FileExtension.ToLower() == ".bmp" || objProduct.FileExtension.ToLower() == ".jpeg" || objProduct.FileExtension.ToLower() == ".jpg" || objProduct.FileExtension.ToLower() == ".png" || objProduct.FileExtension.ToLower() == ".gif")
-                            savedFileName = Config.EnterprisePhysicalPath + EnumFolderSettings.FolderImages.GetStringValue() + objProduct.FilePublicName;
-                        else
-                            savedFileName = Config.EnterprisePhysicalPath + EnumFolderSettings.FolderDocs.GetStringValue() + objProduct.FilePublicName;
-                        if (!Directory.Exists(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderDocs.GetStringValue()))
-                        {
-                            Directory.CreateDirectory(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderDocs.GetStringValue());
-                        }
-                        if (!Directory.Exists(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderImages.GetStringValue()))
-                        {
-                            Directory.CreateDirectory(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderImages.GetStringValue());
-                        }
-                        hpf.SaveAs(savedFileName);
-                    }
-
-                    if (vsId == 0)
-                        SetControls();
-
-                    Message(EnumAlertType.Success, "Se guardo correctamente!");
-                }
-                else
-                {
-                    Message(EnumAlertType.Error, "Invalid Language");
-                }
-            }
-        }
-        public void Message(EnumAlertType type, string message)
+       public void Message(EnumAlertType type, string message)
         {
             ClientScript.RegisterStartupScript(typeof(Page), "message", @"<script type='text/javascript'>fn_message('" + type.GetStringValue() + "', '" + message + "');</script>", false);
         }
