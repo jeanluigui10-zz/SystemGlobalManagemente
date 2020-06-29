@@ -25,24 +25,8 @@ namespace xAPI.Entity.Order
         public String Index { get; set; }
         public String IsCheckbox { get; set; }
 
-        private String _estadodesc;
-        public String EstadoDes
-        {
-            get
-            {
-                if (Status == 1) _estadodesc = "Pagada"; else _estadodesc = "Pendiente";
-                return _estadodesc;
-            }
-        }
-        private String _iscotization;
-        public String EsCotizado
-        {
-            get
-            {
-                if (IsCotization == 1) _iscotization = "Si"; else _iscotization = "No";
-                return _iscotization;
-            }
-        }
+        public String EstadoDes { get; set; }
+
         List<OrderDetail> objListOrderDetail;
         public List<OrderDetail> ListOrderDetail
         {

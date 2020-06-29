@@ -45,18 +45,12 @@ namespace xAPI.Entity.Report
 
     public class ReporteVentasExport
     {
-        public String OrderId { get; set; }
-        public String LegacyNumber { get; set; }
-        //public String OrderDate { get; set; }
-        public String OrderDateStr { get; set; }
-        //public String Description { get; set; }
-        //public String IsCotization { get; set; }
-        //public String Status { get; set; }
-        public String Ordertotal { get; set; }
-        public String SubTotal { get; set; }
-        public String FirstName { get; set; }
-         public String EstadoDes { get; set; }
-        //public String IGV { get; set; }
+        public String NroOrden { get; set; }
+        public String FechaOrden { get; set; }
+        public String Total { get; set; }
+        public String Subtotal { get; set; }
+        public String Cliente { get; set; }
+         public String Estado { get; set; }
     }
     public class CustomerExport
     {
@@ -76,6 +70,7 @@ namespace xAPI.Entity.Report
         public String FirstName { get; set; }
         public String Email { get; set; }
         public String Subject { get; set; }
+        public String Cellphone { get; set; }
         public String Message { get; set; }
         public String CreatedDate { get; set; }
 

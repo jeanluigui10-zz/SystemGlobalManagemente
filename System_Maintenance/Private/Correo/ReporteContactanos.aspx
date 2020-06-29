@@ -163,6 +163,7 @@
                         <th>#</th>
                         <th>Nombre</th>
                         <th>Email</th>
+                        <th>Telefono</th>
                         <th>Asunto</th>
                         <th>Mensaje</th>
                         <th>Fecha registro</th>
@@ -187,6 +188,7 @@
                  <td style='text-align: center;'>{{Index}}</td>
                  <td>{{FirstName}}</td>                 
                  <td>{{Email}}</td>
+                 <td>{{Cellphone}}</td>
                  <td>{{Subject}}</td>
                  <td>{{Message}}</td>
                  <td>{{CreatedDate}}</td>

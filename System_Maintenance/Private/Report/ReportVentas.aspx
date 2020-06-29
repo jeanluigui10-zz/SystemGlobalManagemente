@@ -167,17 +167,12 @@
                         <th>
                             <input type="checkbox" id="all" name="all" /></th>
                         <th>#</th>
-                        <th>OrderId</th>
+                        <th>Nro Orden</th>
                         <th>Fecha de Orden</th>
-                        <%--<th>IGV Total</th>--%>
                         <th>SubTotal</th>
-                        <th>Total</th>                       
-                        <th>Identificador</th>
-                        <th>Nombre</th> 
-                        <%--<th>Descripcion</th>--%>
-                        <%--<th>Cotizado</th>--%>
+                        <th>Total</th>                                               
+                        <th>Cliente</th> 
                         <th>Estado</th>
-                        <%--<th>Accion</th>--%>
                     </tr>
                 </thead>
                 <tbody>
@@ -197,15 +192,11 @@
                  {{#if IsCheckbox}}<td id='multiselect' style='text-align: center;'> <input type='checkbox' id='msg_sel' name='msg_sel' /></td>{{else}}<td id='multiselect' style='text-align: center;'></td>
                  {{/if}} 
                  <td style='text-align: center;'>{{Index}}</td>
-                 <td>{{OrderId}}</td>
-                 <td>{{OrderDateStr}}</td>
-                 <%--<td>{{IGV}}</td>--%>
-                 <td>{{SubTotal}}</td>
-                 <td>{{Ordertotal}}</td>     
                  <td>{{LegacyNumber}}</td>
+                 <td>{{OrderDateStr}}</td>
+                 <td>{{SubTotal}}</td>
+                 <td>{{Ordertotal}}</td>                   
                  <td>{{Customer.FirstName}}</td>
-                 <%--<td>{{Description}}</td>--%>
-                 <%--<td>{{EsCotizado}}</td>--%>
                  <td>{{EstadoDes}}</td>
                  <%--<td style='text-align: center;'><a onclick="fn_RowEdit('{{OrderId}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a><a onclick="fn_DownloadFile('{{Index}}')" title='Download' class='gridActionBtn'><i class='fa fa-download'></i></a></td>--%>
              </tr>

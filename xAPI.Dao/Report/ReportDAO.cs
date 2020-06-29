@@ -137,7 +137,6 @@ namespace xAPI.Dao.Report
                 {
                     count++;
                     OrderHeader objOrderHeader = new OrderHeader();
-                    objOrderHeader.OrderId = dr.GetColumnValue<Int32>("OrderId");
                     objOrderHeader.OrderDateStr = dr.GetColumnValue<DateTime>("OrderDate").ToString();
                     objOrderHeader.IGV = dr.GetColumnValue<Decimal>("IgvTotal");
                     objOrderHeader.SubTotal = dr.GetColumnValue<Decimal>("SubTotal");
@@ -147,15 +146,11 @@ namespace xAPI.Dao.Report
                     {
                         objOrderHeader.Customer = new Customer() {
                             FirstName = dr.GetColumnValue<String>("FirstName")
-                    };
-                       
-
+                        };
                     }
                      objOrderHeader.IsCheckbox = "1";
                      objOrderHeader.Index = count.ToString();
-                     objOrderHeader.Status = dr.GetColumnValue<Int32>("Status");
-                     objOrderHeader.Description = dr.GetColumnValue<String>("Description");
-                     objOrderHeader.IsCotization = dr.GetColumnValue<Int32>("IsCotization");
+                     objOrderHeader.EstadoDes = dr.GetColumnValue<String>("Status");
 
                     lstOrders.Add(objOrderHeader);
                 }
@@ -189,16 +184,12 @@ namespace xAPI.Dao.Report
                 {
                     count++;
                     ReporteVentasExport objOrderHeader = new ReporteVentasExport();
-                    objOrderHeader.OrderId = dr.GetColumnValue<Int32>("OrderId").ToString();
-                    objOrderHeader.OrderDateStr = dr.GetColumnValue<DateTime>("OrderDate").ToString();
-                    //objOrderHeader.IGV = dr.GetColumnValue<Decimal>("IgvTotal").ToString();
-                    objOrderHeader.SubTotal = dr.GetColumnValue<Decimal>("SubTotal").ToString();
-                    objOrderHeader.Ordertotal = dr.GetColumnValue<Decimal>("Total").ToString();
-                    objOrderHeader.LegacyNumber = dr.GetColumnValue<Int64>("LegacyNumber").ToString();
-                    objOrderHeader.FirstName = dr.GetColumnValue<String>("FirstName").ToString();                    
-                    objOrderHeader.EstadoDes = (dr.GetColumnValue<Int32>("Status").ToString() =="1") ? "PAGADO" : "PENDIENTE";
-                    //objOrderHeader.Description = dr.GetColumnValue<String>("Description");
-                    //objOrderHeader.IsCotization = (dr.GetColumnValue<Int32>("IsCotization").ToString() == "1") ? "SI" : "NO";
+                    objOrderHeader.FechaOrden = dr.GetColumnValue<DateTime>("OrderDate").ToString();
+                    objOrderHeader.Subtotal = dr.GetColumnValue<Decimal>("SubTotal").ToString();
+                    objOrderHeader.Total = dr.GetColumnValue<Decimal>("Total").ToString();
+                    objOrderHeader.NroOrden = dr.GetColumnValue<Int64>("LegacyNumber").ToString();
+                    objOrderHeader.Cliente= dr.GetColumnValue<String>("FirstName").ToString();
+                    objOrderHeader.Estado = dr.GetColumnValue<String>("Status").ToString();
 
                     lstOrders.Add(objOrderHeader);
                 }
@@ -237,6 +228,7 @@ namespace xAPI.Dao.Report
                     objReport.FirstName = dr.GetColumnValue<String>("Name");
                     objReport.Email = dr.GetColumnValue<String>("Email");
                     objReport.Subject = dr.GetColumnValue<String>("Subject");
+                    objReport.Cellphone = dr.GetColumnValue<String>("Cellphone");
                     objReport.Message = dr.GetColumnValue<String>("Message");
                     objReport.CreatedDate = dr.GetColumnValue<DateTime>("CreatedDate").ToString();
                     objReport.IsCheckbox = "1";
@@ -277,6 +269,7 @@ namespace xAPI.Dao.Report
                     objReport.FirstName = dr.GetColumnValue<String>("Name");
                     objReport.Email = dr.GetColumnValue<String>("Email");
                     objReport.Subject = dr.GetColumnValue<String>("Subject");
+                    objReport.Cellphone = dr.GetColumnValue<String>("Cellphone");
                     objReport.Message = dr.GetColumnValue<String>("Message");
                     objReport.CreatedDate = dr.GetColumnValue<DateTime>("CreatedDate").ToString();
                     listReport.Add(objReport);

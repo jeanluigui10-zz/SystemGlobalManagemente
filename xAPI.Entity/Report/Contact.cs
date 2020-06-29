@@ -12,6 +12,7 @@ namespace xAPI.Entity.Report
         public String FirstName { get; set; }
         public String Email { get; set; }
         public String Subject { get; set; }
+        public String Cellphone { get; set; }
         public String Message { get; set; }
         public String CreatedDate { get; set; }
         public Int32 Status { get; set; }
