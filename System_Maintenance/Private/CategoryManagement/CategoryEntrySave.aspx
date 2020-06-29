@@ -289,7 +289,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     
-    <div class="row">t
+    <div class="row">
         <div class="col-lg-12">
             <asp:HiddenField ID="hfCategoryId" runat="server" />
             <asp:HiddenField ID="hfPathImage" runat="server" />

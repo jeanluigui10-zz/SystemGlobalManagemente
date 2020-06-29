@@ -274,16 +274,16 @@ namespace System_Maintenance.Private.CategoryManagement
                     {
 
                         if (objCategory.FileExtension.ToLower() == ".bmp" || objCategory.FileExtension.ToLower() == ".jpeg" || objCategory.FileExtension.ToLower() == ".jpg" || objCategory.FileExtension.ToLower() == ".png" || objCategory.FileExtension.ToLower() == ".gif")
-                            savedFileName = Config.EnterprisePhysicalPath + EnumFolderSettings.FolderImages.GetStringValue() + objCategory.FilePublicName;
+                            savedFileName = Config.EnterprisePhysicalPathCategory + EnumFolderSettings.FolderImages.GetStringValue() + objCategory.FilePublicName;
                         else
-                            savedFileName = Config.EnterprisePhysicalPath + EnumFolderSettings.FolderDocs.GetStringValue() + objCategory.FilePublicName;
-                        if (!Directory.Exists(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderDocs.GetStringValue()))
+                            savedFileName = Config.EnterprisePhysicalPathCategory + EnumFolderSettings.FolderDocs.GetStringValue() + objCategory.FilePublicName;
+                        if (!Directory.Exists(Config.EnterprisePhysicalPathCategory + EnumFolderSettings.FolderDocs.GetStringValue()))
                         {
-                            Directory.CreateDirectory(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderDocs.GetStringValue());
+                            Directory.CreateDirectory(Config.EnterprisePhysicalPathCategory + EnumFolderSettings.FolderDocs.GetStringValue());
                         }
-                        if (!Directory.Exists(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderImages.GetStringValue()))
+                        if (!Directory.Exists(Config.EnterprisePhysicalPathCategory + EnumFolderSettings.FolderImages.GetStringValue()))
                         {
-                            Directory.CreateDirectory(Config.EnterprisePhysicalPath + EnumFolderSettings.FolderImages.GetStringValue());
+                            Directory.CreateDirectory(Config.EnterprisePhysicalPathCategory + EnumFolderSettings.FolderImages.GetStringValue());
                         }
                         hpf.SaveAs(savedFileName);
                     }
@@ -366,9 +366,9 @@ namespace System_Maintenance.Private.CategoryManagement
                         objCategory.FileExtension = Path.GetExtension(FileName).ToLower();
 
                         if (objCategory.FileExtension.ToLower() == ".bmp" || objCategory.FileExtension.ToLower() == ".jpeg" || objCategory.FileExtension.ToLower() == ".jpg" || objCategory.FileExtension.ToLower() == ".png" || objCategory.FileExtension.ToLower() == ".gif")
-                            objCategory.NameResource = Config.EnterpriseVirtualPath + EnumFolderSettings.FolderImages.GetStringValue();
+                            objCategory.NameResource = Config.EnterpriseVirtualPathCategory + EnumFolderSettings.FolderImages.GetStringValue();
                         else
-                            objCategory.NameResource = Config.EnterpriseVirtualPath + EnumFolderSettings.FolderDocs.GetStringValue();
+                            objCategory.NameResource = Config.EnterpriseVirtualPathCategory + EnumFolderSettings.FolderDocs.GetStringValue();
                         #endregion
                     }
                     else
