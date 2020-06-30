@@ -96,7 +96,9 @@ namespace System_Maintenance.Private.CategoryManagement
                             isCheckbox = "1",
                             Id = HttpUtility.UrlEncode(Encryption.Encrypt(item["ID"].ToString())),
                             Name = item["Name"].ToString(),
+                            NameResource = item["NameResource"].ToString(),
                             Description = item["Description"].ToString(),
+                            DocType = item["DocType"].ToString(),
                             CreatedDate = Convert.ToDateTime(item["CreatedDate"]).ToString("MM/dd/yyyy"),
                             Status = Convert.ToInt16(item["Status"]) == (short)EnumStatus.Enabled ? "Activo" : "Inactivo",
                             Index = count.ToString()
@@ -123,10 +125,11 @@ namespace System_Maintenance.Private.CategoryManagement
                         lst.Add(new srCategory()
                         {
                             isCheckbox = "1",
-
                             Id = HttpUtility.UrlEncode(Encryption.Encrypt(item["ID"].ToString())),
                             Name = item["Name"].ToString(),
+                            NameResource = item["NameResource"].ToString(),
                             Description = item["Description"].ToString(),
+                            DocType = item["DocType"].ToString(),
                             CreatedDate = Convert.ToDateTime(item["CreatedDate"]).ToString("MM/dd/yyyy"),
                             Status = Convert.ToInt16(item["Status"]) == (short)EnumStatus.Enabled ? "Activo" : "Inactivo",
                             Index = count.ToString()

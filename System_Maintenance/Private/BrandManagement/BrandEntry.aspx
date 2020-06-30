@@ -177,7 +177,7 @@
                                                 <th></th>
                                                 <th><input type="checkbox" id="all" name="all" /></th>
                                                 <th>Name</th>
-                                                <th>Status</th>
+                                                <th>Estado</th>
                                                 <th>Acción</th>
                                             </tr>
                                         </thead>

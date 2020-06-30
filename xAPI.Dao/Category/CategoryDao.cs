@@ -110,7 +110,7 @@ namespace xAPI.Dao.Category
                 dr = cmd.ExecuteReader();
                 while (dr.Read())
                 {
-                    objBrand = GetEntity_C(dr);
+                    objBrand = Category_GetEntity(dr);
                 }
             }
             catch (Exception ex)
@@ -124,13 +124,17 @@ namespace xAPI.Dao.Category
             }
             return objBrand;
         }
-        private Categorys GetEntity_C(SqlDataReader ObjDr)
+        private Categorys Category_GetEntity(SqlDataReader ObjDr)
         {
             Categorys obj = new Categorys
             {
                 ID = ObjDr.GetColumnValue<Int32>("ID"),
                 Name = ObjDr.GetColumnValue<String>("Name"),
                 Description = ObjDr.GetColumnValue<String>("Description"),
+                FileName = ObjDr.GetColumnValue<String>("FileName"),
+                DocType = ObjDr.GetColumnValue<String>("DocType"),
+                NameResource = ObjDr.GetColumnValue<String>("NameResource"),
+                FilePublicName = ObjDr.GetColumnValue<String>("FilePublicName"),
                 Status = ObjDr.GetColumnValue<Byte>("Status")
             };
             return obj;

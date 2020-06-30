@@ -210,7 +210,7 @@
                                                 <th>Precio Oferta (S/.)</th>
                                                 <th>Stock</th>
                                                 <th>Unidad Medida</th>
-                                                <th>Status</th>
+                                                <th>Estado</th>
                                                 <th>Acción</th>
                                             </tr>
                                         </thead>

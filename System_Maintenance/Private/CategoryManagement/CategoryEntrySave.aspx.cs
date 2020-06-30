@@ -136,10 +136,14 @@ namespace System_Maintenance.Private.CategoryManagement
 
         private void SetControls()
         {
+            ddlResourceType.SelectedIndex = 0;
             hfCategoryId.Value = String.Empty;
             txtName.Text = String.Empty;
             txtDescription.Text = String.Empty;
             chkEnable.Checked = true;
+            txtLink.Text = String.Empty;
+            rbFile.Checked = true;
+            rbLink.Checked = false;
         }
         private void SetControls(Categorys objCategory)
         {
@@ -149,6 +153,24 @@ namespace System_Maintenance.Private.CategoryManagement
                 txtName.Text = objCategory.Name;
                 txtDescription.Text = objCategory.Description;
                 chkEnable.Checked = objCategory.Status == (int)EnumStatus.Enabled ? true : false;
+                rbFile.Checked = objCategory.IsUpload == 1 ? true : false;
+                rbLink.Checked = objCategory.IsUpload == 0 ? true : false;
+                ddlResourceType.SelectedValue = objCategory.DocType;
+                if (rbFile.Checked == true)
+                {
+                    hfPathImage.Value = objCategory.NameResource;
+                    hfFileExtension.Value = objCategory.FileExtension;
+                    hfFileName.Value = objCategory.FileName;
+                    hfPublicName.Value = objCategory.FilePublicName;
+                }
+                else
+                {
+                    //txtLink.Text = objProduct.NameResource;
+                    txtLink.Text = Config.EnterpriseVirtualPathCategory + EnumFolderSettings.FolderImages.GetStringValue() + objCategory.FilePublicName;
+
+                }
+
+                Page.ClientScript.RegisterStartupScript(GetType(), "DivfileDivLink", "fn_hide_show();", true);
             }
             catch (Exception ex)
             {

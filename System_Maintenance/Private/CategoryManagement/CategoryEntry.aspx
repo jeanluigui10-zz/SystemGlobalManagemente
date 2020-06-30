@@ -178,10 +178,12 @@
                                                 <th style="display: none;"></th>
                                                 <th></th>
                                                 <th><input type="checkbox" id="all" name="all" /></th>
-                                                <th>Name</th>
+                                                <th>Nombre</th>
                                                 <th>Descripción</th>
+                                                <th>Tipo</th>
+                                                <th>Imagen</th>
                                                 <th>Fecha de Registro</th>
-                                                <th>Status</th>
+                                                <th>Estado</th>
                                                 <th>Acción</th>
                                             </tr>
                                         </thead>
@@ -209,6 +211,8 @@
                 {{/if}} 
                     <td>{{Name}}</td>
                     <td>{{Description}}</td>
+                    <td>{{DocType}}</td>
+                    <td><img style='max-height: 50px; max-width: 50px;' src='{{NameResource}}' onerror='this.src="../../../src/images/image_not_found_res.jpg"'/></td>  
                     <td>{{CreatedDate}}</td>
                     <td>{{Status}}</td>
                     <td style='text-align:center;'><a onclick="Fn_RowEdit('{{Id}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a></td>                 

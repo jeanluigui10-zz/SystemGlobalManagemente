@@ -2316,7 +2316,9 @@ namespace xSystem_Maintenance.src.app_code
     {
         public String Id { get; set; }
         public String Name { get; set; }
+        public String NameResource { get; set; }
         public String Description { get; set; }
+        public String DocType { get; set; }
         public String Status { get; set; }
         public String CreatedDate { get; set; }
         public String isCheckbox { get; set; }

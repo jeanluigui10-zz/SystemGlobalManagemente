@@ -194,7 +194,6 @@ namespace System_Maintenance.Private.ProductManagement
                 hfProductId.Value = objProduct.ID.ToString();
                 ddlResourceType.SelectedValue = objProduct.DocType;
                 txtDescription.Text = objProduct.Description;
-                ddlResourceType.Enabled = false;
 
                 txtName.Text = objProduct.Name;
                 ddlBrand.SelectedValue = objProduct.brand.ID.ToString();
