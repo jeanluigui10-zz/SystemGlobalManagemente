@@ -79,6 +79,7 @@
     <Compile Include="Resource\ResourceBL.cs" />
     <Compile Include="Security\TipoUsuarioBL.cs" />
     <Compile Include="Security\UsuarioBL.cs" />
+    <Compile Include="Setting\SettingBL.cs" />
     <Compile Include="Status\StatusBL.cs" />
     <Compile Include="Tool\EquipoBL.cs" />
   </ItemGroup>

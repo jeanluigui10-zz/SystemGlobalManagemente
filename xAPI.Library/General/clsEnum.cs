@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 
 namespace xAPI.Library.General
@@ -351,4 +348,5 @@ namespace xAPI.Library.General
         [StringValue("p")]
         purged = 6
     }
+
 }

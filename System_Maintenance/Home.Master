@@ -132,9 +132,9 @@
 
         var veInvalidURL = "Invalid URL";
 
-        var veNumbersOnly = "Numbers only";
+        var veNumbersOnly = "Solo Números";
 
-        var veLettersOnly = "Letters only";
+        var veLettersOnly = "Solo Letras";
 
         var veNoSpecialCharsAllowed = "No special characters allowed";
 
@@ -298,16 +298,29 @@
 
                     <!-- sidebar menu: : style can be found in sidebar.less -->
                     <ul class="sidebar-menu">
-                          <li class="treeview">
+                        <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-pie-chart"></i>
+                                <i class="fa fa-home"></i>
+                                <span>Mi Tienda</span>
+                                <span class="pull-right-container">
+                                    <i class="fa fa-angle-left pull-right"></i>
+                                </span>
+                            </a>
+                            <ul class="treeview-menu">
+                                <li><a href="/Private/StoreManagement/StoreEntrySave.aspx"><i class="fa fa-table"></i>Mi Tienda</a></li>
+                            </ul>
+                        </li>   
+
+                        <li class="treeview">
+                            <a href="#">
+                                <i class="fa fa-product-hunt"></i>
                                 <span>Productos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Private/ProductManagement/ProductEntry.aspx"><i class="fa fa-circle-o"></i>Registro Productos</a></li>
+                                <li><a href="/Private/ProductManagement/ProductEntry.aspx"><i class="fa fa-table"></i>Registro Productos</a></li>
                             </ul>
                         </li>   
                         
@@ -320,46 +333,46 @@
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Private/CategoryManagement/CategoryEntry.aspx"><i class="fa fa-circle-o"></i>Registro Categorías</a></li>
+                                <li><a href="/Private/CategoryManagement/CategoryEntry.aspx"><i class="fa fa-table"></i>Registro Categorías</a></li>
                             </ul>
                         </li> 
 
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-pie-chart"></i>
+                                <i class="fa fa-trademark"></i>
                                 <span>Marcas</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Private/BrandManagement/BrandEntry.aspx"><i class="fa fa-circle-o"></i>Registro de Marcas</a></li>
+                                <li><a href="/Private/BrandManagement/BrandEntry.aspx"><i class="fa fa-table"></i>Registro de Marcas</a></li>
                             </ul>
                         </li>   
 
                           <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-dashboard"></i><span>Reporte</span>
+                                <i class="fa fa-file-text-o"></i><span>Reportes</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
 
                             <ul class="treeview-menu">
-                                <li><a href="/Private/Report/ReportVentas.aspx"><i class="fa fa-circle-o"></i>Ventas</a></li>
-                                <li><a href="/Private/Report/ReportCustomer.aspx"><i class="fa fa-circle-o"></i>Clientes</a></li>
+                                <li><a href="/Private/Report/ReportVentas.aspx"><i class="fa fa-pie-chart"></i>Ventas</a></li>
+                                <li><a href="/Private/Report/ReportCustomer.aspx"><i class="fa fa-users"></i>Clientes</a></li>
                             </ul>
                         </li>
                         <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-pie-chart"></i>
+                                <i class="fa fa-user"></i>
                                 <span>Usuarios</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
                             <ul class="treeview-menu">
-                                <li><a href="/Private/Registro/RegistroUsuario.aspx"><i class="fa fa-circle-o"></i>Registro Usuarios</a></li>
+                                <li><a href="/Private/Registro/RegistroUsuario.aspx"><i class="fa fa-users"></i>Registro Usuarios</a></li>
                           
                             </ul>
                         </li>
@@ -378,14 +391,14 @@
                         </li>
                             <li class="treeview">
                             <a href="#">
-                                <i class="fa fa-dashboard"></i><span>Correos</span>
+                                <i class="fa fa-envelope-o"></i><span>Correos</span>
                                 <span class="pull-right-container">
                                     <i class="fa fa-angle-left pull-right"></i>
                                 </span>
                             </a>
 
                             <ul class="treeview-menu">
-                                <li><a href="/Private/Correo/ReporteContactanos.aspx"><i class="fa fa-circle-o"></i>Bandeja Contactanos</a></li>
+                                <li><a href="/Private/Correo/ReporteContactanos.aspx"><i class="fa fa-inbox"></i>Bandeja Contactanos</a></li>
                             </ul>
                         </li>
                        

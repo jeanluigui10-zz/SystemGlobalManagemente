@@ -94,6 +94,7 @@
     <Compile Include="Security\TipoUsuario.cs" />
     <Compile Include="Security\Usuarios.cs" />
     <Compile Include="Status\State.cs" />
+    <Compile Include="Store\Store.cs" />
     <Compile Include="Tool\Equipo.cs" />
     <Compile Include="TypeList\clsTypeList.cs" />
   </ItemGroup>

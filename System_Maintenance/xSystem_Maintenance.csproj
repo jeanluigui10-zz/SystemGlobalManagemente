@@ -2212,6 +2212,7 @@
     <Content Include="Private\ProductManagement\ProductEntry.aspx" />
     <Content Include="Private\ProductManagement\ProductEntrySave.aspx" />
     <Content Include="Private\Report\ReportCustomer.aspx" />
+    <Content Include="Private\StoreManagement\StoreEntrySave.aspx" />
     <Content Include="src\control\Chat\ucRedirectChatModule.ascx" />
     <Content Include="Private\Incidents\Home.aspx" />
     <Content Include="Private\Incidents\Incident.aspx" />
@@ -2352,6 +2353,13 @@
     </Compile>
     <Compile Include="Private\Report\ReportCustomer.aspx.designer.cs">
       <DependentUpon>ReportCustomer.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Private\StoreManagement\StoreEntrySave.aspx.cs">
+      <DependentUpon>StoreEntrySave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Private\StoreManagement\StoreEntrySave.aspx.designer.cs">
+      <DependentUpon>StoreEntrySave.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\control\Chat\ucRedirectChatModule.ascx.cs">
       <DependentUpon>ucRedirectChatModule.ascx</DependentUpon>

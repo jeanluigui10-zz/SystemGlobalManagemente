@@ -36,7 +36,7 @@ namespace System_Maintenance.Private.ProductManagement
         }
         private void LoadFieldTranslations()
         {
-            lblRequiredFields.Text = "(*)Campos requeridos.";
+            lblRequiredFields.Text = "(*) Campos requeridos.";
             lblResourceCategory.Text = "Categoría del Producto:";
             lblResourceType.Text = "Tipo:";
             lblSystemContact.Text = "System Contact:";

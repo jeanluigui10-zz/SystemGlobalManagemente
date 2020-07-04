@@ -81,6 +81,7 @@
     <Compile Include="Security\TipoUsuarioDAO.cs" />
     <Compile Include="Security\UsuarioDAO.cs" />
     <Compile Include="Category\CategoriaDAO.cs" />
+    <Compile Include="Setting\SettingDao.cs" />
     <Compile Include="Status\StatusDAO.cs" />
     <Compile Include="Tool\EquipoDAO.cs" />
   </ItemGroup>

@@ -2312,6 +2312,27 @@ namespace xSystem_Maintenance.src.app_code
     }
 
     [Serializable]
+    public class srStore
+    {
+        public String Id { get; set; }
+        public String Name { get; set; }
+        public String Address { get; set; }
+        public String Email { get; set; }
+        public String Phone1 { get; set; }
+        public String Phone2 { get; set; }
+        public String AttentionHours { get; set; }
+        public String NoteDelivery { get; set; }
+        public String NoteSupport { get; set; }
+        public String NotePromotions { get; set; }
+        public String NotePayment { get; set; }
+        public String Year { get; set; }
+        public String Facebook { get; set; }
+        public String Instagram { get; set; }
+        public String Youtube { get; set; }
+        public String Twitter { get; set; }
+    }
+
+    [Serializable]
     public class srCategory
     {
         public String Id { get; set; }
