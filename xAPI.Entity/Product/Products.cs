@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using xAPI.Entity.Brand;
 using xAPI.Entity.Category;
 using xAPI.Library.Base;
@@ -47,6 +43,20 @@ namespace xAPI.Entity.Product
             set
             {
                 objBrand = value;
+            }
+        }
+
+        SubCategory objSubCategory;
+        public SubCategory subcategory
+        {
+            get
+            {
+                objSubCategory = objSubCategory ?? new SubCategory();
+                return objSubCategory;
+            }
+            set
+            {
+                objSubCategory = value;
             }
         }
     }

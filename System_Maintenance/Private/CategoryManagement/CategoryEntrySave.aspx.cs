@@ -44,7 +44,7 @@ namespace System_Maintenance.Private.CategoryManagement
         }
         private void LoadFieldTranslations()
         {
-            lblRequiredFields.Text = "(*)Campos requeridos.";
+            lblRequiredFields.Text = "(*) Campos requeridos.";
             lblName.Text = "* Nombre:";
             lblDescription.Text = " Descripción:";
             lblEnabled.Text = "Activar";
@@ -57,6 +57,7 @@ namespace System_Maintenance.Private.CategoryManagement
             rbLink.Text = "Enlace";
             lblFileNameL.Text = "* Nombre de archivo y ubicación:  <br><small class='col-md-10'> Tamaño maximo: 5MB</small>";
         }
+
         #region SetQuery
         private void SetQuery()
         {
@@ -80,6 +81,7 @@ namespace System_Maintenance.Private.CategoryManagement
             }
         }
         #endregion
+
         #region SetData
         private void SetData()
         {
@@ -178,38 +180,6 @@ namespace System_Maintenance.Private.CategoryManagement
             }
         }
         #endregion
-
-        //[WebMethod]
-        //public static Object Category_Save(srCategory u)
-        //{
-        //    BaseEntity entity = new BaseEntity();
-        //    Boolean success = false;
-        //    try
-        //    {
-        //        Categorys objCategory = new Categorys
-        //        {
-        //            ID = String.IsNullOrEmpty(u.Id) ? 0 : Convert.ToInt32(u.Id),
-        //            Name = u.Name.ToString(),
-        //            Description = u.Description.ToString(),
-        //            Status = Convert.ToInt32(u.Status)
-        //        };
-
-        //        success = CategoryBL.Instance.Category_Save(ref entity, objCategory);
-        //        if (entity.Errors.Count <= 0 && success)
-        //        {
-        //            return new { Msg = "Se guardo correctamente!", Result = "Ok" };
-
-        //        }
-        //        else
-        //        {
-        //            return new { Msg = "No se pudo guardar", Result = "NoOK" };
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return new { Msg = "No se pudo guardar", Result = "NoOK" };
-        //    }
-        //}
 
         #region Save
         protected void btnSave_Click(object sender, EventArgs e)

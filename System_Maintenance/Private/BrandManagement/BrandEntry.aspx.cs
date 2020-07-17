@@ -101,7 +101,7 @@ namespace System_Maintenance.Private.BrandManagement
             }
             return lst;
         }
-        private void LoadData(Boolean ShowMessage = false)
+        private void LoadData()
         {
             BaseEntity entity = new BaseEntity();
             List<srBrand> lst = new List<srBrand>();
@@ -127,7 +127,7 @@ namespace System_Maintenance.Private.BrandManagement
                 }
                 else
                 {
-                    this.Message(EnumAlertType.Error, "An error occurred while loading data");
+                    this.Message(EnumAlertType.Error, "Ocurrió un error al cargar la data");
                 }
             }
             else

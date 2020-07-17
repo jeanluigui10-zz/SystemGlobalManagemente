@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="ProductEntrySave.aspx.cs" Inherits="System_Maintenance.Private.ProductManagement.ProductEntrySave" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" EnableEventValidation="false" AutoEventWireup="true" CodeBehind="ProductEntrySave.aspx.cs" Inherits="System_Maintenance.Private.ProductManagement.ProductEntrySave" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 
     
@@ -40,7 +40,7 @@
             fn_bind();
             fn_setValidator();
             fn_setmenu();
-           
+            LoadSubCategory_LoadPage($('#ContentPlaceHolder1_ddlCategory option:selected').val())
         }
       
 
@@ -65,6 +65,10 @@
         function fn_validate2(event) {
             if ($('#ContentPlaceHolder1_ddlCategory option:selected').val() == "0") {
                 fn_message('i', "Seleccione una Categoria");
+                return false;
+            }
+            if ($('#ContentPlaceHolder1_ddlSubCategory option:selected').val() == "0") {
+                fn_message('i', "Seleccione una Sub-Categoría");
                 return false;
             }
             if ($('#ContentPlaceHolder1_ddlBrand option:selected').val() == "0") {
@@ -193,7 +197,65 @@
                 $("#piframe").attr("src", "");
                 $.magnificPopup.close();
             });
-        }
+
+             $("select[id$=ddlCategory]").change(function () {
+                       var categoryId = $(this).val();
+                       if (categoryId != 0) {
+                           var success = function (response) {
+                               var result = response.d;
+                               if (result != null) {
+                                   var lstSubCategory = $.parseJSON(result);
+                                   var opts = "";
+                                   $("select[id$=ddlSubCategory]").empty();
+                                   for (var i = 0; i < lstSubCategory.length; i++) {
+                                       opts += '<option value="' + lstSubCategory[i].Id + '">' + lstSubCategory[i].SubCategoryName + '</option>';
+                                   }
+                                   $("select[id$=ddlSubCategory]").append('<option value="0">---'+ 'Seleccione una opción' +"---</option>");
+                                   $("select[id$=ddlSubCategory]").append(opts);
+                               }
+                           };
+                           var error = function (xhr, ajaxOptions, thrownError) {
+                               fn_message('e', 'Ocurrió un error al cargar SubCategorías'); 
+                           };
+                           fn_callmethod("ProductEntrySave.aspx/LoadSubCategoryByCategory", "{categoryId: '" + categoryId + "'}", success, error);
+                       } else
+                       {
+                           $("select[id$=ddlSubCategory]").empty();
+                           $("select[id$=ddlSubCategory]").append('<option value="0">---'+ 'Seleccione una opción' +"---</option>");
+                       }
+                 });
+      
+      }
+    
+        function LoadSubCategory_LoadPage(categoryId){
+            var categoryId = categoryId;
+                       if (categoryId != 0) {
+                           var success = function (response) {
+                               var result = response.d;
+                               if (result != null) {
+                                   var lstSubCategory = $.parseJSON(result);
+                                   var opts = "";
+                                   $("select[id$=ddlSubCategory]").empty();
+                                   for (var i = 0; i < lstSubCategory.length; i++) {
+                                       opts += '<option value="' + lstSubCategory[i].Id + '">' + lstSubCategory[i].SubCategoryName + '</option>';
+                                   }
+                                   $("select[id$=ddlSubCategory]").append('<option value="0">---'+ 'Seleccione una opción' +"---</option>");
+                                   $("select[id$=ddlSubCategory]").append(opts);   
+
+                                    $("select[id$=ddlSubCategory]").val($("#<%=hfSubCategorySelect.ClientID%>").val())
+                                                                     
+                               }
+                           };
+                           var error = function (xhr, ajaxOptions, thrownError) {
+                               fn_message('e', 'Ocurrió un error al cargar SubCategorías'); 
+                           };
+                           fn_callmethod("ProductEntrySave.aspx/LoadSubCategoryByCategory", "{categoryId: '" + categoryId + "'}", success, error);
+                       } else
+                       {
+                           $("select[id$=ddlSubCategory]").empty();
+                           $("select[id$=ddlSubCategory]").append('<option value="0">---'+ 'Seleccione una opción' +"---</option>");
+                       }
+        }        
 
         function fn_change_show() {
             var ddl = $("#<%=ddlResourceType.ClientID%>").val();
@@ -313,6 +375,7 @@
             <asp:HiddenField ID="hfFileName" runat="server" />
             <asp:HiddenField ID="hfPublicName" runat="server" />
             <asp:HiddenField ID="hfFileExtension" runat="server" />
+            <asp:HiddenField ID="hfSubCategorySelect" runat="server" />
 
             <section class="panel">
                 <div id="message_row">
@@ -346,6 +409,14 @@
                             <asp:Label ID="lblResourceCategory" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
                                 <asp:DropDownList runat="server" ID="ddlCategory" CssClass="form-control mb-md">
+                                </asp:DropDownList>
+                            </div>
+                        </div>
+
+                         <div class="form-group">
+                            <asp:Label ID="lblSubCategory" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-2  cnt-text-label"></asp:Label>
+                            <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
+                                <asp:DropDownList runat="server" ID="ddlSubCategory" CssClass="form-control mb-md">
                                 </asp:DropDownList>
                             </div>
                         </div>
@@ -434,7 +505,7 @@
                                     <asp:TextBox runat="server" ID="txtUrl" class="form-control"></asp:TextBox>
                                 </div>
                                 <div>
-                                    <span>For example: user.<strong>xirectss.com/newsite/products/Xirect.aspx</strong></span>
+                                    <span>For example: user.<strong></strong></span>
                                 </div>
                             </div>
                         </div>

@@ -1,15 +1,17 @@
 ﻿using System;
+using System.Data;
 using System.Web.Services;
 using System.Web.UI;
-using xAPI.BL.Brand;
-using xAPI.Entity.Brand;
+using System.Web.UI.WebControls;
+using xAPI.BL.Category;
+using xAPI.Entity.Product;
 using xAPI.Library.Base;
 using xAPI.Library.General;
 using xSystem_Maintenance.src.app_code;
 
-namespace System_Maintenance.Private.BrandManagement
+namespace System_Maintenance.Private.SubCategoryManagement
 {
-    public partial class BrandEntrySave : System.Web.UI.Page
+    public partial class SubCategoryEntrySave : System.Web.UI.Page
     {
         public int vsId
         {
@@ -21,29 +23,64 @@ namespace System_Maintenance.Private.BrandManagement
             if (!Page.IsPostBack)
             {
                 SetQuery();
+                LoadData();
                 SetData();
                 LoadFieldTranslations();
             }
         }
+        #region LoadDLL
+        private void LoadData()
+        {
+            try
+            {
+                LoadDDLCategory();
+            }
+            catch (Exception ex)
+            {
+                Message(EnumAlertType.Error, "An error occurred while loading data");
+            }
+        }
+
+        private void LoadDDLCategory()
+        {
+            BaseEntity entity = new BaseEntity();
+            DataTable dt = CategoryBL.Instance.Product_Category_GetList(ref entity);
+            try
+            {
+                ddlCategory.DataSource = dt;
+                ddlCategory.DataTextField = "Name";
+                ddlCategory.DataValueField = "ID";
+                ddlCategory.DataBind();
+                ddlCategory.Items.Add(new ListItem("-- Seleccionar Opción --", "0"));
+            }
+            catch (Exception ex)
+            {
+                Message(EnumAlertType.Error, "An error occurred while loading data");
+            }
+        }
+      
+        #endregion
+
         private void LoadFieldTranslations()
         {
             lblRequiredFields.Text = "(*) Campos requeridos.";
-            lblName.Text = "* Nombre:";
+            lblSubCategoryName.Text = "* Sub-Categoría: ";
+            lblCategory.Text = "* Categoría: ";
             lblEnabled.Text = "Activar";
             btnCancel.Text = "Regresar";
         }
-       
+
         #region SetQuery
         private void SetQuery()
         {
             if (!String.IsNullOrEmpty(Request.QueryString["q"]))
             {
-                this.ltTitle.Text = "Editar Marca";
+                this.ltTitle.Text = "Editar Sub-Categoría";
                 String id = Encryption.Decrypt(Request.QueryString["q"]);
                 if (!String.IsNullOrEmpty(id))
                 {
                     vsId = Convert.ToInt32(id);
-                    hfBrandId.Value = id;
+                    hfSubCategoryId.Value = id;
                 }
                 else
                 {
@@ -52,11 +89,11 @@ namespace System_Maintenance.Private.BrandManagement
             }
             else
             {
-                this.ltTitle.Text = "Agregar Marca";
+                this.ltTitle.Text = "Agregar Sub-Categoría";
             }
         }
         #endregion
-      
+
         #region SetData
         private void SetData()
         {
@@ -64,9 +101,9 @@ namespace System_Maintenance.Private.BrandManagement
             {
                 if (vsId > 0)
                 {
-                    Brands obj = null;
+                    Products obj = null;
                     BaseEntity entity = new BaseEntity();
-                    obj = BrandBL.Instance.Brand_Get_ById(ref entity, vsId);
+                    obj = CategoryBL.Instance.SubCategory_Get_ById(ref entity, vsId);
                     if (entity.Errors.Count == 0)
                         if (obj != null)
                         {
@@ -90,17 +127,19 @@ namespace System_Maintenance.Private.BrandManagement
         }
         private void SetControls()
         {
-            hfBrandId.Value = String.Empty;
-            txtName.Text = String.Empty;
+            hfSubCategoryId.Value = String.Empty;
+            txtSubCategoryName.Text = String.Empty;
+            ddlCategory.SelectedIndex = 0;
             chkStatus.Checked = true;
         }
-        private void SetControls(Brands objBrand)
+        private void SetControls(Products objSubCategory)
         {
             try
             {
-                hfBrandId.Value = objBrand.ID.ToString();
-                txtName.Text = objBrand.Name;
-                chkStatus.Checked = objBrand.Status == (int)EnumStatus.Enabled ? true : false;
+                hfSubCategoryId.Value = objSubCategory.subcategory.ID.ToString();
+                txtSubCategoryName.Text = objSubCategory.subcategory.Name.ToString();
+                ddlCategory.SelectedValue = objSubCategory.category.ID.ToString();
+                chkStatus.Checked = objSubCategory.subcategory.Status == (int)EnumStatus.Enabled ? true : false;
             }
             catch (Exception ex)
             {
@@ -110,24 +149,23 @@ namespace System_Maintenance.Private.BrandManagement
         #endregion
 
         [WebMethod]
-        public static Object Brand_Save(srBrand u)
+        public static Object SubCategory_Save(srSubCategory u)
         {
             BaseEntity entity = new BaseEntity();
             Boolean success = false;
             try
             {
-                Brands objBrand = new Brands
-                {
-                    ID = String.IsNullOrEmpty(u.Id) ? 0 : Convert.ToInt32(u.Id),
-                    Name = u.Name.ToString(),
-                    Status = Convert.ToInt32(u.Status)
-                };
+                Products objSubCategory = new Products();
 
-                success = BrandBL.Instance.Brand_Save(ref entity, objBrand);
+                objSubCategory.subcategory.ID = String.IsNullOrEmpty(u.Id) ? 0 : Convert.ToInt32(u.Id);
+                objSubCategory.subcategory.Name = u.SubCategoryName.ToString();
+                objSubCategory.subcategory.Status = Convert.ToInt32(u.Status);
+                objSubCategory.category.ID = String.IsNullOrEmpty(u.CategoryId) ? 0 : Convert.ToInt32(u.CategoryId);
+
+                success = CategoryBL.Instance.SubCategory_Save(ref entity, objSubCategory);
                 if (entity.Errors.Count <= 0 && success)
                 {
                     return new { Msg = "Se guardo correctamente!", Result = "Ok" };
-
                 }
                 else
                 {
@@ -145,7 +183,7 @@ namespace System_Maintenance.Private.BrandManagement
         }
         private void GoBack()
         {
-            Response.Redirect("BrandEntry.aspx", false);
+            Response.Redirect("SubCategoryEntry.aspx", false);
         }
         public void Message(EnumAlertType type, string message)
         {

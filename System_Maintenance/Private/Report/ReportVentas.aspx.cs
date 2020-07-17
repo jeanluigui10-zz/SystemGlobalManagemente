@@ -15,7 +15,7 @@ namespace System_Maintenance.Private.Report
 {
     public partial class ReportVentas : Page
     {
-        protected void Page_Load(object sender, EventArgs e)
+        protected void Page_Load(Object sender, EventArgs e)
         {
             if (!Page.IsPostBack)
             {
@@ -49,7 +49,7 @@ namespace System_Maintenance.Private.Report
         }
 
         [WebMethod]
-        public static object Cargar_Ventas(string fechaInicio, string fechaFin)
+        public static Object Cargar_Ventas(string fechaInicio, string fechaFin)
         {
             BaseEntity objBase = new BaseEntity();
             String Inicio = (String.IsNullOrEmpty(fechaInicio)) ? "" : Convert.ToString(Convert.ToDateTime(fechaInicio, CultureInfo.InvariantCulture).ToString("MM/dd/yyyy"));
@@ -85,7 +85,7 @@ namespace System_Maintenance.Private.Report
         }
 
     
-        protected void btnExport_Click(object sender, EventArgs e)
+        protected void btnExport_Click(Object sender, EventArgs e)
         {
             BaseEntity objBase = new BaseEntity();
 

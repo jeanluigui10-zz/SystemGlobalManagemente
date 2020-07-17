@@ -1,5 +1,7 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="BrandEntry.aspx.cs" Inherits="System_Maintenance.Private.BrandManagement.BrandEntry" %>
-<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server"> <script type="text/javascript">
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Home.Master" AutoEventWireup="true" CodeBehind="SubCategoryEntry.aspx.cs" Inherits="System_Maintenance.Private.SubCategoryManagement.SubCategoryEntry" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+     <script type="text/javascript">
  
         var idSelected = "";
         var obj;
@@ -14,10 +16,9 @@
             Fn_content();
             Fn_bind();
             Fn_setmenu();
-                                                                           }
-
+        }
         function Fn_setmenu() {
-            $('#mgbrand').attr("class", "nav-active");
+            $('#mgsubCategory').attr("class", "nav-active");
             $('#menu_comm_center').addClass("nav-active nav-expanded");
             $(".labelDash").html("Global");
         }
@@ -57,7 +58,7 @@
         }
      
         function Fn_content() {
-            Fn_fillTable2($("#<%=hfDataBrand.ClientID%>").val());
+            Fn_fillTable2($("#<%=hfDataSubCategory.ClientID%>").val());
         }
 
         function Fn_fillTable2(data) {
@@ -66,7 +67,7 @@
                 obj = $.parseJSON(glancedata);
                 var object = {};
                 object.request = obj;
-                var item = fn_LoadTemplates("datatable-brand", object);
+                var item = fn_LoadTemplates("datatable-subcategory", object);
                 $("#tbDataTable tbody").html(item);
                 table = $("#tbDataTable").DataTable({
                     'columnDefs': [{
@@ -97,11 +98,11 @@
         }        
 
         function Fn_RowEdit(Id) {
-            window.location.href = "BrandEntrySave.aspx?q=" + Id; 
+            window.location.href = "SubCategoryEntrySave.aspx?q=" + Id; 
         }
 
     	   function Fn_new() {
-                    window.location.href = "BrandEntrySave.aspx"; 
+                    window.location.href = "SubCategoryEntrySave.aspx"; 
         }
 
         function fn_delete3() {
@@ -117,9 +118,9 @@
                         var json = JSON.stringify(lista);
                         var senddata = '{ jsondata:"' + fn_jsonreplace(json) + '" }';
                         var success = function (asw) {
-                            if (asw.d.sJSON == "Ok") {
+                            if (asw.d.sJSON == "Deleted successfully") {
                                 var lista = asw.d.Lista;
-                                $("#<%=hfDataBrand.ClientID%>").val(lista);
+                                $("#<%=hfDataSubCategory.ClientID%>").val(lista);
                                 table.destroy();
                                 Fn_fillTable2(lista);
                                 fn_message('s', 'Se elimino correctamente');
@@ -131,18 +132,19 @@
                             fn_message('e', 'No se puede eliminar el registro(s)');
                         };
 
-                        fn_callmethod("BrandEntry.aspx/SendDelete", senddata, success, error);
+                        fn_callmethod("SubCategoryEntry.aspx/SendDelete", senddata, success, error);
                     }
                 });
             }
             else fn_message('i', "Por favor, seleccione una fila para eliminar");
         }
 
-    </script>
+     </script>
+
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    
-    <asp:HiddenField runat="server" ID="hfDataBrand" />
+
+    <asp:HiddenField runat="server" ID="hfDataSubCategory" />
     <div class="row">
         <div class="col-lg-12">
             <section class="panel">
@@ -151,7 +153,7 @@
                 <header class="panel-heading">
                     <div class="panel-actions">
                     </div>
-                    <h2 class="panel-title">Marcas</h2>
+                    <h2 class="panel-title">Relación de Sub-Categorías</h2>
                     <div class="title" style="text-align: right; margin-top: -20px;">
                         <a id= "helpdesk" class="helpDesk" data-keyname="PROCESS_COMMUNICATION_CENTER_RESOURCES_MANAGEMENT"><i class="fa fa-question-circle fa-2x"></i></a>
                     </div>
@@ -162,7 +164,8 @@
 
                         <div class="row">
                             <div class="col-md-9 cnt-controles">
-                                <a class="mb-xs mt-xs mr-xs btn btn-primary" onclick="Fn_new()"  id="a1"><i class="fa fa-plus"></i><span>&nbsp;Agregar</span> </a>
+                                <a class="mb-xs mt-xs mr-xs btn btn-primary" onclick="Fn_new()"  id="a1"><i
+                                    class="fa fa-plus"></i><span>&nbsp;Agregar</span> </a>
                                 <a class="mb-xs mt-xs mr-xs btn btn-danger" onclick="fn_delete3()" id="A2"><i class="fa fa-times"></i><span>&nbsp;Eliminar</span> </a>
                             </div>
                         </div>
@@ -176,7 +179,8 @@
                                                 <th style="display: none;"></th>
                                                 <th></th>
                                                 <th><input type="checkbox" id="all" name="all" /></th>
-                                                <th>Name</th>
+                                                <th>SubCategoría</th>
+                                                <th>Categoría</th>
                                                 <th>Estado</th>
                                                 <th>Acción</th>
                                             </tr>
@@ -193,7 +197,7 @@
         </div>
     </div>
     
-    <script type="text/x-handlebars-template" id="datatable-brand">
+    <script type="text/x-handlebars-template" id="datatable-subcategory">
         {{# each request}}
             <tr>
                 <td style="display: none;">{{Id}}</td> 
@@ -203,11 +207,13 @@
                 {{else}}
                     <td id='multiselect' style='text-align:center;'></td>
                 {{/if}} 
-                    <td>{{Name}}</td>
+                    <td>{{SubCategoryName}}</td>
+                    <td>{{CategoryName}}</td>
                     <td>{{Status}}</td>
                     <td style='text-align:center;'><a onclick="Fn_RowEdit('{{Id}}')" title='Edit' class='gridActionBtn'><i class='fa fa-edit'></i></a></td>                 
-            </tr>
+                  </tr>
         {{/each}}
     </script>
+
 
 </asp:Content>

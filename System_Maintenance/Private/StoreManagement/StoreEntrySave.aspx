@@ -275,7 +275,7 @@
                                 <asp:Label ID="lblPhone2" runat="server" Text="" CssClass="col-sm-4 col-md-4 col-lg-3 cnt-text-label"></asp:Label>
 
                                 <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7   cnt-controles">
-                                    <asp:TextBox runat="server" CssClass="form-control validate[required]" ID="txtPhone2"></asp:TextBox>
+                                    <asp:TextBox runat="server" CssClass="form-control" ID="txtPhone2"></asp:TextBox>
                                 </div>
                             </div>
                              <div class="form-group">

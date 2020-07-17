@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web;
 using System.Web.Script.Serialization;
+using System.Web.Services;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using xAPI.BL.Brand;
@@ -41,6 +43,7 @@ namespace System_Maintenance.Private.ProductManagement
             lblResourceType.Text = "Tipo:";
             lblSystemContact.Text = "System Contact:";
             lblName.Text = "* Nombre:";
+            lblSubCategory.Text = "* Sub-Categoría";
             lblBrand.Text = "* Marca";
             lblDescription.Text = " Descripción:";
             lblUploadFile.Text = "Subir Archivo:";
@@ -65,6 +68,7 @@ namespace System_Maintenance.Private.ProductManagement
             {
                 DDLType();
                 LoadDDLCategory();
+                LoadDDLSubCategory();
                 LoadDDLBrand();
             }
             catch (Exception ex)
@@ -112,6 +116,23 @@ namespace System_Maintenance.Private.ProductManagement
                 Message(EnumAlertType.Error, "An error occurred while loading data");
             }
         }
+        private void LoadDDLSubCategory()
+        {
+            BaseEntity entity = new BaseEntity();
+            DataTable dt = CategoryBL.Instance.Product_SubCategory_GetList(ref entity);
+            try
+            {
+                ddlSubCategory.DataSource = dt;
+                ddlSubCategory.DataTextField = "Name";
+                ddlSubCategory.DataValueField = "ID";
+                ddlSubCategory.DataBind();
+            }
+            catch (Exception ex)
+            {
+                Message(EnumAlertType.Error, "An error occurred while loading data");
+            }
+        }
+
         private void LoadDDLBrand()
         {
             BaseEntity entity = new BaseEntity();
@@ -173,6 +194,7 @@ namespace System_Maintenance.Private.ProductManagement
             ddlResourceType.SelectedIndex = 0;
             ddlCategory.SelectedIndex = 0;
             ddlBrand.SelectedIndex = 0;
+            ddlSubCategory.SelectedIndex = 0;
             hfProductId.Value = String.Empty;
             txtSku.Text = String.Empty;
             txtStock.Text = String.Empty;
@@ -197,6 +219,8 @@ namespace System_Maintenance.Private.ProductManagement
 
                 txtName.Text = objProduct.Name;
                 ddlBrand.SelectedValue = objProduct.brand.ID.ToString();
+                ddlSubCategory.SelectedValue = objProduct.subcategory.ID.ToString();
+                hfSubCategorySelect.Value = objProduct.subcategory.ID.ToString();
                 txtStock.Text = objProduct.Stock.ToString();
                 txtUniMed.Text = objProduct.UniMed;
                 txtUnitPrice.Text = objProduct.UnitPrice.ToString();
@@ -255,6 +279,7 @@ namespace System_Maintenance.Private.ProductManagement
                 objProduct.DocType = ddlResourceType.SelectedItem.Text.Trim();
                 objProduct.category.ID = Convert.ToInt32(ddlCategory.SelectedValue);
                 objProduct.brand.ID = Convert.ToInt32(ddlBrand.SelectedValue);
+                objProduct.subcategory.ID = Convert.ToInt32(ddlSubCategory.SelectedValue);
                 objProduct.Name = HtmlSanitizer.SanitizeHtml(txtName.Text.Trim());
                 objProduct.Stock = Convert.ToInt32(txtStock.Text.Trim());
                 objProduct.UniMed = HtmlSanitizer.SanitizeHtml(txtUniMed.Text.Trim());
@@ -339,7 +364,7 @@ namespace System_Maintenance.Private.ProductManagement
         private void SaveProduct(Products objProduct, HttpPostedFile hpf)
         {
             BaseEntity entity = new BaseEntity();
-            bool success = ProductBL.Instance.Product_Save(ref entity, objProduct);
+            Boolean success = ProductBL.Instance.Product_Save(ref entity, objProduct);
             if (entity.Errors.Count <= 0)
             {
                 if (success)
@@ -364,8 +389,14 @@ namespace System_Maintenance.Private.ProductManagement
                     }
 
                     if (vsId == 0)
+                    {
                         SetControls();
-
+                    }
+                    else {
+                        SetData();
+                    }
+                         
+                    
                     Message(EnumAlertType.Success, "Se guardo correctamente!");
                 }
                 else
@@ -467,7 +498,50 @@ namespace System_Maintenance.Private.ProductManagement
 
         #endregion
 
+        #region Get Sub-Category by Category cbo
+        [WebMethod]
+        public static String LoadSubCategoryByCategory(Int32 categoryId)
+        {
+            BaseEntity entity = new BaseEntity();
+            List<srSubCategory> lst = new List<srSubCategory>();
 
+            String subCategoryList = String.Empty;
+
+            try
+            {
+                DataTable dt = CategoryBL.Instance.SubCategory_LoadBy_CategoryId(ref entity, categoryId);
+                if (entity.Errors.Count == 0)
+                {
+                    if (dt != null)
+                    {
+                        foreach (DataRow item in dt.Rows)
+                        {
+                            lst.Add(new srSubCategory()
+                            {
+                                Id = item["SubCategoryId"].ToString(),
+                                SubCategoryName = item["SubCategoryName"].ToString()
+                            });
+                        }
+                    }
+                }
+
+                if (entity.Errors.Count <= 0)
+                {
+                    if (lst != null)
+                    {
+                        JavaScriptSerializer serializer = new JavaScriptSerializer();
+                        subCategoryList = serializer.Serialize(lst);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return subCategoryList;
+        }
+
+        #endregion
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             GoBack();

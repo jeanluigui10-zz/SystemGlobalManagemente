@@ -5,16 +5,16 @@ using System.Web;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using System.Web.UI;
-using xAPI.BL.Product;
+using xAPI.BL.Category;
 using xAPI.Entity;
-using xAPI.Entity.Product;
+using xAPI.Entity.Category;
 using xAPI.Library.Base;
 using xAPI.Library.General;
 using xSystem_Maintenance.src.app_code;
 
-namespace System_Maintenance.Private.ProductManagement
+namespace System_Maintenance.Private.SubCategoryManagement
 {
-    public partial class ProductEntry : System.Web.UI.Page
+    public partial class SubCategoryEntry : System.Web.UI.Page
     {
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -40,49 +40,47 @@ namespace System_Maintenance.Private.ProductManagement
                 }
             }
         }
+
         [WebMethod]
         public static Object SendDelete(String jsondata)
         {
             Boolean success = false;
+            BaseEntity objEntity = new BaseEntity();
+            tBaseIdList baseIdList = new tBaseIdList();
+            JavaScriptSerializer sr = new JavaScriptSerializer();
             try
             {
-                JavaScriptSerializer sr = new JavaScriptSerializer();
                 List<String> listDes = sr.Deserialize<List<String>>(jsondata);
-                tBaseIdList baseIdList = new tBaseIdList();
-
                 foreach (String item in listDes)
                     baseIdList.Add(new tBaseId { Id = Convert.ToInt32(Encryption.Decrypt(HttpContext.Current.Server.UrlDecode(item))), Action = 0 });
 
-                BaseEntity objEntity = new BaseEntity();
-
-                success = ProductBL.Instance.Product_Delete(ref objEntity, baseIdList);
-
+                success = CategoryBL.Instance.SubCategory_Delete(ref objEntity, baseIdList);
                 if (objEntity.Errors.Count == 0)
                     if (success)
                     {
-                        return new { Lista = sr.Serialize(List()), sJSON = "Ok" };
+                        return new { Lista = sr.Serialize(List()), sJSON = "Deleted successfully" };
                     }
                     else
                     {
-                        return new { Lista = new List<Products>(), sJSON = "NoOK" };
+                        return new { Lista = new List<SubCategory>(), sJSON = "No se puede eliminar los registro(s)" };
                     }
                 else
                 {
-                    return new { Lista = new List<Products>(), sJSON = "No se pueden eliminar los registro(s)" };
+                    return new { Lista = new List<SubCategory>(), sJSON = "No se puede eliminar los registro(s)" };
                 }
             }
             catch (Exception ex)
             {
-                return new { Lista = new List<Products>(), sJSON = "Ocurri un error al eliminar" };
+                return new { Lista = new List<SubCategory>(), sJSON = "Ocurrió un error al eliminar" };
             }
         }
 
-        private static List<srProducts> List()
+        private static List<srSubCategory> List()
         {
             BaseEntity objEntity = new BaseEntity();
-            List<srProducts> lst = new List<srProducts>();
+            List<srSubCategory> lst = new List<srSubCategory>();
 
-            DataTable dt = ProductBL.Instance.Product_GetList(ref objEntity);
+            DataTable dt = CategoryBL.Instance.SubCategory_GetList(ref objEntity);
             if (objEntity.Errors.Count == 0)
             {
                 if (dt != null)
@@ -91,41 +89,26 @@ namespace System_Maintenance.Private.ProductManagement
                     foreach (DataRow item in dt.Rows)
                     {
                         count++;
-                        lst.Add(new srProducts()
+                        lst.Add(new srSubCategory()
                         {
                             isCheckbox = "1",
                             Id = HttpUtility.UrlEncode(Encryption.Encrypt(item["ID"].ToString())),
-                            Name = item["Name"].ToString(),
-                            Description = item["Description"].ToString(),
-                            DocType = item["DocType"].ToString(),
-                            Brand = item["BrandName"].ToString(),
-                            Category = item["Resource_Category_Name"].ToString(),
-                            NameResource = item["NameResource"].ToString(),
-                            UnitPrice = Convert.ToDecimal(item["UnitPrice"]).ToString(),
-                            Stock = Convert.ToInt32(item["Stock"]).ToString(),
-                            PriceOffer = Convert.ToDecimal(item["PriceOffer"]).ToString(),
-                            UniMed = item["UniMed"].ToString(),
+                            SubCategoryName = item["SubCategoryName"].ToString(),
+                            CategoryName = item["CategoryName"].ToString(),
                             Status = Convert.ToInt16(item["Status"]) == (short)EnumStatus.Enabled ? "Activo" : "Inactivo",
                             Index = count.ToString()
                         });
                     }
                 }
-                else {
-                    lst = null;
-                }
-            }
-            else
-            {
-                lst = null;
             }
             return lst;
         }
         private void LoadData()
         {
             BaseEntity entity = new BaseEntity();
-            List<srProducts> lst = new List<srProducts>();
+            List<srSubCategory> lst = new List<srSubCategory>();
 
-            DataTable dt = ProductBL.Instance.Product_GetList(ref entity);
+            DataTable dt = CategoryBL.Instance.SubCategory_GetList(ref entity);
             if (entity.Errors.Count == 0)
             {
                 if (dt != null)
@@ -134,20 +117,12 @@ namespace System_Maintenance.Private.ProductManagement
                     foreach (DataRow item in dt.Rows)
                     {
                         count++;
-                        lst.Add(new srProducts()
+                        lst.Add(new srSubCategory()
                         {
                             isCheckbox = "1",
                             Id = HttpUtility.UrlEncode(Encryption.Encrypt(item["ID"].ToString())),
-                            Name = item["Name"].ToString(),
-                            Description = item["Description"].ToString(),
-                            DocType = item["DocType"].ToString(),
-                            Brand = item["BrandName"].ToString(),
-                            Category = item["Resource_Category_Name"].ToString(),
-                            NameResource = item["NameResource"].ToString(),
-                            UnitPrice = Convert.ToDecimal(item["UnitPrice"]).ToString(),
-                            Stock = Convert.ToInt32(item["Stock"]).ToString(),
-                            PriceOffer = Convert.ToDecimal(item["PriceOffer"]).ToString(),
-                            UniMed = item["UniMed"].ToString(),
+                            SubCategoryName = item["SubCategoryName"].ToString(),
+                            CategoryName = item["CategoryName"].ToString(),
                             Status = Convert.ToInt16(item["Status"]) == (short)EnumStatus.Enabled ? "Activo" : "Inactivo",
                             Index = count.ToString()
                         });
@@ -169,14 +144,16 @@ namespace System_Maintenance.Private.ProductManagement
                 {
                     JavaScriptSerializer serializer = new JavaScriptSerializer();
                     String sJSON = serializer.Serialize(lst);
-                    hfData.Value = sJSON.ToString();
+                    hfDataSubCategory.Value = sJSON.ToString();
                 }
             }
         }
+
         public void Message(EnumAlertType type, string message)
         {
             String script = @"<script type='text/javascript'>fn_message('" + type.GetStringValue() + "', '" + message + "');</script>";
             Page.ClientScript.RegisterStartupScript(typeof(Page), "message", script);
         }
+
     }
 }

@@ -3,6 +3,7 @@ using System.Data;
 using System.Data.SqlClient;
 using xAPI.Entity;
 using xAPI.Entity.Category;
+using xAPI.Entity.Product;
 using xAPI.Library.Base;
 using xAPI.Library.Connection;
 using xAPI.Library.General;
@@ -48,6 +49,31 @@ namespace xAPI.Dao.Category
             }
             return dt;
         }
+
+        public DataTable SubCategory_GetList(ref BaseEntity Base)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("SubCategory_GetList_Sp", clsConnection.GetConnection())
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                dt = null;
+                Base.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  while loading data"));
+
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(cmd);
+            }
+            return dt;
+        }
         public DataTable Product_Category_GetList(ref BaseEntity Base)
         {
             DataTable dt = new DataTable();
@@ -55,6 +81,30 @@ namespace xAPI.Dao.Category
             try
             {
                 cmd = new SqlCommand("Product_Category_GetList_Sp", clsConnection.GetConnection())
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                dt = null;
+                Base.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  while loading data"));
+
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(cmd);
+            }
+            return dt;
+        }
+        public DataTable Product_SubCategory_GetList(ref BaseEntity Base)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("Product_SubCategory_GetList_Sp", clsConnection.GetConnection())
                 {
                     CommandType = CommandType.StoredProcedure
                 };
@@ -94,6 +144,97 @@ namespace xAPI.Dao.Category
                 clsConnection.DisposeCommand(cmd);
             }
             return success;
+        }
+
+        public Boolean SubCategory_Delete(ref BaseEntity Entity, tBaseIdList BaseList)
+        {
+            Boolean success = false;
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("SubCategory_Delete_Sp", clsConnection.GetConnection());
+                cmd.Parameters.Add(new SqlParameter { ParameterName = "@Type_BaseId", Value = BaseList, SqlDbType = SqlDbType.Structured, TypeName = "dbo.TY_BASEID" });
+                cmd.CommandType = CommandType.StoredProcedure;
+                success = cmd.ExecuteNonQuery() > 0 ? true : false;
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                Entity.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  deleting a resource."));
+
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(cmd);
+            }
+            return success;
+        }
+        public Boolean SubCategory_Save(ref BaseEntity Entity, Products objSubCategory)
+        {
+            Boolean success = false;
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("SubCategory_Save_Sp", clsConnection.GetConnection())
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@id", objSubCategory.subcategory.ID);
+                cmd.Parameters.AddWithValue("@subCategoryName", objSubCategory.subcategory.Name);
+                cmd.Parameters.AddWithValue("@categoryId", objSubCategory.category.ID);
+                cmd.Parameters.AddWithValue("@status", objSubCategory.subcategory.Status);
+
+                success = cmd.ExecuteNonQuery() > 0;
+            }
+            catch (Exception ex)
+            {
+                success = false;
+                Entity.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  saving an Event."));
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(cmd);
+            }
+            return success;
+        }
+        public Products SubCategory_Get_ById(ref BaseEntity Base, Int32 Id)
+        {
+            Products objSubCategory = new Products();
+            SqlDataReader dr = null;
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("SubCategory_Get_ById_Sp", clsConnection.GetConnection())
+                {
+                    CommandType = CommandType.StoredProcedure
+                };
+                cmd.Parameters.AddWithValue("@id", Id);
+                dr = cmd.ExecuteReader();
+                while (dr.Read())
+                {
+                    objSubCategory = SubCategory_GetEntity(dr);
+                }
+            }
+            catch (Exception ex)
+            {
+                objSubCategory = null;
+                Base.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  getting a AppResource by it's Id."));
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(cmd);
+            }
+            return objSubCategory;
+        }
+        private Products SubCategory_GetEntity(SqlDataReader ObjDr)
+        {
+            Products obj = new Products();
+            obj.subcategory.ID = ObjDr.GetColumnValue<Int32>("ID");
+            obj.subcategory.Name = ObjDr.GetColumnValue<String>("SubCategoryName");
+            obj.subcategory.Status = ObjDr.GetColumnValue<Byte>("Status");
+            obj.category.ID = ObjDr.GetColumnValue<Int32>("CategoryId");
+
+            return obj;
         }
         public Categorys Category_Get_ById(ref BaseEntity Base, Int32 Id)
         {
@@ -211,34 +352,30 @@ namespace xAPI.Dao.Category
             return success;
         }
 
-        //public Boolean Category_Save(ref BaseEntity Entity, Categorys objCategory)
-
-        //{
-        //    Boolean success = false;
-        //    SqlCommand cmd = null;
-        //    try
-        //    {
-        //        cmd = new SqlCommand("Category_Save_Sp", clsConnection.GetConnection())
-        //        {
-        //            CommandType = CommandType.StoredProcedure
-        //        };
-        //        cmd.Parameters.AddWithValue("@id", objCategory.ID);
-        //        cmd.Parameters.AddWithValue("@name", objCategory.Name);
-        //        cmd.Parameters.AddWithValue("@description", objCategory.Description);
-        //        cmd.Parameters.AddWithValue("@status", objCategory.Status);
-
-        //        success = cmd.ExecuteNonQuery() > 0;
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        success = false;
-        //        Entity.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  saving an Event."));
-        //    }
-        //    finally
-        //    {
-        //        clsConnection.DisposeCommand(cmd);
-        //    }
-        //    return success;
-        //}
+         public DataTable SubCategory_LoadBy_CategoryId(ref BaseEntity Base, Int32 IdCategory)
+        {
+            DataTable dt = new DataTable();
+            SqlCommand cmd = null;
+            try
+            {
+                cmd = new SqlCommand("Load_SubCategory_ByCategoryId", clsConnection.GetConnection())
+                {
+                    CommandType = CommandType.StoredProcedure
+                }; 
+                cmd.Parameters.AddWithValue("@categoryId", IdCategory);
+                cmd.CommandTimeout = 0;
+                dt.Load(cmd.ExecuteReader());
+            }
+            catch (Exception ex)
+            {
+                dt = null;
+                Base.Errors.Add(new BaseEntity.ListError(ex, "An error occurred  while loading data"));
+            }
+            finally
+            {
+                clsConnection.DisposeCommand(cmd);
+            }
+            return dt;
+        }
     }
 }

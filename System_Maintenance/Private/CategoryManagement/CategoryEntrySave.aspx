@@ -321,7 +321,7 @@
                         <div class="form-group">
                             <asp:Label ID="lblName" runat="server" Text="" CssClass="col-sm-4 col-md-3 col-lg-3  cnt-text-label"></asp:Label>
                             <div class="col-xs-12 col-sm-7 col-md-6 col-lg-7 cnt-controles">
-                                <asp:TextBox ID="txtName" runat="server" CssClass="form-control  validate[required,maxSize[50]]" MaxLength="50"></asp:TextBox>
+                                <asp:TextBox ID="txtName" runat="server" CssClass="form-control  validate[required]" MaxLength="50"></asp:TextBox>
                             </div>
                         </div>
 
@@ -394,7 +394,6 @@
                 <footer class="panel-footer" id="f_Company">
                     <div class="row">
                         <div class="col-sm-6 col-sm-offset-3">
-<%--                            <button type="button" id="btnUpload" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" onclick="Fn_ValidateCategory(event);">Guardar</button>    --%>
                             <asp:Button ID="btnUpload" runat="server" class="mb-xs mt-xs mr-xs btn btn-lg btn-primary" Text="" OnClick="btnSave_Click" OnClientClick="fn_validate2(event);" />
                             <asp:Button ID="btnCancel" runat="server" class="mb-xs mt-xs mr-xs btn btn-lg btn-default" Text="" OnClick="btnCancel_Click" />
                         </div>

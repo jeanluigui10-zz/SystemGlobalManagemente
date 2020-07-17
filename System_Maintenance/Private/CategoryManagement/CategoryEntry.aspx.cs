@@ -107,7 +107,7 @@ namespace System_Maintenance.Private.CategoryManagement
             }
             return lst;
         }
-        private void LoadData(Boolean ShowMessage = false)
+        private void LoadData()
         {
             BaseEntity entity = new BaseEntity();
             List<srCategory> lst = new List<srCategory>();

@@ -60,6 +60,15 @@ namespace System_Maintenance.Private.ProductManagement
         protected global::System.Web.UI.WebControls.HiddenField hfFileExtension;
 
         /// <summary>
+        /// Control hfSubCategorySelect.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hfSubCategorySelect;
+
+        /// <summary>
         /// Control ltTitle.
         /// </summary>
         /// <remarks>
@@ -112,6 +121,24 @@ namespace System_Maintenance.Private.ProductManagement
         /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList ddlCategory;
+
+        /// <summary>
+        /// Control lblSubCategory.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblSubCategory;
+
+        /// <summary>
+        /// Control ddlSubCategory.
+        /// </summary>
+        /// <remarks>
+        /// Campo generado automáticamente.
+        /// Para modificarlo, mueva la declaración del campo del archivo del diseñador al archivo de código subyacente.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList ddlSubCategory;
 
         /// <summary>
         /// Control lblSystemContact.

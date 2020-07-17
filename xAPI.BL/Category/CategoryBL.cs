@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using xAPI.Dao.Category;
 using xAPI.Entity;
 using xAPI.Entity.Category;
+using xAPI.Entity.Product;
 using xAPI.Library.Base;
 
 namespace xAPI.BL.Category
@@ -34,11 +31,28 @@ namespace xAPI.BL.Category
 
             return dt;
         }
+
+        public DataTable SubCategory_GetList(ref BaseEntity entity)
+        {
+            entity = new BaseEntity();
+            DataTable dt = null;
+            dt = CategoryDao.Instance.SubCategory_GetList(ref entity);
+
+            return dt;
+        }
         public DataTable Product_Category_GetList(ref BaseEntity entity)
         {
             entity = new BaseEntity();
             DataTable dt = null;
             dt = CategoryDao.Instance.Product_Category_GetList(ref entity);
+
+            return dt;
+        }
+        public DataTable Product_SubCategory_GetList(ref BaseEntity entity)
+        {
+            entity = new BaseEntity();
+            DataTable dt = null;
+            dt = CategoryDao.Instance.Product_SubCategory_GetList(ref entity);
 
             return dt;
         }
@@ -52,6 +66,38 @@ namespace xAPI.BL.Category
                 entity.Errors.Add(new BaseEntity.ListError(new Exception { }, "An error occurred sending data"));
 
             return success;
+        }
+
+        public Boolean SubCategory_Delete(ref BaseEntity entity, tBaseIdList idList)
+        {
+            Boolean success = false;
+            if (idList.Count > 0)
+                success = CategoryDao.Instance.SubCategory_Delete(ref entity, idList);
+            else
+                entity.Errors.Add(new BaseEntity.ListError(new Exception { }, "An error occurred sending data"));
+
+            return success;
+        }
+        public Boolean SubCategory_Save(ref BaseEntity Entity, Products objSubCategory)
+        {
+            Boolean success = false;
+            Entity = new BaseEntity();
+
+            success = CategoryDao.Instance.SubCategory_Save(ref Entity, objSubCategory);
+
+            return success;
+        }
+        public Products SubCategory_Get_ById(ref BaseEntity entity, Int32 Id)
+        {
+            entity = new BaseEntity();
+            Products dt = null;
+            if (Id > 0)
+            {
+                dt = CategoryDao.Instance.SubCategory_Get_ById(ref entity, Id);
+            }
+            else
+                entity.Errors.Add(new BaseEntity.ListError(new Exception { }, "An error occurred sending data"));
+            return dt;
         }
         public Categorys Category_Get_ById(ref BaseEntity entity, Int32 Id)
         {
@@ -78,14 +124,15 @@ namespace xAPI.BL.Category
 
             return success;
         }
-        //public Boolean Category_Save(ref BaseEntity Entity, Categorys objCategory)
-        //{
-        //    Boolean success = false;
-        //    Entity = new BaseEntity();
 
-        //    success = CategoryDao.Instance.Category_Save(ref Entity, objCategory);
+        public DataTable SubCategory_LoadBy_CategoryId(ref BaseEntity entity, Int32 IdCategory)
+        {
+            entity = new BaseEntity();
+            DataTable dt = null;
+            dt = CategoryDao.Instance.SubCategory_LoadBy_CategoryId(ref entity, IdCategory);
 
-        //    return success;
-        //}
+            return dt;
+        }
+
     }
 }

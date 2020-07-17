@@ -76,6 +76,7 @@
     <Compile Include="Brand\Brands.cs" />
     <Compile Include="Category\Categoria.cs" />
     <Compile Include="Category\Categorys.cs" />
+    <Compile Include="Category\SubCategory.cs" />
     <Compile Include="Customers\Customer.cs" />
     <Compile Include="Environment\Ambientes.cs" />
     <Compile Include="Environment\Detalle_AmbienteUsuario.cs" />

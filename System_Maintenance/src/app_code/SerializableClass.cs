@@ -2333,6 +2333,18 @@ namespace xSystem_Maintenance.src.app_code
     }
 
     [Serializable]
+    public class srSubCategory
+    {
+        public String Id { get; set; }
+        public String SubCategoryName { get; set; }
+        public String CategoryName { get; set; }
+        public String CategoryId { get; set; }
+        public String Status { get; set; }
+        public String isCheckbox { get; set; }
+        public String Index { get; set; }
+    }
+
+    [Serializable]
     public class srCategory
     {
         public String Id { get; set; }

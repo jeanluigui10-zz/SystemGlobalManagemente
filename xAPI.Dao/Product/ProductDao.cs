@@ -117,6 +117,7 @@ namespace xAPI.Dao.Product
                 Stock = ObjDr.GetColumnValue<Int32>("Stock")
             };
             obj.category.ID = ObjDr.GetColumnValue<Int32>("CategoryId");
+            obj.subcategory.ID = ObjDr.GetColumnValue<Int32>("SubCategoryId");
             obj.brand.ID = ObjDr.GetColumnValue<Int32>("BrandId");
 
             return obj;
@@ -174,6 +175,7 @@ namespace xAPI.Dao.Product
                 cmd.Parameters.AddWithValue("@description", Product.Description);
                 cmd.Parameters.AddWithValue("@categoryId", Product.category.ID);
                 cmd.Parameters.AddWithValue("@brandId", Product.brand.ID);
+                cmd.Parameters.AddWithValue("@subCategoryId", Product.subcategory.ID);
                 cmd.Parameters.AddWithValue("@fileExtension", Product.FileExtension);
                 cmd.Parameters.AddWithValue("@filePublicName", Product.FilePublicName);
                 cmd.Parameters.AddWithValue("@unitPrice", Product.UnitPrice);

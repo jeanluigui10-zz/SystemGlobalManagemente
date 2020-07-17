@@ -72,7 +72,7 @@ namespace System_Maintenance.Private.StoreManagement
             lblAddress.Text = "* Dirección: ";
             lblEmail.Text = "* Correo: ";
             lblPhone1.Text = "* Teléfono 1: ";
-            lblPhone2.Text = "* Teléfono 2: ";
+            lblPhone2.Text = " Teléfono 2: ";
             lblAttentionHours.Text = "* Horario de atención: ";
             lblNoteDelivery.Text = "* Nota de Delivery: ";
             lblNoteSupport.Text =  "* Nota de Soporte: ";
@@ -90,7 +90,7 @@ namespace System_Maintenance.Private.StoreManagement
             lblAddress2.Text = "* Dirección: ";
             lblEmail2.Text = "* Correo: ";
             lblPhone12.Text = "* Teléfono 1: ";
-            lblPhone22.Text = "* Teléfono 2: ";
+            lblPhone22.Text = " Teléfono 2: ";
             lblAttentionHours2.Text = "* Horario de atención: ";
             lblNoteDelivery2.Text = "* Nota de Delivery: ";
             lblNoteSupport2.Text =  "* Nota de Soporte: ";

@@ -11,7 +11,7 @@ namespace System_Maintenance.Private.Incidents
         {
             if (!Page.IsPostBack)
             {
-                idBienvenido.InnerText = "Hola estimado " + BaseSession.SsUser.Nombre_Usuario + " " + BaseSession.SsUser.APaterno_Usuario + ", bienvenido a tu sistema corporativo.";
+                idBienvenido.InnerText = "Hola estimado(a) " + BaseSession.SsUser.Nombre_Usuario + " " + BaseSession.SsUser.APaterno_Usuario + ", bienvenido a tu sistema corporativo.";
             }
         }
     }

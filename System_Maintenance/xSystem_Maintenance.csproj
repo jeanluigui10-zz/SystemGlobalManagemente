@@ -2213,6 +2213,8 @@
     <Content Include="Private\ProductManagement\ProductEntrySave.aspx" />
     <Content Include="Private\Report\ReportCustomer.aspx" />
     <Content Include="Private\StoreManagement\StoreEntrySave.aspx" />
+    <Content Include="Private\SubCategoryManagement\SubCategoryEntry.aspx" />
+    <Content Include="Private\SubCategoryManagement\SubCategoryEntrySave.aspx" />
     <Content Include="src\control\Chat\ucRedirectChatModule.ascx" />
     <Content Include="Private\Incidents\Home.aspx" />
     <Content Include="Private\Incidents\Incident.aspx" />
@@ -2360,6 +2362,20 @@
     </Compile>
     <Compile Include="Private\StoreManagement\StoreEntrySave.aspx.designer.cs">
       <DependentUpon>StoreEntrySave.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Private\SubCategoryManagement\SubCategoryEntry.aspx.cs">
+      <DependentUpon>SubCategoryEntry.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Private\SubCategoryManagement\SubCategoryEntry.aspx.designer.cs">
+      <DependentUpon>SubCategoryEntry.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Private\SubCategoryManagement\SubCategoryEntrySave.aspx.cs">
+      <DependentUpon>SubCategoryEntrySave.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Private\SubCategoryManagement\SubCategoryEntrySave.aspx.designer.cs">
+      <DependentUpon>SubCategoryEntrySave.aspx</DependentUpon>
     </Compile>
     <Compile Include="src\control\Chat\ucRedirectChatModule.ascx.cs">
       <DependentUpon>ucRedirectChatModule.ascx</DependentUpon>

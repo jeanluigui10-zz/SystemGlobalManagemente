@@ -140,6 +140,8 @@ namespace xAPI.Dao.Brand
             }
             return success;
         }
+
+        
         public DataTable Product_Brand_GetList(ref BaseEntity Base)
         {
             DataTable dt = new DataTable();
